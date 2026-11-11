@@ -27,7 +27,7 @@ Never write a hex value in a component. Use the shadcn CSS variable through its 
 | Page background                                 | `#ffffff` | `--background`                                                                                                                       |
 | Headings, primary text                          | `#111111` | `--foreground`                                                                                                                       |
 | Body text                                       | `#374151` | `--body` (custom variable, Tailwind class `text-body`). Not `text-foreground/80`, which gives a translucent `#111111`, not this grey |
-| Secondary text                                  | `#6b7280` | `--muted-foreground`                                                                                                                 |
+| Secondary text                                  | `#666e7d` | `--muted-foreground`                                                                                                                 |
 | Soft surface (sidebar, table header, tab group) | `#f8f9fa` | `--muted`, `--sidebar`                                                                                                               |
 | Card surface (stat cards, empty states)         | `#f5f5f5` | `--secondary`, `--accent`                                                                                                            |
 | Border, divider, input border                   | `#e5e7eb` | `--border`, `--input`                                                                                                                |
@@ -60,7 +60,7 @@ The source has no dark theme. These values extend its two dark surface tokens (`
 | Focus ring                               | `#fafafa`                         |
 | Success / Warning / Error                | `#34d399` / `#fbbf24` / `#f87171` |
 
-Check every text and background pair for WCAG AA contrast (4.5:1 for body text) in both themes.
+Check every text and background pair for WCAG AA contrast (4.5:1 for body text) in both themes. Secondary text is `#666e7d` rather than the source `#6b7280`, which only reaches 4.43:1 on the `#f5f5f5` card surface.
 
 ### Status colours (added)
 

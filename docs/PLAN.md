@@ -209,7 +209,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Prettier configured with the Tailwind plugin. `npm run lint`, `npm run typecheck` and `npm run format` exist and pass.
   - shadcn/ui initialised. `Button` renders on the home page.
 
-- [ ] **T-006 Design tokens** (M) — do this right after T-002
+- [x] **T-006 Design tokens** (M) — do this right after T-002
   - Light and dark colour tokens from DESIGN.md section 2 are set as shadcn CSS variables in `globals.css`, including `--body`, `--success`, `--warning` and a text-shade variable for every badge colour. `--radius` is `0.5rem`.
   - Inter, Noto Sans Sinhala and JetBrains Mono load through `next/font` with no layout shift.
   - next-themes is installed with `attribute="class"`, so both themes can be checked from day one. (The user-facing switch comes in T-081.)

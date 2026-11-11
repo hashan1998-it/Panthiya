@@ -216,7 +216,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - A temporary `/styleguide` page shows buttons, input, badges for every status, a card and the type scale in both themes.
   - Body text and muted text pass WCAG AA contrast in both themes.
 
-- [ ] **T-003 CI pipeline** (S)
+- [x] **T-003 CI pipeline** (S)
   - GitHub Actions workflow runs lint, typecheck and build on every push and pull request.
   - A deliberately broken commit on a test branch turns the check red.
   - `main` is protected: merging requires a green check.

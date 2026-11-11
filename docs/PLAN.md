@@ -205,7 +205,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - `strict` is on in `tsconfig.json`. Path alias `@/*` works.
   - Git repository initialised and pushed to GitHub with a sensible `.gitignore`.
 
-- [ ] **T-002 Tooling** (S)
+- [x] **T-002 Tooling** (S)
   - Prettier configured with the Tailwind plugin. `npm run lint`, `npm run typecheck` and `npm run format` exist and pass.
   - shadcn/ui initialised. `Button` renders on the home page.
 

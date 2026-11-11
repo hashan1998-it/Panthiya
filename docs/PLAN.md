@@ -9,38 +9,39 @@ A web app for a tuition teacher to manage students, classes, attendance and fees
 
 ## 1. Decisions
 
-| Topic | Decision |
-|---|---|
-| Framework | Next.js (App Router) + TypeScript (strict) |
-| Styling / UI | Tailwind CSS + shadcn/ui |
-| Visual design | [DESIGN.md](DESIGN.md), based on the Cal.com design analysis, adapted for a dashboard with dark mode and Sinhala |
-| Backend | Supabase (Postgres, Auth, Row Level Security) from day one |
-| Roles | Admin and Student |
-| Student accounts | Created by the admin only. No public sign-up |
-| Fee model | Fixed monthly fee per class, with per-enrollment discounts |
-| Extra features | Reports + charts, CSV export + receipts, timetable calendar, Sinhala/English, dark mode |
-| Testing | Vitest + React Testing Library (unit/component), Playwright (E2E) |
-| Workflow | One feature branch per task, merged through a pull request, CI on every push |
-| Hosting | Vercel |
-| Timezone | All "today" and "this month" logic uses `Asia/Colombo`, never the server's clock (Vercel runs in UTC) |
-| Time budget | Full time, about 3 weeks |
+| Topic            | Decision                                                                                                         |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Framework        | Next.js (App Router) + TypeScript (strict)                                                                       |
+| Styling / UI     | Tailwind CSS + shadcn/ui                                                                                         |
+| Visual design    | [DESIGN.md](DESIGN.md), based on the Cal.com design analysis, adapted for a dashboard with dark mode and Sinhala |
+| Backend          | Supabase (Postgres, Auth, Row Level Security) from day one                                                       |
+| Roles            | Admin and Student                                                                                                |
+| Student accounts | Created by the admin only. No public sign-up                                                                     |
+| Fee model        | Fixed monthly fee per class, with per-enrollment discounts                                                       |
+| Extra features   | Reports + charts, CSV export + receipts, timetable calendar, Sinhala/English, dark mode                          |
+| Testing          | Vitest + React Testing Library (unit/component), Playwright (E2E)                                                |
+| Workflow         | One feature branch per task, merged through a pull request, CI on every push                                     |
+| Hosting          | Vercel                                                                                                           |
+| Timezone         | All "today" and "this month" logic uses `Asia/Colombo`, never the server's clock (Vercel runs in UTC)            |
+| Time budget      | Full time, about 3 weeks                                                                                         |
 
 ## 2. Users and permissions
 
-| Capability | Admin | Student |
-|---|---|---|
-| Manage students, classes, enrollments | Yes | No |
-| Mark attendance | Yes | No |
-| Record payments, issue receipts | Yes | No |
-| See reports and exports | Yes | No |
-| See own classes, attendance, payments, receipts | n/a | Yes (read-only) |
-| Change own password, language, theme | Yes | Yes |
+| Capability                                      | Admin | Student         |
+| ----------------------------------------------- | ----- | --------------- |
+| Manage students, classes, enrollments           | Yes   | No              |
+| Mark attendance                                 | Yes   | No              |
+| Record payments, issue receipts                 | Yes   | No              |
+| See reports and exports                         | Yes   | No              |
+| See own classes, attendance, payments, receipts | n/a   | Yes (read-only) |
+| Change own password, language, theme            | Yes   | Yes             |
 
 Permissions are enforced in the database with Row Level Security. Hiding a button in the UI is not security.
 
 ## 3. Features
 
 ### Core
+
 - **Auth:** email + password login, logout, role-based redirect, protected routes.
 - **Students:** list with search, grade filter, sort, pagination. Add, edit, deactivate. Profile page.
 - **Classes:** subject, grade, day of week, start/end time, monthly fee. Enroll and unenroll students.
@@ -50,12 +51,14 @@ Permissions are enforced in the database with Row Level Security. Hiding a butto
 - **Dashboard:** active students, today's classes, this month's collected and outstanding fees.
 
 ### Extras
+
 - **Reports:** attendance rate per class, income per month, students per class.
 - **Export:** CSV for students, attendance and payments. Printable fee receipt.
 - **Timetable:** weekly calendar grid of all classes.
 - **i18n + theme:** Sinhala / English switch, light / dark mode.
 
 ### Out of scope
+
 Online payments, SMS/WhatsApp notifications, exams and marks, multiple teachers, parent accounts.
 
 ## 4. Data model
@@ -100,6 +103,7 @@ payments     id, due_id -> dues, amount numeric(10,2) (> 0), paid_on, method,
 **One day per class:** a class meets once a week on `day_of_week`. A subject taught twice a week is two classes. This is deliberate to keep attendance and fees simple.
 
 **RLS summary:**
+
 - Admin can read and write everything.
 - A student can only `select` rows that belong to their own `students` record.
 - The only student write: `update` of their own `profiles` row, limited to the `locale` column (column-level grant). A student can never change `role`.
@@ -128,19 +132,19 @@ payments     id, due_id -> dues, amount numeric(10,2) (> 0), paid_on, method,
 
 ## 6. Tech stack
 
-| Concern | Choice |
-|---|---|
-| Data access | `@supabase/ssr`. Reads in Server Components, writes in Server Actions |
-| Validation | Zod schemas shared between forms and Server Actions |
-| Forms | React Hook Form + shadcn `Form` |
-| Tables | TanStack Table + shadcn `Table` |
-| Charts | Recharts (shadcn chart components) |
-| i18n | next-intl |
-| Theme | next-themes |
-| Dates | date-fns |
-| Toasts | sonner |
-| Lint / format | ESLint + Prettier |
-| DB types | generated with `supabase gen types typescript` |
+| Concern       | Choice                                                                |
+| ------------- | --------------------------------------------------------------------- |
+| Data access   | `@supabase/ssr`. Reads in Server Components, writes in Server Actions |
+| Validation    | Zod schemas shared between forms and Server Actions                   |
+| Forms         | React Hook Form + shadcn `Form`                                       |
+| Tables        | TanStack Table + shadcn `Table`                                       |
+| Charts        | Recharts (shadcn chart components)                                    |
+| i18n          | next-intl                                                             |
+| Theme         | next-themes                                                           |
+| Dates         | date-fns                                                              |
+| Toasts        | sonner                                                                |
+| Lint / format | ESLint + Prettier                                                     |
+| DB types      | generated with `supabase gen types typescript`                        |
 
 ## 7. Folder structure
 
@@ -177,6 +181,7 @@ e2e/
 5. Tick the task in this file.
 
 ### Definition of done (applies to every task)
+
 - All acceptance criteria met.
 - No TypeScript or ESLint errors. No `any`.
 - Loading, empty and error states handled for every data view.
@@ -191,7 +196,7 @@ e2e/
 
 Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
-**Cut if late:** tasks or criteria marked *(cut if late)* are the first to drop or move to "Later" if the schedule slips. The budget is tight for 3 weeks.
+**Cut if late:** tasks or criteria marked _(cut if late)_ are the first to drop or move to "Later" if the schedule slips. The budget is tight for 3 weeks.
 
 ### Phase 0 — Setup (day 1)
 
@@ -382,7 +387,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 - [ ] **T-072 Weekly timetable** (L)
   - A 7-column weekly grid with time on the vertical axis. Each class is a block positioned by start time and sized by duration.
-  - Overlapping classes are shown side by side, not on top of each other. *(cut if late)*
+  - Overlapping classes are shown side by side, not on top of each other. _(cut if late)_
   - On mobile it switches to one day at a time with a day selector.
   - Clicking a block opens the class detail.
 
@@ -406,7 +411,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - `si.json` is complete. A language switch in the header saves to `profiles.locale`.
   - A check (script or test) fails if `si.json` is missing any key from `en.json`.
   - Dates and currency follow the selected locale.
-  - Layouts do not break with longer Sinhala text. *(full polish of every page: cut if late)*
+  - Layouts do not break with longer Sinhala text. _(full polish of every page: cut if late)_
 
 - [ ] **T-083 Settings page** (S)
   - Change password, language and theme.

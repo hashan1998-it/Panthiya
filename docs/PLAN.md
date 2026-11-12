@@ -226,7 +226,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Supabase CLI installed and linked. Server and browser clients exist in `lib/supabase/`.
   - No secret key is committed. The service role key is never imported in a client component.
 
-- [ ] **T-005 Deploy the skeleton** (S)
+- [x] **T-005 Deploy the skeleton** (S)
   - App is live on Vercel with environment variables set.
   - Every pull request gets a preview URL.
 

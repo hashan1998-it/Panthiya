@@ -221,7 +221,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - A deliberately broken commit on a test branch turns the check red.
   - `main` is protected: merging requires a green check.
 
-- [ ] **T-004 Supabase project** (S)
+- [x] **T-004 Supabase project** (S)
   - Supabase project created. URL and anon key are in `.env.local`. `.env.example` lists the variable names without values.
   - Supabase CLI installed and linked. Server and browser clients exist in `lib/supabase/`.
   - No secret key is committed. The service role key is never imported in a client component.

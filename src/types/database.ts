@@ -308,7 +308,8 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      current_student_id: { Args: Record<PropertyKey, never>; Returns: string };
+      is_admin: { Args: Record<PropertyKey, never>; Returns: boolean };
     };
     Enums: {
       app_locale: "en" | "si";

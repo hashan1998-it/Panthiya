@@ -232,7 +232,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 1 — Database and auth (days 2-3)
 
-- [ ] **T-010 Schema migration** (M)
+- [x] **T-010 Schema migration** (M)
   - All seven tables from section 4 created through a migration file, with foreign keys, unique constraints and check constraints (for example `discount_percent between 0 and 100` and the discount type / percent match).
   - A receipt number sequence exists. No foreign key cascades deletes.
   - Running the migrations on an empty database succeeds.

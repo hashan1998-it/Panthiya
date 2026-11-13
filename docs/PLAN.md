@@ -238,7 +238,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Running the migrations on an empty database succeeds.
   - TypeScript types are generated into `types/database.ts` and there is an npm script for it.
 
-- [ ] **T-011 Row Level Security** (M)
+- [x] **T-011 Row Level Security** (M)
   - RLS enabled on every table. Admin checks go through a `security definer` `is_admin()` function.
   - Signed in as a student, querying `students`, `attendance`, `dues` and `payments` returns only that student's rows. Insert, update and delete are rejected.
   - A student can update `locale` on their own profile, and an attempt to change `role` is rejected.

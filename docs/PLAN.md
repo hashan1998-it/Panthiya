@@ -245,7 +245,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Signed in as admin, all rows are readable and writable.
   - A signed-out request returns nothing.
 
-- [ ] **T-012 Seed data** (S)
+- [x] **T-012 Seed data** (S)
   - `seed.sql` creates 1 admin, about 30 students, 6 classes, enrollments with a mix of discounts (including one ended enrollment), 2 months of attendance, dues and payments (including one partial payment).
   - Resetting the local database produces the same data every time.
 

@@ -1,9 +1,12 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Home() {
   return (
     <div className="flex h-dvh items-center justify-center">
-      <Button>Get started</Button>
+      <Link href="/login" className={buttonVariants()}>
+        Get started
+      </Link>
     </div>
   );
 }

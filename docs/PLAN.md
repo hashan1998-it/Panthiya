@@ -249,7 +249,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - `seed.sql` creates 1 admin, about 30 students, 6 classes, enrollments with a mix of discounts (including one ended enrollment), 2 months of attendance, dues and payments (including one partial payment).
   - Resetting the local database produces the same data every time.
 
-- [ ] **T-013 Login page** (M)
+- [x] **T-013 Login page** (M)
   - Email + password form validated with Zod. Wrong credentials show an inline error, not a crash.
   - The submit button shows a pending state and cannot be double-submitted.
   - After login, admin lands on `/dashboard` and a student lands on `/me`.

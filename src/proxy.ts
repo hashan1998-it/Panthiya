@@ -3,67 +3,56 @@ import { getHomePath, type UserRole } from "./lib/auth/getHomePath";
 import { getUserRole } from "./lib/auth/getUserRole";
 import { updateSession } from "./lib/supabase/middleware";
 
-const HOME_PAGE = "/";
+const LANDING_PAGE = "/";
 const LOGIN_PAGE = "/login";
 const PUBLIC_PAGES = [LOGIN_PAGE, "/styleguide"];
 const STUDENT_PAGES = ["/me"];
 
-function isSameOrSubPage(pathName: string, page: string) {
-  return pathName === page || pathName.startsWith(`${page}/`);
+function isSameOrSubPage(pathname: string, page: string) {
+  return pathname === page || pathname.startsWith(`${page}/`);
 }
 
-function isPublicRoute(pathName: string) {
-  if (pathName === HOME_PAGE) {
-    return true;
-  }
-
-  return PUBLIC_PAGES.some((page) => isSameOrSubPage(pathName, page));
+function matchesAnyPage(pathname: string, pages: string[]) {
+  return pages.some((page) => isSameOrSubPage(pathname, page));
 }
 
-function isStudentRoute(pathName: string) {
-  return STUDENT_PAGES.some((page) => isSameOrSubPage(pathName, page));
+function isPublicPage(pathname: string) {
+  return pathname === LANDING_PAGE || matchesAnyPage(pathname, PUBLIC_PAGES);
 }
 
-function canAccessRoute(role: UserRole, pathName: string) {
-  if (isPublicRoute(pathName)) return true;
+function isLoginPage(pathname: string) {
+  return isSameOrSubPage(pathname, LOGIN_PAGE);
+}
 
-  const isStudentPage = isStudentRoute(pathName);
-  return role === "student" ? isStudentPage : !isStudentPage;
+function getPageOwner(pathname: string): UserRole {
+  return matchesAnyPage(pathname, STUDENT_PAGES) ? "student" : "admin";
 }
 
 function redirectTo(path: string, request: NextRequest) {
   return NextResponse.redirect(new URL(path, request.url));
 }
 
-function redirectToLogin(request: NextRequest) {
-  return redirectTo(LOGIN_PAGE, request);
-}
-
 export async function proxy(request: NextRequest) {
   const { response, user, supabase } = await updateSession(request);
-  const pathName = request.nextUrl.pathname;
+  const { pathname } = request.nextUrl;
 
-  if (!user) {
-    if (isPublicRoute(pathName)) return response;
-    return redirectToLogin(request);
-  }
+  const role = user ? await getUserRole(supabase, user.id) : null;
 
-  const role = await getUserRole(supabase, user.id);
   if (!role) {
-    if (isPublicRoute(pathName)) return response;
-    return redirectToLogin(request);
+    return isPublicPage(pathname) ? response : redirectTo(LOGIN_PAGE, request);
   }
 
-  if (isSameOrSubPage(pathName, LOGIN_PAGE)) {
+  if (isLoginPage(pathname)) {
     return redirectTo(getHomePath(role), request);
   }
 
-  if (!canAccessRoute(role, pathName)) {
-    return redirectTo(getHomePath(role), request);
+  if (isPublicPage(pathname) || getPageOwner(pathname) === role) {
+    return response;
   }
 
-  return response;
+  return redirectTo(getHomePath(role), request);
 }
+
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],

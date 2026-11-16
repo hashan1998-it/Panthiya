@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getHomePath } from "./lib/auth/getHomePath";
+import { getHomePath, type UserRole } from "./lib/auth/getHomePath";
 import { getUserRole } from "./lib/auth/getUserRole";
 import { updateSession } from "./lib/supabase/middleware";
 
 const HOME_PAGE = "/";
 const LOGIN_PAGE = "/login";
 const PUBLIC_PAGES = [LOGIN_PAGE, "/styleguide"];
+const STUDENT_PAGES = ["/me"];
 
 function isSameOrSubPage(pathName: string, page: string) {
   return pathName === page || pathName.startsWith(`${page}/`);
@@ -17,6 +18,17 @@ function isPublicRoute(pathName: string) {
   }
 
   return PUBLIC_PAGES.some((page) => isSameOrSubPage(pathName, page));
+}
+
+function isStudentRoute(pathName: string) {
+  return STUDENT_PAGES.some((page) => isSameOrSubPage(pathName, page));
+}
+
+function canAccessRoute(role: UserRole, pathName: string) {
+  if (isPublicRoute(pathName)) return true;
+
+  const isStudentPage = isStudentRoute(pathName);
+  return role === "student" ? isStudentPage : !isStudentPage;
 }
 
 function redirectTo(path: string, request: NextRequest) {
@@ -43,6 +55,10 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isSameOrSubPage(pathName, LOGIN_PAGE)) {
+    return redirectTo(getHomePath(role), request);
+  }
+
+  if (!canAccessRoute(role, pathName)) {
     return redirectTo(getHomePath(role), request);
   }
 

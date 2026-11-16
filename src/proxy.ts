@@ -28,8 +28,17 @@ function getPageOwner(pathname: string): UserRole {
   return matchesAnyPage(pathname, STUDENT_PAGES) ? "student" : "admin";
 }
 
-function redirectTo(path: string, request: NextRequest) {
-  return NextResponse.redirect(new URL(path, request.url));
+function redirectTo(path: string, request: NextRequest, response: NextResponse) {
+  const redirect = NextResponse.redirect(new URL(path, request.url));
+
+  response.cookies.getAll().forEach((cookie) => redirect.cookies.set(cookie));
+
+  const cacheControl = response.headers.get("cache-control");
+  if (cacheControl) {
+    redirect.headers.set("cache-control", cacheControl);
+  }
+
+  return redirect;
 }
 
 export async function proxy(request: NextRequest) {
@@ -39,18 +48,18 @@ export async function proxy(request: NextRequest) {
   const role = user ? await getUserRole(supabase, user.id) : null;
 
   if (!role) {
-    return isPublicPage(pathname) ? response : redirectTo(LOGIN_PAGE, request);
+    return isPublicPage(pathname) ? response : redirectTo(LOGIN_PAGE, request, response);
   }
 
   if (isLoginPage(pathname)) {
-    return redirectTo(getHomePath(role), request);
+    return redirectTo(getHomePath(role), request, response);
   }
 
   if (isPublicPage(pathname) || getPageOwner(pathname) === role) {
     return response;
   }
 
-  return redirectTo(getHomePath(role), request);
+  return redirectTo(getHomePath(role), request, response);
 }
 
 

@@ -2,6 +2,8 @@
 
 import z from "zod";
 import { redirect } from "next/navigation";
+import { getHomePath } from "@/lib/auth/getHomePath";
+import { getUserRole } from "@/lib/auth/getUserRole";
 import { createClient } from "@/lib/supabase/server";
 import { signInSchema } from "./schema";
 
@@ -30,14 +32,11 @@ export async function signIn(_prevState: SignInState, formData: FormData): Promi
     return { error: "Invalid email or password", fieldErrors: {} };
   }
 
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", authData.user.id)
-    .single();
-  if (profileError) {
+  const role = await getUserRole(supabase, authData.user.id);
+  if (!role) {
     await supabase.auth.signOut();
     return { error: "We couldn't load your account. Please try again.", fieldErrors: {} };
   }
-  redirect(profile.role === "admin" ? "/dashboard" : "/me");
+
+  redirect(getHomePath(role));
 }

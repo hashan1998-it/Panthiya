@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { getUserRole } from "./lib/auth/getUserRole";
 import { updateSession } from "./lib/supabase/middleware";
 
 const HOME_PAGE = "/";
@@ -21,12 +22,21 @@ function redirectToLogin(request: NextRequest) {
 }
 
 export async function proxy(request: NextRequest) {
-  const { response, user } = await updateSession(request);
+  const { response, user, supabase } = await updateSession(request);
+  const pathName = request.nextUrl.pathname;
 
-  if (user) return response;
-  if (isPublicRoute(request.nextUrl.pathname)) return response;
+  if (!user) {
+    if (isPublicRoute(pathName)) return response;
+    return redirectToLogin(request);
+  }
 
-  return redirectToLogin(request);
+  const role = await getUserRole(supabase, user.id);
+  if (!role) {
+    if (isPublicRoute(pathName)) return response;
+    return redirectToLogin(request);
+  }
+
+  return response;
 }
 
 export const config = {

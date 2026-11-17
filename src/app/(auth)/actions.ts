@@ -15,6 +15,10 @@ export type SignInState = {
   };
 };
 
+export type SignOutState = {
+  error?: string;
+};
+
 export async function signIn(_prevState: SignInState, formData: FormData): Promise<SignInState> {
   const raw = { email: formData.get("email"), password: formData.get("password") };
   const result = signInSchema.safeParse(raw);
@@ -39,4 +43,14 @@ export async function signIn(_prevState: SignInState, formData: FormData): Promi
   }
 
   redirect(getHomePath(role));
+}
+
+export async function signOut(): Promise<SignOutState> {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signOut({ scope: "local" });
+  if (error) {
+    return { error: "We couldn't sign you out. Please try again." };
+  }
+
+  redirect("/login");
 }

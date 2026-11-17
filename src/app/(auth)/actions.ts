@@ -2,6 +2,8 @@
 
 import z from "zod";
 import { redirect } from "next/navigation";
+import { getHomePath } from "@/lib/auth/get-home-path";
+import { getUserRole } from "@/lib/auth/get-user-role";
 import { createClient } from "@/lib/supabase/server";
 import { signInSchema } from "./schema";
 
@@ -11,6 +13,11 @@ export type SignInState = {
     email?: string[];
     password?: string[];
   };
+};
+
+export type SignOutState = {
+  error?: string;
+  signedOut?: boolean;
 };
 
 export async function signIn(_prevState: SignInState, formData: FormData): Promise<SignInState> {
@@ -30,14 +37,21 @@ export async function signIn(_prevState: SignInState, formData: FormData): Promi
     return { error: "Invalid email or password", fieldErrors: {} };
   }
 
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", authData.user.id)
-    .single();
-  if (profileError) {
+  const role = await getUserRole(supabase, authData.user.id);
+  if (!role) {
     await supabase.auth.signOut();
     return { error: "We couldn't load your account. Please try again.", fieldErrors: {} };
   }
-  redirect(profile.role === "admin" ? "/dashboard" : "/me");
+
+  redirect(getHomePath(role));
+}
+
+export async function signOut(): Promise<SignOutState> {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signOut({ scope: "local" });
+  if (error) {
+    return { error: "We couldn't sign you out. Please try again." };
+  }
+
+  return { signedOut: true };
 }

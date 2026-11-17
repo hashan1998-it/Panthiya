@@ -1,7 +1,5 @@
-import { requireRole } from "@/lib/auth/requireRole";
+import { RoleGate } from "@/components/role-gate";
 
-export default async function AdminLayout({ children }: LayoutProps<"/">) {
-  await requireRole("admin");
-
-  return children;
+export default function AdminLayout({ children }: LayoutProps<"/">) {
+  return <RoleGate role="admin">{children}</RoleGate>;
 }

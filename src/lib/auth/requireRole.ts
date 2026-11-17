@@ -1,9 +1,13 @@
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getHomePath, type UserRole } from "./getHomePath";
 import { getUserRole } from "./getUserRole";
 
 export async function requireRole(requiredRole: UserRole) {
+  // Supabase checks token expiry with Date.now(), so this must run per request.
+  await connection();
+
   const supabase = await createClient();
   const {
     data: { user },

@@ -254,7 +254,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - The submit button shows a pending state and cannot be double-submitted.
   - After login, admin lands on `/dashboard` and a student lands on `/me`.
 
-- [ ] **T-014 Route protection** (M)
+- [x] **T-014 Route protection** (M)
   - Signed-out users visiting any app route are redirected to `/login`.
   - A student who types `/students` in the address bar is redirected to `/me`. An admin visiting `/me` is redirected to `/dashboard`.
   - Signed-in users visiting `/login` are redirected to their home page.

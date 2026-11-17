@@ -52,7 +52,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function StyleguidePage() {
   return (
-    <main className="mx-auto flex w-full max-w-[1200px] flex-col gap-8 px-4 py-8 md:px-6">
+    <main className="mx-auto flex w-full max-w-300 flex-col gap-8 px-4 py-8 md:px-6">
       <header className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-1">
           <h1 className="text-display-sm">Styleguide</h1>
@@ -119,7 +119,7 @@ export default function StyleguidePage() {
       </Section>
 
       <Section title="Input">
-        <div className="flex max-w-[560px] flex-col gap-4">
+        <div className="flex max-w-140 flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="sg-name">Full name</Label>
             <Input id="sg-name" placeholder="Nimal Perera" />

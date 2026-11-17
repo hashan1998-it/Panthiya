@@ -1,6 +1,6 @@
 import { Suspense, type ReactNode } from "react";
-import { requireRole } from "@/lib/auth/requireRole";
-import type { UserRole } from "@/lib/auth/getHomePath";
+import { requireRole } from "@/lib/auth/require-role";
+import type { UserRole } from "@/lib/auth/get-home-path";
 
 type RoleGateProps = {
   role: UserRole;

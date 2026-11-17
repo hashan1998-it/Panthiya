@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getHomePath, type UserRole } from "./lib/auth/getHomePath";
-import { getUserRole } from "./lib/auth/getUserRole";
+import { getHomePath, type UserRole } from "./lib/auth/get-home-path";
+import { getUserRole } from "./lib/auth/get-user-role";
 import { updateSession } from "./lib/supabase/middleware";
 
 const LANDING_PAGE = "/";

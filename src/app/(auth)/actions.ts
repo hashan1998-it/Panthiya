@@ -2,8 +2,8 @@
 
 import z from "zod";
 import { redirect } from "next/navigation";
-import { getHomePath } from "@/lib/auth/getHomePath";
-import { getUserRole } from "@/lib/auth/getUserRole";
+import { getHomePath } from "@/lib/auth/get-home-path";
+import { getUserRole } from "@/lib/auth/get-user-role";
 import { createClient } from "@/lib/supabase/server";
 import { signInSchema } from "./schema";
 

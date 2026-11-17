@@ -17,6 +17,7 @@ export type SignInState = {
 
 export type SignOutState = {
   error?: string;
+  signedOut?: boolean;
 };
 
 export async function signIn(_prevState: SignInState, formData: FormData): Promise<SignInState> {
@@ -52,5 +53,5 @@ export async function signOut(): Promise<SignOutState> {
     return { error: "We couldn't sign you out. Please try again." };
   }
 
-  redirect("/login");
+  return { signedOut: true };
 }

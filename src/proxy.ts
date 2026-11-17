@@ -55,7 +55,12 @@ export async function proxy(request: NextRequest) {
     return redirectTo(getHomePath(role), request, response);
   }
 
-  if (isPublicPage(pathname) || getPageOwner(pathname) === role) {
+  if (isPublicPage(pathname)) {
+    return response;
+  }
+
+  if (getPageOwner(pathname) === role) {
+    response.headers.set("cache-control", "private, no-store");
     return response;
   }
 

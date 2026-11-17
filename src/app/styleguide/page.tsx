@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ThemeSwitcher } from "./theme-switcher";
+import { ToastDemo } from "./toast-demo";
 
 export const metadata: Metadata = {
   title: "Styleguide · Panthiya",
@@ -182,6 +183,10 @@ export default function StyleguidePage() {
             </CardFooter>
           </Card>
         </div>
+      </Section>
+
+      <Section title="Toasts">
+        <ToastDemo />
       </Section>
     </main>
   );

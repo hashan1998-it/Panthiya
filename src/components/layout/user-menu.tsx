@@ -27,7 +27,7 @@ type UserMenuProps = {
 };
 
 export function UserMenu({ fullName }: UserMenuProps) {
-  const { signOut, busy, error } = useSignOut();
+  const { signOut, busy } = useSignOut();
 
   return (
     <DropdownMenu>
@@ -56,11 +56,6 @@ export function UserMenu({ fullName }: UserMenuProps) {
           <LogOut aria-hidden />
           {busy ? "Signing out…" : "Log out"}
         </DropdownMenuItem>
-        {error && (
-          <p role="alert" className="px-1.5 py-1 text-caption text-destructive-foreground">
-            {error}
-          </p>
-        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -5,20 +5,18 @@ import type { UserRole } from "@/lib/auth/get-home-path";
 type RoleGateProps = {
   role: UserRole;
   children: ReactNode;
+  fallback?: ReactNode;
 };
 
-async function RoleCheck({ role, children }: RoleGateProps) {
+async function RoleCheck({ role, children }: Omit<RoleGateProps, "fallback">) {
   await requireRole(role);
 
   return children;
 }
 
-// The role check reads cookies, which only exist at request time. With Cache
-// Components on, that work must sit inside <Suspense> so the rest of the route
-// can still be prerendered.
-export function RoleGate({ role, children }: RoleGateProps) {
+export function RoleGate({ role, children, fallback }: RoleGateProps) {
   return (
-    <Suspense>
+    <Suspense fallback={fallback}>
       <RoleCheck role={role}>{children}</RoleCheck>
     </Suspense>
   );

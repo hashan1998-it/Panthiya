@@ -262,7 +262,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 2 — App shell (day 4)
 
-- [ ] **T-020 Admin layout** (M)
+- [x] **T-020 Admin layout** (M)
   - Sidebar with links to every admin section. The active link is highlighted.
   - Below 768px the sidebar becomes a slide-in drawer opened from a menu button. From 768 to 1024px it collapses to icons only, with tooltips.
   - Header shows the user's name and a menu with Settings and Logout.

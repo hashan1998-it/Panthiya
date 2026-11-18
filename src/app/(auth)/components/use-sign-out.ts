@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useActionState, useEffect } from "react";
+import { toast } from "sonner";
 import { signOut, type SignOutState } from "../actions";
 
 const initialState: SignOutState = {};
@@ -11,13 +12,14 @@ export function useSignOut() {
   useEffect(() => {
     if (state.signedOut) {
       window.location.replace("/login");
+    } else if (state.error) {
+      toast.error(state.error);
     }
-  }, [state.signedOut]);
+  }, [state]);
 
   return {
     formAction,
     signOut: () => startTransition(formAction),
     busy: pending || Boolean(state.signedOut),
-    error: state.error,
   };
 }

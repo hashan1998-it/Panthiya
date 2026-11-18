@@ -8,9 +8,17 @@ type EmptyStateProps = {
   description?: string;
   action?: ReactNode;
   className?: string;
+  titleAs?: "h1" | "h2";
 };
 
-export function EmptyState({ icon: Icon, title, description, action, className }: EmptyStateProps) {
+export function EmptyState({
+  icon: Icon,
+  title,
+  description,
+  action,
+  className,
+  titleAs: Title = "h2",
+}: EmptyStateProps) {
   return (
     <div
       className={cn(
@@ -20,7 +28,7 @@ export function EmptyState({ icon: Icon, title, description, action, className }
     >
       <Icon aria-hidden className="size-10 text-muted-foreground" />
       <div className="flex max-w-sm flex-col gap-1">
-        <h2 className="text-title-md">{title}</h2>
+        <Title className="text-title-md">{title}</Title>
         {description && <p className="text-body-sm text-muted-foreground">{description}</p>}
       </div>
       {action}

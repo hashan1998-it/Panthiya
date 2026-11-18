@@ -12,6 +12,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { ThemeSwitcher } from "./theme-switcher";
 import { ToastDemo } from "./toast-demo";
 
@@ -40,6 +48,33 @@ const surfaces = [
   { className: "bg-success", name: "success" },
   { className: "bg-warning", name: "warning" },
   { className: "bg-destructive", name: "destructive" },
+] as const;
+
+const sampleStudents = [
+  {
+    admissionNo: "PN-0001",
+    name: "Nimal Perera",
+    grade: 10,
+    phone: "071 234 5678",
+    fee: "Rs. 2,500.00",
+    active: true,
+  },
+  {
+    admissionNo: "PN-0002",
+    name: "Kamal Silva",
+    grade: 11,
+    phone: "077 345 6789",
+    fee: "Rs. 1,250.00",
+    active: true,
+  },
+  {
+    admissionNo: "PN-0003",
+    name: "Sachini Fernando",
+    grade: 10,
+    phone: "076 456 7890",
+    fee: "Rs. 0.00",
+    active: false,
+  },
 ] as const;
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -183,6 +218,37 @@ export default function StyleguidePage() {
             </CardFooter>
           </Card>
         </div>
+      </Section>
+
+      <Section title="Table">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Admission no</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Grade</TableHead>
+              <TableHead>Phone</TableHead>
+              <TableHead className="text-right">Monthly fee</TableHead>
+              <TableHead>Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sampleStudents.map((s) => (
+              <TableRow key={s.admissionNo}>
+                <TableCell className="font-mono">{s.admissionNo}</TableCell>
+                <TableCell className="text-foreground">{s.name}</TableCell>
+                <TableCell>{s.grade}</TableCell>
+                <TableCell>{s.phone}</TableCell>
+                <TableCell className="text-right tabular-nums">{s.fee}</TableCell>
+                <TableCell>
+                  <Badge variant={s.active ? "success" : "neutral"}>
+                    {s.active ? "Active" : "Inactive"}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Section>
 
       <Section title="Toasts">

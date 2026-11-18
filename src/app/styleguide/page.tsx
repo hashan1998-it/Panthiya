@@ -12,14 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { DataTableDemo, type DemoStudent } from "./data-table-demo";
 import { ThemeSwitcher } from "./theme-switcher";
 import { ToastDemo } from "./toast-demo";
 
@@ -50,8 +43,9 @@ const surfaces = [
   { className: "bg-destructive", name: "destructive" },
 ] as const;
 
-const sampleStudents = [
+const sampleStudents: DemoStudent[] = [
   {
+    id: "1",
     admissionNo: "PN-0001",
     name: "Nimal Perera",
     grade: 10,
@@ -60,6 +54,7 @@ const sampleStudents = [
     active: true,
   },
   {
+    id: "2",
     admissionNo: "PN-0002",
     name: "Kamal Silva",
     grade: 11,
@@ -68,6 +63,7 @@ const sampleStudents = [
     active: true,
   },
   {
+    id: "3",
     admissionNo: "PN-0003",
     name: "Sachini Fernando",
     grade: 10,
@@ -75,7 +71,7 @@ const sampleStudents = [
     fee: "Rs. 0.00",
     active: false,
   },
-] as const;
+];
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -220,35 +216,9 @@ export default function StyleguidePage() {
         </div>
       </Section>
 
-      <Section title="Table">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Admission no</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Grade</TableHead>
-              <TableHead>Phone</TableHead>
-              <TableHead className="text-right">Monthly fee</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {sampleStudents.map((s) => (
-              <TableRow key={s.admissionNo}>
-                <TableCell className="font-mono">{s.admissionNo}</TableCell>
-                <TableCell className="text-foreground">{s.name}</TableCell>
-                <TableCell>{s.grade}</TableCell>
-                <TableCell>{s.phone}</TableCell>
-                <TableCell className="text-right tabular-nums">{s.fee}</TableCell>
-                <TableCell>
-                  <Badge variant={s.active ? "success" : "neutral"}>
-                    {s.active ? "Active" : "Inactive"}
-                  </Badge>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <Section title="Data table">
+        <DataTableDemo students={sampleStudents} />
+        <DataTableDemo students={[]} />
       </Section>
 
       <Section title="Toasts">

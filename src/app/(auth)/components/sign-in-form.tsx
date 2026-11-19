@@ -62,7 +62,7 @@ function SignInForm() {
       </FieldGroup>
       {state.error && (
         <p role="alert" className="text-body-sm text-destructive-foreground">
-          {state.error}
+          {t(`errors.${state.error}`)}
         </p>
       )}
       <Button type="submit" className="w-full" disabled={pending}>

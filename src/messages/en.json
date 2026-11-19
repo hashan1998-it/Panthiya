@@ -14,7 +14,14 @@
       "submitting": "Signing in…",
       "errors": {
         "invalidEmail": "Enter a valid email address",
-        "passwordRequired": "Enter your password"
+        "passwordRequired": "Enter your password",
+        "invalidCredentials": "Invalid email or password",
+        "accountLoadFailed": "We couldn't load your account. Please try again."
+      }
+    },
+    "signOut": {
+      "errors": {
+        "failed": "We couldn't sign you out. Please try again."
       }
     }
   }

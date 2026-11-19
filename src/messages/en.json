@@ -1,4 +1,8 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading…"
+  },
   "metadata": {
     "title": "Panthiya",
     "description": "Tuition class management: students, classes, attendance and fees."

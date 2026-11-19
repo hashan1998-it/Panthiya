@@ -38,12 +38,18 @@ const columns = column.columns([
   }),
 ]);
 
-export function StudentsTable({ students }: { students: DemoStudent[] }) {
+type StudentsTableProps = {
+  students: DemoStudent[];
+  rowCount: number;
+};
+
+export function StudentsTable({ students, rowCount }: StudentsTableProps) {
   return (
     <DataTable
       label="Students"
       columns={columns}
       data={students}
+      rowCount={rowCount}
       sortableColumns={DEMO_SORTABLE_COLUMNS}
       getRowId={(student) => student.id}
     />

@@ -59,6 +59,28 @@ export function parseTableParams(raw: RawSearchParams, sortable: readonly string
   };
 }
 
+export type PageInfo = {
+  page: number;
+  pageCount: number;
+  offset: number;
+  from: number;
+  to: number;
+};
+
+export function getPageInfo(rowCount: number, page: number, pageSize: number): PageInfo {
+  const pageCount = Math.max(1, Math.ceil(rowCount / pageSize));
+  const current = Math.min(page, pageCount);
+  const offset = (current - 1) * pageSize;
+
+  return {
+    page: current,
+    pageCount,
+    offset,
+    from: rowCount === 0 ? 0 : offset + 1,
+    to: Math.min(offset + pageSize, rowCount),
+  };
+}
+
 function setOrDelete(params: URLSearchParams, key: string, value: string | null) {
   if (value === null) {
     params.delete(key);

@@ -6,7 +6,12 @@
   "auth": {
     "signIn": {
       "metaTitle": "Sign in · Panthiya",
-      "description": "Sign in to manage classes, attendance and fees."
+      "description": "Sign in to manage classes, attendance and fees.",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…"
     }
   }
 }

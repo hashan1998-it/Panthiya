@@ -51,6 +51,7 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
       data={students}
       rowCount={rowCount}
       sortableColumns={DEMO_SORTABLE_COLUMNS}
+      searchPlaceholder="Search by name or admission no"
       getRowId={(student) => student.id}
     />
   );

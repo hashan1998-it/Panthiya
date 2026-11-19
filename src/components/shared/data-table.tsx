@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, type ReactNode } from "react";
+import { Suspense, useEffect, useState, type ReactNode } from "react";
 import {
   createColumnHelper,
   FlexRender,
@@ -22,10 +22,13 @@ import {
   ChevronLeft,
   ChevronRight,
   Inbox,
+  Search,
+  SearchX,
 } from "lucide-react";
 import { EmptyState } from "@/components/shared/empty-state";
 import { useTableParams } from "@/components/shared/use-table-params";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -37,6 +40,7 @@ import {
 import {
   DEFAULT_PAGE_SIZE,
   getPageInfo,
+  MAX_SEARCH_LENGTH,
   PAGE_SIZE_OPTIONS,
   parseTableParams,
   type PageInfo,
@@ -67,12 +71,14 @@ type DataTableProps<TData extends RowData> = {
   label: string;
   rowCount?: number;
   sortableColumns?: readonly string[];
+  searchPlaceholder?: string;
   getRowId?: (row: TData) => string;
   emptyState?: ReactNode;
 };
 
 type DataTableViewProps<TData extends RowData> = DataTableProps<TData> & {
   sort: TableSort | null;
+  q: string;
   page: number;
   pageSize: number;
   onChange?: (change: TableParamsChange) => void;
@@ -80,6 +86,7 @@ type DataTableViewProps<TData extends RowData> = DataTableProps<TData> & {
 };
 
 const NO_SORTABLE_COLUMNS: readonly string[] = [];
+const SEARCH_DEBOUNCE_MS = 300;
 
 function alignClass(align: DataTableColumnMeta["align"]) {
   return align === "right" ? "text-right tabular-nums" : undefined;
@@ -95,9 +102,11 @@ function DataTableView<TData extends RowData>({
   label,
   rowCount,
   sortableColumns = NO_SORTABLE_COLUMNS,
+  searchPlaceholder,
   getRowId,
   emptyState,
   sort,
+  q,
   page,
   pageSize,
   onChange,
@@ -141,6 +150,15 @@ function DataTableView<TData extends RowData>({
 
   return (
     <div className="flex flex-col gap-4">
+      {searchPlaceholder && (
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
+          <DataTableSearch
+            q={q}
+            placeholder={searchPlaceholder}
+            onSearch={onChange ? (nextQ) => onChange({ q: nextQ }) : undefined}
+          />
+        </div>
+      )}
       <Table
         aria-label={label}
         aria-busy={isPending}
@@ -215,20 +233,29 @@ function DataTableView<TData extends RowData>({
           ) : (
             <TableRow className="hover:bg-transparent">
               <TableCell colSpan={columnCount} className="h-auto p-0 whitespace-normal">
-                {emptyState ?? (
+                {q ? (
                   <EmptyState
-                    icon={Inbox}
-                    title="No results"
-                    description="There's nothing to show here yet."
+                    icon={SearchX}
+                    title={`No results for "${q}"`}
+                    description="Check the spelling or try a different search."
                     className="rounded-none border-0 bg-transparent"
                   />
+                ) : (
+                  (emptyState ?? (
+                    <EmptyState
+                      icon={Inbox}
+                      title="No results"
+                      description="There's nothing to show here yet."
+                      className="rounded-none border-0 bg-transparent"
+                    />
+                  ))
                 )}
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-      {pageInfo && rowCount !== undefined && onChange && (
+      {pageInfo && rowCount !== undefined && rowCount > 0 && onChange && (
         <DataTablePagination
           pageInfo={pageInfo}
           rowCount={rowCount}
@@ -240,6 +267,42 @@ function DataTableView<TData extends RowData>({
           onPageSizeChange={(size) => table.setPageSize(size)}
         />
       )}
+    </div>
+  );
+}
+
+type DataTableSearchProps = {
+  q: string;
+  placeholder: string;
+  onSearch?: (q: string) => void;
+};
+
+function DataTableSearch({ q, placeholder, onSearch }: DataTableSearchProps) {
+  const [value, setValue] = useState(q);
+
+  useEffect(() => {
+    if (!onSearch || value.trim() === q) return;
+
+    const timer = setTimeout(() => onSearch(value), SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [value, q, onSearch]);
+
+  return (
+    <div className="relative w-full md:max-w-xs">
+      <Search
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
+      />
+      <Input
+        type="search"
+        aria-label={placeholder}
+        placeholder={placeholder}
+        value={value}
+        maxLength={MAX_SEARCH_LENGTH}
+        disabled={!onSearch}
+        onChange={(event) => setValue(event.target.value)}
+        className="pl-9"
+      />
     </div>
   );
 }
@@ -320,6 +383,7 @@ function DataTableWithUrlState<TData extends RowData>(props: DataTableProps<TDat
     <DataTableView
       {...props}
       sort={params.sort}
+      q={params.q}
       page={params.page}
       pageSize={params.pageSize}
       onChange={setTableParams}
@@ -331,7 +395,7 @@ function DataTableWithUrlState<TData extends RowData>(props: DataTableProps<TDat
 export function DataTable<TData extends RowData>(props: DataTableProps<TData>) {
   return (
     <Suspense
-      fallback={<DataTableView {...props} sort={null} page={1} pageSize={DEFAULT_PAGE_SIZE} />}
+      fallback={<DataTableView {...props} sort={null} q="" page={1} pageSize={DEFAULT_PAGE_SIZE} />}
     >
       <DataTableWithUrlState {...props} />
     </Suspense>

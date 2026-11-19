@@ -44,6 +44,17 @@ export const SAMPLE_STUDENTS: DemoStudent[] = SURNAMES.flatMap((surname, s) =>
   }),
 );
 
+export function searchStudents(students: DemoStudent[], q: string): DemoStudent[] {
+  if (!q) return students;
+
+  const needle = q.toLowerCase();
+  return students.filter(
+    (student) =>
+      student.name.toLowerCase().includes(needle) ||
+      student.admissionNo.toLowerCase().includes(needle),
+  );
+}
+
 export function sortStudents(students: DemoStudent[], sort: TableSort | null): DemoStudent[] {
   if (!sort) return students;
 

@@ -1,7 +1,15 @@
 {
   "common": {
     "cancel": "Cancel",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "comingSoon": "Coming soon."
+  },
+  "dashboard": {
+    "metaTitle": "Dashboard · Panthiya"
+  },
+  "me": {
+    "metaTitle": "My classes · Panthiya",
+    "title": "My classes"
   },
   "errors": {
     "generic": {

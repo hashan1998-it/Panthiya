@@ -158,7 +158,7 @@ function DataTableView<TData extends RowData>({
   return (
     <div className="flex flex-col gap-4">
       {(searchPlaceholder || filters) && (
-        <div className="flex flex-col gap-4 md:flex-row md:items-center">
+        <div className="flex flex-wrap items-center gap-4">
           {searchPlaceholder && (
             <DataTableSearch
               q={q}
@@ -166,7 +166,9 @@ function DataTableView<TData extends RowData>({
               onSearch={onChange ? (nextQ) => onChange({ q: nextQ }) : undefined}
             />
           )}
-          {filters && <div className="flex flex-wrap items-center gap-4">{filters}</div>}
+          {filters && (
+            <div className="flex max-w-full shrink-0 flex-wrap items-center gap-4">{filters}</div>
+          )}
         </div>
       )}
       <Table
@@ -305,7 +307,7 @@ function DataTableSearch({ q, placeholder, onSearch }: DataTableSearchProps) {
   }, [value, q, onSearch]);
 
   return (
-    <div className="relative w-full md:max-w-xs">
+    <div className="relative w-full md:w-80">
       <Search
         aria-hidden
         className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"

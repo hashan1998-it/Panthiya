@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Check, Clock, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -183,6 +184,19 @@ export default function StyleguidePage() {
             </CardFooter>
           </Card>
         </div>
+      </Section>
+
+      <Section title="Data table">
+        <p className="text-body-sm text-muted-foreground">
+          Sorting, pagination and search read the URL, so the demo lives on its own page:{" "}
+          <Link
+            href="/styleguide/data-table"
+            className="text-foreground underline underline-offset-4"
+          >
+            open the data table demo
+          </Link>
+          .
+        </p>
       </Section>
 
       <Section title="Toasts">

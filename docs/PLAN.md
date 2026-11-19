@@ -267,7 +267,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Below 768px the sidebar becomes a slide-in drawer opened from a menu button. From 768 to 1024px it collapses to icons only, with tooltips.
   - Header shows the user's name and a menu with Settings and Logout.
 
-- [ ] **T-021 Shared building blocks** (M)
+- [x] **T-021 Shared building blocks** (M)
   - `PageHeader` (title, description, action slot), `EmptyState`, `ConfirmDialog` and a route-level `loading.tsx` skeleton and `error.tsx` with a retry button.
   - Toasts work for success and failure.
   - A `not-found.tsx` page exists.

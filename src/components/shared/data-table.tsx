@@ -120,6 +120,7 @@ function DataTableView<TData extends RowData>({
   onChange,
   isPending = false,
 }: DataTableViewProps<TData>) {
+  const t = useTranslations("table.empty");
   const sorting = toSortingState(sort);
   const pageInfo = rowCount === undefined ? null : getPageInfo(rowCount, page, pageSize);
   const pagination: PaginationState = {
@@ -249,23 +250,23 @@ function DataTableView<TData extends RowData>({
                 {q ? (
                   <EmptyState
                     icon={SearchX}
-                    title={`No results for "${q}"`}
-                    description="Check the spelling or try a different search."
+                    title={t("searchTitle", { q })}
+                    description={t("searchDescription")}
                     className="rounded-none border-0 bg-transparent"
                   />
                 ) : isFiltered ? (
                   <EmptyState
                     icon={ListFilter}
-                    title="No matching results"
-                    description="Try changing or clearing the filters."
+                    title={t("filteredTitle")}
+                    description={t("filteredDescription")}
                     className="rounded-none border-0 bg-transparent"
                   />
                 ) : (
                   (emptyState ?? (
                     <EmptyState
                       icon={Inbox}
-                      title="No results"
-                      description="There's nothing to show here yet."
+                      title={t("defaultTitle")}
+                      description={t("defaultDescription")}
                       className="rounded-none border-0 bg-transparent"
                     />
                   ))

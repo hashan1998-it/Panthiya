@@ -50,6 +50,14 @@
       "pageOf": "Page {page} of {pageCount}",
       "previous": "Previous",
       "next": "Next"
+    },
+    "empty": {
+      "searchTitle": "No results for \"{q}\"",
+      "searchDescription": "Check the spelling or try a different search.",
+      "filteredTitle": "No matching results",
+      "filteredDescription": "Try changing or clearing the filters.",
+      "defaultTitle": "No results",
+      "defaultDescription": "There's nothing to show here yet."
     }
   }
 }

@@ -2,5 +2,11 @@
   "metadata": {
     "title": "Panthiya",
     "description": "Tuition class management: students, classes, attendance and fees."
+  },
+  "auth": {
+    "signIn": {
+      "metaTitle": "Sign in · Panthiya",
+      "description": "Sign in to manage classes, attendance and fees."
+    }
   }
 }

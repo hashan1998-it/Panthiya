@@ -2,7 +2,9 @@
   "common": {
     "cancel": "Cancel",
     "loading": "Loading…",
-    "comingSoon": "Coming soon."
+    "comingSoon": "Coming soon.",
+    "close": "Close",
+    "getStarted": "Get started"
   },
   "dashboard": {
     "metaTitle": "Dashboard · Panthiya"

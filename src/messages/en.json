@@ -3,6 +3,24 @@
     "cancel": "Cancel",
     "loading": "Loading…"
   },
+  "errors": {
+    "generic": {
+      "title": "Something went wrong",
+      "description": "We couldn't load this page. Please try again.",
+      "retry": "Try again",
+      "errorId": "Error ID: {digest}"
+    },
+    "notFound": {
+      "title": "Not found",
+      "description": "We couldn't find what you're looking for. It may have been removed.",
+      "backToDashboard": "Back to dashboard"
+    },
+    "pageNotFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has moved.",
+      "goHome": "Go to home page"
+    }
+  },
   "metadata": {
     "title": "Panthiya",
     "description": "Tuition class management: students, classes, attendance and fees."

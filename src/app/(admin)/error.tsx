@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { TriangleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Button } from "@/components/ui/button";
 
@@ -18,6 +19,7 @@ function getDigest(error: unknown) {
 }
 
 export default function AdminError({ error, retry }: AdminErrorProps) {
+  const t = useTranslations("errors.generic");
   const digest = getDigest(error);
 
   useEffect(() => {
@@ -28,13 +30,15 @@ export default function AdminError({ error, retry }: AdminErrorProps) {
     <div role="alert">
       <EmptyState
         icon={TriangleAlert}
-        title="Something went wrong"
-        description="We couldn't load this page. Please try again."
+        title={t("title")}
+        description={t("description")}
         action={
           <div className="flex flex-col items-center gap-3">
-            <Button onClick={() => retry()}>Try again</Button>
+            <Button onClick={() => retry()}>{t("retry")}</Button>
             {digest && (
-              <p className="font-mono text-caption text-muted-foreground">Error ID: {digest}</p>
+              <p className="font-mono text-caption text-muted-foreground">
+                {t("errorId", { digest })}
+              </p>
             )}
           </div>
         }

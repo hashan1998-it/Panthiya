@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronDown, LogOut, Settings } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useSignOut } from "@/app/(auth)/components/use-sign-out";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -27,13 +28,14 @@ type UserMenuProps = {
 };
 
 export function UserMenu({ fullName }: UserMenuProps) {
+  const t = useTranslations();
   const { signOut, busy } = useSignOut();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={<Button variant="ghost" className="h-10 gap-2 px-2" />}
-        aria-label={`Account menu for ${fullName}`}
+        aria-label={t("nav.accountMenu", { name: fullName })}
       >
         <Avatar>
           <AvatarFallback className="text-caption">{getInitials(fullName)}</AvatarFallback>
@@ -50,11 +52,11 @@ export function UserMenu({ fullName }: UserMenuProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem render={<Link href="/settings" />}>
           <Settings aria-hidden />
-          Settings
+          {t("nav.settings")}
         </DropdownMenuItem>
         <DropdownMenuItem closeOnClick={false} disabled={busy} onClick={signOut}>
           <LogOut aria-hidden />
-          {busy ? "Signing out…" : "Log out"}
+          {busy ? t("auth.signOut.signingOut") : t("auth.signOut.logOut")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

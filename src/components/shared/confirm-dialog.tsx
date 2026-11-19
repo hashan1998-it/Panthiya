@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition, type ReactElement } from "react";
+import { useTranslations } from "next-intl";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,10 +31,11 @@ export function ConfirmDialog({
   description,
   confirmLabel,
   pendingLabel = confirmLabel,
-  cancelLabel = "Cancel",
+  cancelLabel,
   destructive = false,
   onConfirm,
 }: ConfirmDialogProps) {
+  const t = useTranslations("common");
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
 
@@ -60,7 +62,7 @@ export function ConfirmDialog({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={pending}>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogCancel disabled={pending}>{cancelLabel ?? t("cancel")}</AlertDialogCancel>
           <AlertDialogAction
             variant={destructive ? "destructive" : "default"}
             disabled={pending}

@@ -272,7 +272,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Toasts work for success and failure.
   - A `not-found.tsx` page exists.
 
-- [ ] **T-022 Reusable data table** (L)
+- [x] **T-022 Reusable data table** (L)
   - Generic, typed `DataTable<T>` built on TanStack Table: column sorting, pagination, a search input and a slot for filters.
   - Search, sort, filter and page are stored in the URL, so a refresh or a shared link shows the same view.
   - On mobile the table scrolls horizontally without breaking the page layout.

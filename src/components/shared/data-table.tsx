@@ -25,6 +25,7 @@ import {
   Search,
   SearchX,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { EmptyState } from "@/components/shared/empty-state";
 import { useTableParams } from "@/components/shared/use-table-params";
 import { Button } from "@/components/ui/button";
@@ -119,6 +120,7 @@ function DataTableView<TData extends RowData>({
   onChange,
   isPending = false,
 }: DataTableViewProps<TData>) {
+  const t = useTranslations("table.empty");
   const sorting = toSortingState(sort);
   const pageInfo = rowCount === undefined ? null : getPageInfo(rowCount, page, pageSize);
   const pagination: PaginationState = {
@@ -248,23 +250,23 @@ function DataTableView<TData extends RowData>({
                 {q ? (
                   <EmptyState
                     icon={SearchX}
-                    title={`No results for "${q}"`}
-                    description="Check the spelling or try a different search."
+                    title={t("searchTitle", { q })}
+                    description={t("searchDescription")}
                     className="rounded-none border-0 bg-transparent"
                   />
                 ) : isFiltered ? (
                   <EmptyState
                     icon={ListFilter}
-                    title="No matching results"
-                    description="Try changing or clearing the filters."
+                    title={t("filteredTitle")}
+                    description={t("filteredDescription")}
                     className="rounded-none border-0 bg-transparent"
                   />
                 ) : (
                   (emptyState ?? (
                     <EmptyState
                       icon={Inbox}
-                      title="No results"
-                      description="There's nothing to show here yet."
+                      title={t("defaultTitle")}
+                      description={t("defaultDescription")}
                       className="rounded-none border-0 bg-transparent"
                     />
                   ))
@@ -347,17 +349,19 @@ function DataTablePagination({
   onNext,
   onPageSizeChange,
 }: DataTablePaginationProps) {
+  const t = useTranslations("table.pagination");
+
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={t("label")}
       className="flex flex-col gap-4 text-body-sm text-muted-foreground md:flex-row md:items-center md:justify-between"
     >
       <p className="tabular-nums">
-        Showing {pageInfo.from}–{pageInfo.to} of {rowCount}
+        {t("showing", { from: pageInfo.from, to: pageInfo.to, total: rowCount })}
       </p>
       <div className="flex flex-wrap items-center gap-4">
         <label className="flex items-center gap-2">
-          Rows per page
+          {t("rowsPerPage")}
           <NativeSelect
             value={pageSize}
             onChange={(event) => onPageSizeChange(Number(event.target.value))}
@@ -370,15 +374,15 @@ function DataTablePagination({
           </NativeSelect>
         </label>
         <p aria-live="polite" className="tabular-nums">
-          Page {pageInfo.page} of {pageInfo.pageCount}
+          {t("pageOf", { page: pageInfo.page, pageCount: pageInfo.pageCount })}
         </p>
         <div className="flex gap-2">
           <Button variant="outline" disabled={!canPrevious} onClick={onPrevious}>
             <ChevronLeft data-icon="inline-start" aria-hidden />
-            Previous
+            {t("previous")}
           </Button>
           <Button variant="outline" disabled={!canNext} onClick={onNext}>
-            Next
+            {t("next")}
             <ChevronRight data-icon="inline-end" aria-hidden />
           </Button>
         </div>

@@ -1,0 +1,95 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "comingSoon": "Coming soon.",
+    "close": "Close",
+    "getStarted": "Get started"
+  },
+  "dashboard": {
+    "metaTitle": "Dashboard · Panthiya"
+  },
+  "me": {
+    "metaTitle": "My classes · Panthiya",
+    "title": "My classes"
+  },
+  "errors": {
+    "generic": {
+      "title": "Something went wrong",
+      "description": "We couldn't load this page. Please try again.",
+      "retry": "Try again",
+      "errorId": "Error ID: {digest}"
+    },
+    "notFound": {
+      "title": "Not found",
+      "description": "We couldn't find what you're looking for. It may have been removed.",
+      "backToDashboard": "Back to dashboard"
+    },
+    "pageNotFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has moved.",
+      "goHome": "Go to home page"
+    }
+  },
+  "metadata": {
+    "title": "Panthiya",
+    "description": "Tuition class management: students, classes, attendance and fees."
+  },
+  "auth": {
+    "signIn": {
+      "metaTitle": "Sign in · Panthiya",
+      "description": "Sign in to manage classes, attendance and fees.",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "errors": {
+        "invalidEmail": "Enter a valid email address",
+        "passwordRequired": "Enter your password",
+        "invalidCredentials": "Invalid email or password",
+        "accountLoadFailed": "We couldn't load your account. Please try again."
+      }
+    },
+    "signOut": {
+      "signOut": "Sign out",
+      "logOut": "Log out",
+      "signingOut": "Signing out…",
+      "errors": {
+        "failed": "We couldn't sign you out. Please try again."
+      }
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "classes": "Classes",
+    "attendance": "Attendance",
+    "fees": "Fees",
+    "timetable": "Timetable",
+    "reports": "Reports",
+    "settings": "Settings",
+    "brandInitial": "P",
+    "mainLabel": "Main",
+    "openMenu": "Open menu",
+    "accountMenu": "Account menu for {name}"
+  },
+  "table": {
+    "pagination": {
+      "label": "Pagination",
+      "showing": "Showing {from}–{to} of {total}",
+      "rowsPerPage": "Rows per page",
+      "pageOf": "Page {page} of {pageCount}",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "empty": {
+      "searchTitle": "No results for \"{q}\"",
+      "searchDescription": "Check the spelling or try a different search.",
+      "filteredTitle": "No matching results",
+      "filteredDescription": "Try changing or clearing the filters.",
+      "defaultTitle": "No results",
+      "defaultDescription": "There's nothing to show here yet."
+    }
+  }
+}

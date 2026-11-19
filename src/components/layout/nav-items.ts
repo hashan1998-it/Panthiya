@@ -9,22 +9,24 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import type { Messages } from "next-intl";
 
 export type NavItem = {
   href: string;
-  label: string;
+  // A key in the "nav" messages. This file is not a component, so it can't call `t()`.
+  labelKey: keyof Messages["nav"];
   icon: LucideIcon;
 };
 
 export const ADMIN_NAV_ITEMS: NavItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/students", label: "Students", icon: Users },
-  { href: "/classes", label: "Classes", icon: BookOpen },
-  { href: "/attendance", label: "Attendance", icon: CalendarCheck },
-  { href: "/fees", label: "Fees", icon: Wallet },
-  { href: "/timetable", label: "Timetable", icon: CalendarDays },
-  { href: "/reports", label: "Reports", icon: ChartColumn },
-  { href: "/settings", label: "Settings", icon: Settings },
+  { href: "/dashboard", labelKey: "dashboard", icon: LayoutDashboard },
+  { href: "/students", labelKey: "students", icon: Users },
+  { href: "/classes", labelKey: "classes", icon: BookOpen },
+  { href: "/attendance", labelKey: "attendance", icon: CalendarCheck },
+  { href: "/fees", labelKey: "fees", icon: Wallet },
+  { href: "/timetable", labelKey: "timetable", icon: CalendarDays },
+  { href: "/reports", labelKey: "reports", icon: ChartColumn },
+  { href: "/settings", labelKey: "settings", icon: Settings },
 ];
 
 export function isActivePath(pathname: string | null, href: string) {

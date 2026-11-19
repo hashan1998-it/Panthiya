@@ -11,7 +11,11 @@
       "emailPlaceholder": "you@example.com",
       "password": "Password",
       "submit": "Sign in",
-      "submitting": "Signing in…"
+      "submitting": "Signing in…",
+      "errors": {
+        "invalidEmail": "Enter a valid email address",
+        "passwordRequired": "Enter your password"
+      }
     }
   }
 }

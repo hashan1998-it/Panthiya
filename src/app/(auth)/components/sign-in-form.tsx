@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { type SignInInput, signInSchema } from "../schema";
+import { type SignInErrorKey, type SignInInput, signInSchema } from "../schema";
 import { signIn, type SignInState } from "../actions";
 import { startTransition, useActionState } from "react";
 
@@ -22,8 +22,10 @@ function SignInForm() {
 
   const [state, formAction, pending] = useActionState(signIn, initialState);
 
-  const emailError = errors.email?.message ?? state.fieldErrors.email?.[0];
-  const passwordError = errors.password?.message ?? state.fieldErrors.password?.[0];
+  const translateError = (key?: string) => (key ? t(`errors.${key as SignInErrorKey}`) : undefined);
+
+  const emailError = translateError(errors.email?.message ?? state.fieldErrors.email?.[0]);
+  const passwordError = translateError(errors.password?.message ?? state.fieldErrors.password?.[0]);
 
   const onSuccess: SubmitHandler<SignInInput> = (data) => {
     const formData = new FormData();

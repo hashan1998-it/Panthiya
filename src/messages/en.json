@@ -20,6 +20,9 @@
       }
     },
     "signOut": {
+      "signOut": "Sign out",
+      "logOut": "Log out",
+      "signingOut": "Signing out…",
       "errors": {
         "failed": "We couldn't sign you out. Please try again."
       }
@@ -36,6 +39,7 @@
     "settings": "Settings",
     "brandInitial": "P",
     "mainLabel": "Main",
-    "openMenu": "Open menu"
+    "openMenu": "Open menu",
+    "accountMenu": "Account menu for {name}"
   }
 }

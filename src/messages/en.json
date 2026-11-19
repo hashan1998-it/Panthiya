@@ -41,5 +41,15 @@
     "mainLabel": "Main",
     "openMenu": "Open menu",
     "accountMenu": "Account menu for {name}"
+  },
+  "table": {
+    "pagination": {
+      "label": "Pagination",
+      "showing": "Showing {from}–{to} of {total}",
+      "rowsPerPage": "Rows per page",
+      "pageOf": "Page {page} of {pageCount}",
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }

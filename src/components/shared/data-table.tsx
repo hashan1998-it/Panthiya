@@ -25,6 +25,7 @@ import {
   Search,
   SearchX,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { EmptyState } from "@/components/shared/empty-state";
 import { useTableParams } from "@/components/shared/use-table-params";
 import { Button } from "@/components/ui/button";
@@ -347,17 +348,19 @@ function DataTablePagination({
   onNext,
   onPageSizeChange,
 }: DataTablePaginationProps) {
+  const t = useTranslations("table.pagination");
+
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={t("label")}
       className="flex flex-col gap-4 text-body-sm text-muted-foreground md:flex-row md:items-center md:justify-between"
     >
       <p className="tabular-nums">
-        Showing {pageInfo.from}–{pageInfo.to} of {rowCount}
+        {t("showing", { from: pageInfo.from, to: pageInfo.to, total: rowCount })}
       </p>
       <div className="flex flex-wrap items-center gap-4">
         <label className="flex items-center gap-2">
-          Rows per page
+          {t("rowsPerPage")}
           <NativeSelect
             value={pageSize}
             onChange={(event) => onPageSizeChange(Number(event.target.value))}
@@ -370,15 +373,15 @@ function DataTablePagination({
           </NativeSelect>
         </label>
         <p aria-live="polite" className="tabular-nums">
-          Page {pageInfo.page} of {pageInfo.pageCount}
+          {t("pageOf", { page: pageInfo.page, pageCount: pageInfo.pageCount })}
         </p>
         <div className="flex gap-2">
           <Button variant="outline" disabled={!canPrevious} onClick={onPrevious}>
             <ChevronLeft data-icon="inline-start" aria-hidden />
-            Previous
+            {t("previous")}
           </Button>
           <Button variant="outline" disabled={!canNext} onClick={onNext}>
-            Next
+            {t("next")}
             <ChevronRight data-icon="inline-end" aria-hidden />
           </Button>
         </div>

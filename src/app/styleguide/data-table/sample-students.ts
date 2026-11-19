@@ -1,4 +1,5 @@
-import type { TableSort } from "@/lib/table-params";
+import { z } from "zod";
+import { readParam, type RawSearchParams, type TableSort } from "@/lib/table-params";
 
 export type DemoStudent = {
   id: string;
@@ -43,6 +44,38 @@ export const SAMPLE_STUDENTS: DemoStudent[] = SURNAMES.flatMap((surname, s) =>
     };
   }),
 );
+
+export const DEMO_GRADES = [6, 7, 8, 9, 10, 11] as const;
+export const DEMO_STATUSES = ["active", "inactive"] as const;
+
+export type DemoFilters = {
+  grade?: number;
+  status?: (typeof DEMO_STATUSES)[number];
+};
+
+const gradeSchema = z.coerce
+  .number()
+  .int()
+  .refine((grade) => (DEMO_GRADES as readonly number[]).includes(grade))
+  .optional()
+  .catch(undefined);
+
+const statusSchema = z.enum(DEMO_STATUSES).optional().catch(undefined);
+
+export function parseDemoFilters(raw: RawSearchParams): DemoFilters {
+  return {
+    grade: gradeSchema.parse(readParam(raw, "grade")),
+    status: statusSchema.parse(readParam(raw, "status")),
+  };
+}
+
+export function filterStudents(students: DemoStudent[], filters: DemoFilters): DemoStudent[] {
+  return students.filter(
+    (student) =>
+      (filters.grade === undefined || student.grade === filters.grade) &&
+      (filters.status === undefined || student.active === (filters.status === "active")),
+  );
+}
 
 export function searchStudents(students: DemoStudent[], q: string): DemoStudent[] {
   if (!q) return students;

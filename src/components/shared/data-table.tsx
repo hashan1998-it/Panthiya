@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState, type ReactNode } from "react";
+import { createContext, Suspense, useContext, useEffect, useState, type ReactNode } from "react";
 import {
   createColumnHelper,
   FlexRender,
@@ -18,10 +18,10 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpDown,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Inbox,
+  ListFilter,
   Search,
   SearchX,
 } from "lucide-react";
@@ -29,6 +29,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { useTableParams } from "@/components/shared/use-table-params";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
 import {
   Table,
   TableBody,
@@ -40,9 +41,11 @@ import {
 import {
   DEFAULT_PAGE_SIZE,
   getPageInfo,
+  isFilterKey,
   MAX_SEARCH_LENGTH,
   PAGE_SIZE_OPTIONS,
   parseTableParams,
+  readParam,
   type PageInfo,
   type TableParamsChange,
   type TableSort,
@@ -72,6 +75,7 @@ type DataTableProps<TData extends RowData> = {
   rowCount?: number;
   sortableColumns?: readonly string[];
   searchPlaceholder?: string;
+  filters?: ReactNode;
   getRowId?: (row: TData) => string;
   emptyState?: ReactNode;
 };
@@ -79,6 +83,7 @@ type DataTableProps<TData extends RowData> = {
 type DataTableViewProps<TData extends RowData> = DataTableProps<TData> & {
   sort: TableSort | null;
   q: string;
+  isFiltered?: boolean;
   page: number;
   pageSize: number;
   onChange?: (change: TableParamsChange) => void;
@@ -103,10 +108,12 @@ function DataTableView<TData extends RowData>({
   rowCount,
   sortableColumns = NO_SORTABLE_COLUMNS,
   searchPlaceholder,
+  filters,
   getRowId,
   emptyState,
   sort,
   q,
+  isFiltered = false,
   page,
   pageSize,
   onChange,
@@ -150,13 +157,16 @@ function DataTableView<TData extends RowData>({
 
   return (
     <div className="flex flex-col gap-4">
-      {searchPlaceholder && (
+      {(searchPlaceholder || filters) && (
         <div className="flex flex-col gap-4 md:flex-row md:items-center">
-          <DataTableSearch
-            q={q}
-            placeholder={searchPlaceholder}
-            onSearch={onChange ? (nextQ) => onChange({ q: nextQ }) : undefined}
-          />
+          {searchPlaceholder && (
+            <DataTableSearch
+              q={q}
+              placeholder={searchPlaceholder}
+              onSearch={onChange ? (nextQ) => onChange({ q: nextQ }) : undefined}
+            />
+          )}
+          {filters && <div className="flex flex-wrap items-center gap-4">{filters}</div>}
         </div>
       )}
       <Table
@@ -238,6 +248,13 @@ function DataTableView<TData extends RowData>({
                     icon={SearchX}
                     title={`No results for "${q}"`}
                     description="Check the spelling or try a different search."
+                    className="rounded-none border-0 bg-transparent"
+                  />
+                ) : isFiltered ? (
+                  <EmptyState
+                    icon={ListFilter}
+                    title="No matching results"
+                    description="Try changing or clearing the filters."
                     className="rounded-none border-0 bg-transparent"
                   />
                 ) : (
@@ -339,23 +356,16 @@ function DataTablePagination({
       <div className="flex flex-wrap items-center gap-4">
         <label className="flex items-center gap-2">
           Rows per page
-          <span className="relative inline-flex">
-            <select
-              value={pageSize}
-              onChange={(event) => onPageSizeChange(Number(event.target.value))}
-              className="h-10 cursor-pointer appearance-none rounded-lg border border-input bg-background pr-9 pl-3 text-foreground tabular-nums transition-colors duration-150 outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none dark:scheme-dark"
-            >
-              {PAGE_SIZE_OPTIONS.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-            <ChevronDown
-              aria-hidden
-              className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground"
-            />
-          </span>
+          <NativeSelect
+            value={pageSize}
+            onChange={(event) => onPageSizeChange(Number(event.target.value))}
+          >
+            {PAGE_SIZE_OPTIONS.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </NativeSelect>
         </label>
         <p aria-live="polite" className="tabular-nums">
           Page {pageInfo.page} of {pageInfo.pageCount}
@@ -375,20 +385,46 @@ function DataTablePagination({
   );
 }
 
+type DataTableFilterContextValue = {
+  getValue: (key: string) => string;
+  setValue: (key: string, value: string | null) => void;
+};
+
+const DataTableFilterContext = createContext<DataTableFilterContextValue | null>(null);
+
+export function useDataTableFilter(key: string) {
+  const context = useContext(DataTableFilterContext);
+
+  return {
+    value: context?.getValue(key) ?? "",
+    setValue: (value: string | null) => context?.setValue(key, value),
+    disabled: context === null,
+  };
+}
+
 function DataTableWithUrlState<TData extends RowData>(props: DataTableProps<TData>) {
   const { searchParams, setTableParams, isPending } = useTableParams();
   const params = parseTableParams(searchParams, props.sortableColumns ?? NO_SORTABLE_COLUMNS);
+  const isFiltered = [...searchParams.keys()].some(isFilterKey);
+
+  const filterContext: DataTableFilterContextValue = {
+    getValue: (key) => readParam(searchParams, key) ?? "",
+    setValue: (key, value) => setTableParams({ filters: { [key]: value } }),
+  };
 
   return (
-    <DataTableView
-      {...props}
-      sort={params.sort}
-      q={params.q}
-      page={params.page}
-      pageSize={params.pageSize}
-      onChange={setTableParams}
-      isPending={isPending}
-    />
+    <DataTableFilterContext value={filterContext}>
+      <DataTableView
+        {...props}
+        sort={params.sort}
+        q={params.q}
+        isFiltered={isFiltered}
+        page={params.page}
+        pageSize={params.pageSize}
+        onChange={setTableParams}
+        isPending={isPending}
+      />
+    </DataTableFilterContext>
   );
 }
 

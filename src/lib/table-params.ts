@@ -16,9 +16,17 @@ export type TableParams = {
   q: string;
 };
 
-export type TableParamsChange = Partial<TableParams>;
+export type TableParamsChange = Partial<TableParams> & {
+  filters?: Record<string, string | null>;
+};
 
-type RawSearchParams = URLSearchParams | Record<string, string | string[] | undefined>;
+export type RawSearchParams = URLSearchParams | Record<string, string | string[] | undefined>;
+
+const RESERVED_KEYS: readonly string[] = ["q", "sort", "page", "pageSize"];
+
+export function isFilterKey(key: string) {
+  return !RESERVED_KEYS.includes(key);
+}
 
 const pageSchema = z.coerce.number().int().min(1).catch(1);
 
@@ -29,7 +37,7 @@ const pageSizeSchema = z.coerce
 
 const searchSchema = z.string().trim().max(MAX_SEARCH_LENGTH).catch("");
 
-function readParam(raw: RawSearchParams, key: string) {
+export function readParam(raw: RawSearchParams, key: string) {
   if (raw instanceof URLSearchParams) {
     return raw.get(key) ?? undefined;
   }
@@ -110,6 +118,12 @@ export function applyTableParamsChange(
       "pageSize",
       change.pageSize === DEFAULT_PAGE_SIZE ? null : String(change.pageSize),
     );
+  }
+
+  for (const [key, value] of Object.entries(change.filters ?? {})) {
+    if (isFilterKey(key)) {
+      setOrDelete(next, key, value || null);
+    }
   }
 
   if (change.page !== undefined) {

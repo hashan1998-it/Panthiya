@@ -33,6 +33,9 @@
     "fees": "Fees",
     "timetable": "Timetable",
     "reports": "Reports",
-    "settings": "Settings"
+    "settings": "Settings",
+    "brandInitial": "P",
+    "mainLabel": "Main",
+    "openMenu": "Open menu"
   }
 }

@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { ADMIN_NAV_ITEMS, isActivePath } from "./nav-items";
@@ -16,11 +17,13 @@ const linkClass =
   "flex h-10 items-center gap-3 rounded-lg px-3 text-body-sm font-medium text-muted-foreground transition-colors duration-150 ease-out outline-none hover:bg-secondary hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 aria-[current=page]:bg-secondary aria-[current=page]:text-foreground motion-reduce:transition-none [&_svg]:size-5 [&_svg]:shrink-0";
 
 function NavLinks({ variant, onNavigate, pathname }: NavListProps & { pathname: string | null }) {
+  const t = useTranslations("nav");
   const isSidebar = variant === "sidebar";
 
   return (
     <ul className="flex flex-col gap-1">
-      {ADMIN_NAV_ITEMS.map(({ href, label, icon: Icon }) => {
+      {ADMIN_NAV_ITEMS.map(({ href, labelKey, icon: Icon }) => {
+        const label = t(labelKey);
         const current = isActivePath(pathname, href) ? "page" : undefined;
 
         if (!isSidebar) {

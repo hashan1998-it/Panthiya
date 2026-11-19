@@ -24,5 +24,15 @@
         "failed": "We couldn't sign you out. Please try again."
       }
     }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "classes": "Classes",
+    "attendance": "Attendance",
+    "fees": "Fees",
+    "timetable": "Timetable",
+    "reports": "Reports",
+    "settings": "Settings"
   }
 }

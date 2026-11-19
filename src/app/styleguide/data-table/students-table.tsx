@@ -2,16 +2,12 @@
 
 import { createDataTableColumnHelper, DataTable } from "@/components/shared/data-table";
 import { Badge } from "@/components/ui/badge";
+import { DEMO_SORTABLE_COLUMNS, type DemoStudent } from "./sample-students";
 
-export type DemoStudent = {
-  id: string;
-  admissionNo: string;
-  name: string;
-  grade: number;
-  phone: string;
-  fee: string;
-  active: boolean;
-};
+const feeFormatter = new Intl.NumberFormat("en-LK", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 const column = createDataTableColumnHelper<DemoStudent>();
 
@@ -26,7 +22,11 @@ const columns = column.columns([
   }),
   column.accessor("grade", { header: "Grade" }),
   column.accessor("phone", { header: "Phone" }),
-  column.accessor("fee", { header: "Monthly fee", meta: { align: "right" } }),
+  column.accessor("fee", {
+    header: "Monthly fee",
+    cell: (info) => `Rs. ${feeFormatter.format(info.getValue())}`,
+    meta: { align: "right" },
+  }),
   column.accessor("active", {
     header: "Status",
     cell: (info) =>
@@ -38,12 +38,13 @@ const columns = column.columns([
   }),
 ]);
 
-export function DataTableDemo({ students }: { students: DemoStudent[] }) {
+export function StudentsTable({ students }: { students: DemoStudent[] }) {
   return (
     <DataTable
       label="Students"
       columns={columns}
       data={students}
+      sortableColumns={DEMO_SORTABLE_COLUMNS}
       getRowId={(student) => student.id}
     />
   );

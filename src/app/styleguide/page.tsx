@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Check, Clock, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { DataTableDemo, type DemoStudent } from "./data-table-demo";
 import { ThemeSwitcher } from "./theme-switcher";
 import { ToastDemo } from "./toast-demo";
 
@@ -42,36 +42,6 @@ const surfaces = [
   { className: "bg-warning", name: "warning" },
   { className: "bg-destructive", name: "destructive" },
 ] as const;
-
-const sampleStudents: DemoStudent[] = [
-  {
-    id: "1",
-    admissionNo: "PN-0001",
-    name: "Nimal Perera",
-    grade: 10,
-    phone: "071 234 5678",
-    fee: "Rs. 2,500.00",
-    active: true,
-  },
-  {
-    id: "2",
-    admissionNo: "PN-0002",
-    name: "Kamal Silva",
-    grade: 11,
-    phone: "077 345 6789",
-    fee: "Rs. 1,250.00",
-    active: true,
-  },
-  {
-    id: "3",
-    admissionNo: "PN-0003",
-    name: "Sachini Fernando",
-    grade: 10,
-    phone: "076 456 7890",
-    fee: "Rs. 0.00",
-    active: false,
-  },
-];
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -217,8 +187,16 @@ export default function StyleguidePage() {
       </Section>
 
       <Section title="Data table">
-        <DataTableDemo students={sampleStudents} />
-        <DataTableDemo students={[]} />
+        <p className="text-body-sm text-muted-foreground">
+          Sorting, pagination and search read the URL, so the demo lives on its own page:{" "}
+          <Link
+            href="/styleguide/data-table"
+            className="text-foreground underline underline-offset-4"
+          >
+            open the data table demo
+          </Link>
+          .
+        </p>
       </Section>
 
       <Section title="Toasts">

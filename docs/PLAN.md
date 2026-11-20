@@ -285,7 +285,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 3 — Students (days 5-6)
 
-- [ ] **T-030 Students list** (M)
+- [x] **T-030 Students list** (M)
   - Shows admission number, name, grade, phone and status. Search by name or admission number, filter by grade and status.
   - Search is debounced. Filtering happens in the database, not in the browser.
   - Empty state when there are no students and a different one when a search has no results.

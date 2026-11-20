@@ -35,6 +35,39 @@
     "empty": {
       "title": "No students yet",
       "description": "Students you add will show up here."
+    },
+    "addStudent": "Add student",
+    "form": {
+      "metaTitle": "Add student · Panthiya",
+      "description": "Fill in the student's details. Add at least one phone number.",
+      "optional": "Optional",
+      "phoneHint": "Sri Lankan number, for example 077 123 4567",
+      "selectGrade": "Select a grade",
+      "submit": "Save student",
+      "submitting": "Saving…",
+      "created": "{name} was added",
+      "fields": {
+        "admissionNo": "Admission no",
+        "fullName": "Full name",
+        "grade": "Grade",
+        "phone": "Student phone",
+        "parentName": "Parent name",
+        "parentPhone": "Parent phone",
+        "joinedOn": "Joined on"
+      },
+      "errors": {
+        "admissionNoRequired": "Enter an admission number",
+        "admissionNoTooLong": "Use 20 characters or fewer",
+        "admissionNoTaken": "This admission number is already used",
+        "fullNameRequired": "Enter the student's name",
+        "fullNameTooLong": "Use 100 characters or fewer",
+        "gradeRequired": "Select a grade",
+        "phoneInvalid": "Enter a valid Sri Lankan phone number",
+        "contactRequired": "Add a student phone or a parent phone",
+        "parentNameTooLong": "Use 100 characters or fewer",
+        "joinedOnRequired": "Enter the date the student joined",
+        "saveFailed": "We couldn't save the student. Please try again."
+      }
     }
   },
   "me": {

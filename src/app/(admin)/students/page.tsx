@@ -1,9 +1,12 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { connection } from "next/server";
+import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/shared/page-header";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StudentsTable } from "@/features/students/components/students-table";
 import { parseStudentFilters, STUDENT_SORTABLE_COLUMNS } from "@/features/students/filters";
@@ -33,7 +36,16 @@ export default function StudentsPage({ searchParams }: { searchParams: SearchPar
 
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title={t("nav.students")} description={t("students.description")} />
+      <PageHeader
+        title={t("nav.students")}
+        description={t("students.description")}
+        action={
+          <Link href="/students/new" className={buttonVariants()}>
+            <Plus data-icon="inline-start" aria-hidden />
+            {t("students.addStudent")}
+          </Link>
+        }
+      />
       <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>
         <StudentsResults searchParams={searchParams} />
       </Suspense>

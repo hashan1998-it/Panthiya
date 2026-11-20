@@ -8,7 +8,7 @@ function NativeSelect({ className, ...props }: ComponentProps<"select">) {
       <select
         data-slot="native-select"
         className={cn(
-          "h-10 cursor-pointer appearance-none rounded-lg border border-input bg-background pr-9 pl-3 text-body-sm text-foreground tabular-nums transition-colors duration-150 outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none dark:scheme-dark",
+          "h-10 cursor-pointer appearance-none rounded-lg border border-input bg-background pr-9 pl-3 text-body-sm text-foreground tabular-nums transition-colors duration-150 outline-none hover:bg-muted focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 motion-reduce:transition-none dark:scheme-dark dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
           className,
         )}
         {...props}

@@ -34,6 +34,7 @@ export function StudentForm() {
     handleSubmit,
     getValues,
     setError,
+    reset,
   } = useForm<StudentFormValues, unknown, StudentInput>({
     resolver: zodResolver(studentSchema),
     mode: "onTouched",
@@ -49,6 +50,11 @@ export function StudentForm() {
   });
 
   const [formError, setFormError] = useState<StudentFormErrorKey>();
+
+  const clearForm = () => {
+    reset();
+    setFormError(undefined);
+  };
 
   const errorText = (name: FieldName) => {
     const key = errors[name]?.message;
@@ -72,6 +78,7 @@ export function StudentForm() {
       }
 
       toast.success(t("students.form.created", { name: result.fullName }));
+      clearForm();
       router.push(`/students/${result.id}`);
     });
   };
@@ -142,7 +149,11 @@ export function StudentForm() {
         <Button type="submit" disabled={pending}>
           {pending ? t("students.form.submitting") : t("students.form.submit")}
         </Button>
-        <Link href="/students" className={buttonVariants({ variant: "outline" })}>
+        <Link
+          href="/students"
+          onClick={clearForm}
+          className={buttonVariants({ variant: "outline" })}
+        >
           {t("common.cancel")}
         </Link>
       </div>

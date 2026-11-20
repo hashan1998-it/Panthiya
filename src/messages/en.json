@@ -37,6 +37,11 @@
       "description": "Students you add will show up here."
     },
     "addStudent": "Add student",
+    "profile": {
+      "metaTitle": "{name} · Panthiya",
+      "backToStudents": "Back to students",
+      "details": "Details"
+    },
     "form": {
       "metaTitle": "Add student · Panthiya",
       "description": "Fill in the student's details. Add at least one phone number.",

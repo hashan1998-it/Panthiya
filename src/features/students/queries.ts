@@ -1,3 +1,5 @@
+import { cache } from "react";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { toContainsPattern } from "@/lib/search";
 import { getPageInfo, type TableParams } from "@/lib/table-params";
@@ -16,7 +18,11 @@ export type StudentList = {
   rowCount: number;
 };
 
+export type StudentDetail = Omit<Tables<"students">, "created_at" | "profile_id">;
+
 const LIST_COLUMNS = "id, admission_no, full_name, grade, phone, is_active";
+const DETAIL_COLUMNS =
+  "id, admission_no, full_name, grade, phone, parent_name, parent_phone, joined_on, is_active";
 const RANGE_NOT_SATISFIABLE = "PGRST103";
 
 export async function listStudents(
@@ -69,3 +75,18 @@ export async function listStudents(
 
   return { students: result.data, rowCount: result.count ?? 0 };
 }
+
+export const getStudent = cache(async (id: string): Promise<StudentDetail | null> => {
+  if (!z.guid().safeParse(id).success) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("students")
+    .select(DETAIL_COLUMNS)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  return data;
+});

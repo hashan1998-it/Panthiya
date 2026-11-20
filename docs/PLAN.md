@@ -277,7 +277,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Search, sort, filter and page are stored in the URL, so a refresh or a shared link shows the same view.
   - On mobile the table scrolls horizontally without breaking the page layout.
 
-- [ ] **T-023 i18n foundation** (M)
+- [x] **T-023 i18n foundation** (M)
   - next-intl set up with `en.json` (and an empty `si.json`). Every string in the app so far moves into `en.json`.
   - Zod error messages and toasts go through the translation function.
   - `lib/dates.ts` has helpers for "today" and "current month" in `Asia/Colombo`, with unit tests around midnight UTC (05:30 in Sri Lanka).

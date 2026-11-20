@@ -9,6 +9,34 @@
   "dashboard": {
     "metaTitle": "Dashboard · Panthiya"
   },
+  "students": {
+    "metaTitle": "Students · Panthiya",
+    "description": "Search and filter every student in the class.",
+    "searchPlaceholder": "Search by name or admission no",
+    "notSet": "—",
+    "columns": {
+      "admissionNo": "Admission no",
+      "name": "Name",
+      "grade": "Grade",
+      "phone": "Phone",
+      "status": "Status"
+    },
+    "filters": {
+      "grade": "Grade",
+      "allGrades": "All grades",
+      "gradeOption": "Grade {grade}",
+      "status": "Status",
+      "allStatuses": "All"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "empty": {
+      "title": "No students yet",
+      "description": "Students you add will show up here."
+    }
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

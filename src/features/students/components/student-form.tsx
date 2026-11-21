@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { type MouseEvent, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { canGoBackInApp } from "@/components/navigation-tracker";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -73,6 +74,18 @@ export function StudentForm({ student }: StudentFormProps) {
   const clearForm = () => {
     reset();
     setFormError(undefined);
+  };
+
+  const onCancel = (event: MouseEvent<HTMLAnchorElement>) => {
+    const opensElsewhere =
+      event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+    if (opensElsewhere) return;
+
+    clearForm();
+    if (!canGoBackInApp()) return;
+
+    event.preventDefault();
+    router.back();
   };
 
   const errorText = (name: FieldName) => {
@@ -181,7 +194,7 @@ export function StudentForm({ student }: StudentFormProps) {
         </Button>
         <Link
           href={student ? `/students/${student.id}` : "/students"}
-          onClick={clearForm}
+          onClick={onCancel}
           className={buttonVariants({ variant: "outline" })}
         >
           {t("common.cancel")}

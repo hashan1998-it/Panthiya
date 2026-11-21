@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { AppHeader } from "@/components/layout/app-header";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { NavigationTracker } from "@/components/navigation-tracker";
 import { RoleGate } from "@/components/role-gate";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +20,9 @@ export default function AdminLayout({ children }: LayoutProps<"/">) {
           </main>
         </div>
       </div>
+      <Suspense>
+        <NavigationTracker />
+      </Suspense>
     </TooltipProvider>
   );
 }

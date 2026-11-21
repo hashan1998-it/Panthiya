@@ -11,14 +11,14 @@ type FilterOption = {
 type DataTableSelectFilterProps = {
   param: string;
   label: string;
-  allLabel: string;
+  defaultLabel: string;
   options: readonly FilterOption[];
 };
 
 export function DataTableSelectFilter({
   param,
   label,
-  allLabel,
+  defaultLabel,
   options,
 }: DataTableSelectFilterProps) {
   const { value, setValue, disabled } = useDataTableFilter(param);
@@ -31,7 +31,7 @@ export function DataTableSelectFilter({
         disabled={disabled}
         onChange={(event) => setValue(event.target.value || null)}
       >
-        <option value="">{allLabel}</option>
+        <option value="">{defaultLabel}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

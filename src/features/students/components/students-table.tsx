@@ -72,13 +72,13 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
           <DataTableSelectFilter
             param="grade"
             label={t("students.filters.grade")}
-            allLabel={t("students.filters.allGrades")}
+            defaultLabel={t("students.filters.allGrades")}
             options={gradeOptions}
           />
           <DataTableSelectFilter
             param="status"
             label={t("students.filters.status")}
-            allLabel={t("students.filters.allStatuses")}
+            defaultLabel={t("students.filters.allStatuses")}
             options={statusOptions}
           />
         </>

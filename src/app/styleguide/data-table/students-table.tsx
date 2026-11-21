@@ -68,13 +68,13 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
           <DataTableSelectFilter
             param="grade"
             label="Grade"
-            allLabel="All grades"
+            defaultLabel="All grades"
             options={GRADE_OPTIONS}
           />
           <DataTableSelectFilter
             param="status"
             label="Status"
-            allLabel="All"
+            defaultLabel="All"
             options={STATUS_OPTIONS}
           />
         </>

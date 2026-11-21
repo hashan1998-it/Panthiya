@@ -296,7 +296,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - A duplicate admission number shows an error on that field.
   - On success: toast, redirect to the new profile, and the list shows the new student.
 
-- [ ] **T-032 Edit and deactivate student** (S)
+- [x] **T-032 Edit and deactivate student** (S)
   - The edit form reuses the add form component, pre-filled.
   - Deactivate asks for confirmation. Deactivated students are hidden by default but their history is kept.
 

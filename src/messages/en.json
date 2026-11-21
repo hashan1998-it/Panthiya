@@ -37,10 +37,38 @@
       "description": "Students you add will show up here."
     },
     "addStudent": "Add student",
+    "actions": {
+      "column": "Actions",
+      "menu": "Actions for {name}",
+      "viewProfile": "View profile"
+    },
     "profile": {
       "metaTitle": "{name} · Panthiya",
       "backToStudents": "Back to students",
-      "details": "Details"
+      "details": "Details",
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "reactivate": "Reactivate",
+      "deactivateDialog": {
+        "title": "Deactivate {name}?",
+        "description": "They will be hidden from the students list. Their attendance and payment history is kept, and you can reactivate them later.",
+        "pending": "Deactivating…"
+      },
+      "reactivateDialog": {
+        "title": "Reactivate {name}?",
+        "description": "They will show in the students list again.",
+        "pending": "Reactivating…"
+      },
+      "deactivated": "{name} was deactivated",
+      "reactivated": "{name} was reactivated",
+      "statusFailed": "We couldn't change the student's status. Please try again."
+    },
+    "edit": {
+      "metaTitle": "Edit {name} · Panthiya",
+      "title": "Edit student",
+      "description": "Update {name}'s details.",
+      "submit": "Save changes",
+      "updated": "{name} was updated"
     },
     "form": {
       "metaTitle": "Add student · Panthiya",
@@ -71,7 +99,8 @@
         "contactRequired": "Add a student phone or a parent phone",
         "parentNameTooLong": "Use 100 characters or fewer",
         "joinedOnRequired": "Enter the date the student joined",
-        "saveFailed": "We couldn't save the student. Please try again."
+        "saveFailed": "We couldn't save the student. Please try again.",
+        "notFound": "This student no longer exists."
       }
     }
   },

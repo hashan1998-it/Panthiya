@@ -15,7 +15,9 @@ import {
 } from "@/components/ui/alert-dialog";
 
 type ConfirmDialogProps = {
-  trigger: ReactElement;
+  trigger?: ReactElement;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   title: string;
   description: string;
   confirmLabel: string;
@@ -27,6 +29,8 @@ type ConfirmDialogProps = {
 
 export function ConfirmDialog({
   trigger,
+  open: controlledOpen,
+  onOpenChange,
   title,
   description,
   confirmLabel,
@@ -36,8 +40,14 @@ export function ConfirmDialog({
   onConfirm,
 }: ConfirmDialogProps) {
   const t = useTranslations("common");
-  const [open, setOpen] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
   const [pending, startTransition] = useTransition();
+
+  const open = controlledOpen ?? uncontrolledOpen;
+  const setOpen = (nextOpen: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(nextOpen);
+    onOpenChange?.(nextOpen);
+  };
 
   function handleConfirm() {
     startTransition(async () => {
@@ -55,7 +65,7 @@ export function ConfirmDialog({
         if (!pending) setOpen(nextOpen);
       }}
     >
-      <AlertDialogTrigger render={trigger} />
+      {trigger && <AlertDialogTrigger render={trigger} />}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

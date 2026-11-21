@@ -2,8 +2,12 @@ import { describe, expect, it } from "vitest";
 import { parseStudentFilters } from "./filters";
 
 describe("parseStudentFilters", () => {
-  it("returns no filters when the URL has none", () => {
-    expect(parseStudentFilters({})).toEqual({ grade: null, status: null });
+  it("shows only active students when the URL has no filters", () => {
+    expect(parseStudentFilters({})).toEqual({ grade: null, status: "active" });
+  });
+
+  it("reads status=all as every student", () => {
+    expect(parseStudentFilters({ status: "all" }).status).toBe("all");
   });
 
   it("reads a valid grade and status", () => {
@@ -20,8 +24,8 @@ describe("parseStudentFilters", () => {
     expect(parseStudentFilters({ grade: "abc" }).grade).toBeNull();
   });
 
-  it("ignores an unknown status", () => {
-    expect(parseStudentFilters({ status: "deleted" }).status).toBeNull();
+  it("falls back to active for an unknown status", () => {
+    expect(parseStudentFilters({ status: "deleted" }).status).toBe("active");
   });
 
   it("works with URLSearchParams too", () => {

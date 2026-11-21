@@ -290,7 +290,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Search is debounced. Filtering happens in the database, not in the browser.
   - Empty state when there are no students and a different one when a search has no results.
 
-- [ ] **T-031 Add student** (M)
+- [x] **T-031 Add student** (M)
   - Form with all `students` fields. Zod validates required fields and a Sri Lankan phone number format.
   - The same schema validates again inside the Server Action.
   - A duplicate admission number shows an error on that field.

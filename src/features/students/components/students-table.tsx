@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { STUDENT_GRADES, STUDENT_SORTABLE_COLUMNS, type StudentStatusFilter } from "../filters";
 import type { StudentListItem } from "../queries";
+import { StudentActionsMenu } from "./student-actions-menu";
 
 const column = createDataTableColumnHelper<StudentListItem>();
 
@@ -44,6 +45,12 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
             ) : (
               <Badge variant="neutral">{t("students.status.inactive")}</Badge>
             ),
+        }),
+        column.display({
+          id: "actions",
+          header: () => <span className="sr-only">{t("students.actions.column")}</span>,
+          cell: (info) => <StudentActionsMenu student={info.row.original} />,
+          meta: { align: "right" },
         }),
       ]),
     [t],

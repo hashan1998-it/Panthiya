@@ -37,6 +37,11 @@
       "description": "Students you add will show up here."
     },
     "addStudent": "Add student",
+    "actions": {
+      "column": "Actions",
+      "menu": "Actions for {name}",
+      "viewProfile": "View profile"
+    },
     "profile": {
       "metaTitle": "{name} · Panthiya",
       "backToStudents": "Back to students",

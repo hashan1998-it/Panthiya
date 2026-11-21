@@ -8,9 +8,9 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { PageHeader } from "@/components/shared/page-header";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StudentStatusButton } from "@/features/students/components/student-status-button";
+import { StudentStatusDialog } from "@/features/students/components/student-status-dialog";
 import { getStudent } from "@/features/students/queries";
 
 type Params = Promise<{ id: string }>;
@@ -67,10 +67,15 @@ async function StudentProfile({ params }: { params: Params }) {
               <Pencil data-icon="inline-start" aria-hidden />
               {t("profile.edit")}
             </Link>
-            <StudentStatusButton
+            <StudentStatusDialog
               studentId={student.id}
               fullName={student.full_name}
               isActive={student.is_active}
+              trigger={
+                <Button variant="outline">
+                  {student.is_active ? t("profile.deactivate") : t("profile.reactivate")}
+                </Button>
+              }
             />
           </>
         }

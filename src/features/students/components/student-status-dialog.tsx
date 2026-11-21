@@ -1,21 +1,30 @@
 "use client";
 
+import type { ReactElement } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { Button } from "@/components/ui/button";
 import { setStudentActive } from "../actions";
 
-type StudentStatusButtonProps = {
+type StudentStatusDialogProps = {
   studentId: string;
   fullName: string;
   isActive: boolean;
+  trigger?: ReactElement;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
-export function StudentStatusButton({ studentId, fullName, isActive }: StudentStatusButtonProps) {
+export function StudentStatusDialog({
+  studentId,
+  fullName,
+  isActive,
+  trigger,
+  open,
+  onOpenChange,
+}: StudentStatusDialogProps) {
   const t = useTranslations("students.profile");
   const dialog = isActive ? "deactivateDialog" : "reactivateDialog";
-  const label = isActive ? t("deactivate") : t("reactivate");
 
   const onConfirm = async () => {
     const result = await setStudentActive(studentId, !isActive);
@@ -34,10 +43,12 @@ export function StudentStatusButton({ studentId, fullName, isActive }: StudentSt
 
   return (
     <ConfirmDialog
-      trigger={<Button variant="outline">{label}</Button>}
+      trigger={trigger}
+      open={open}
+      onOpenChange={onOpenChange}
       title={t(`${dialog}.title`, { name: fullName })}
       description={t(`${dialog}.description`)}
-      confirmLabel={label}
+      confirmLabel={isActive ? t("deactivate") : t("reactivate")}
       pendingLabel={t(`${dialog}.pending`)}
       destructive={isActive}
       onConfirm={onConfirm}

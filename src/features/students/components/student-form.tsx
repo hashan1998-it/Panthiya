@@ -12,8 +12,9 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/c
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { getToday } from "@/lib/dates";
-import { createStudent } from "../actions";
+import { createStudent, updateStudent } from "../actions";
 import { STUDENT_GRADES } from "../filters";
+import type { StudentDetail } from "../queries";
 import {
   studentSchema,
   type StudentFormErrorKey,
@@ -23,10 +24,27 @@ import {
 
 type FieldName = keyof StudentFormValues;
 
-export function StudentForm() {
+type StudentFormProps = {
+  student?: StudentDetail;
+};
+
+function toFormValues(student: StudentDetail): StudentFormValues {
+  return {
+    admission_no: student.admission_no,
+    full_name: student.full_name,
+    grade: String(student.grade),
+    phone: student.phone ?? "",
+    parent_name: student.parent_name ?? "",
+    parent_phone: student.parent_phone ?? "",
+    joined_on: student.joined_on,
+  };
+}
+
+export function StudentForm({ student }: StudentFormProps) {
   const t = useTranslations();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const isEdit = student !== undefined;
 
   const {
     formState: { errors },
@@ -47,6 +65,7 @@ export function StudentForm() {
       parent_phone: "",
       joined_on: getToday(),
     },
+    values: student ? toFormValues(student) : undefined,
   });
 
   const [formError, setFormError] = useState<StudentFormErrorKey>();
@@ -65,7 +84,10 @@ export function StudentForm() {
     setFormError(undefined);
 
     startTransition(async () => {
-      const result = await createStudent(getValues());
+      const values = getValues();
+      const result = student
+        ? await updateStudent(student.id, values)
+        : await createStudent(values);
 
       if (!result.ok) {
         for (const [name, messages] of Object.entries(result.fieldErrors)) {
@@ -77,7 +99,11 @@ export function StudentForm() {
         return;
       }
 
-      toast.success(t("students.form.created", { name: result.fullName }));
+      toast.success(
+        isEdit
+          ? t("students.edit.updated", { name: result.fullName })
+          : t("students.form.created", { name: result.fullName }),
+      );
       clearForm();
       router.push(`/students/${result.id}`);
     });
@@ -147,10 +173,14 @@ export function StudentForm() {
       )}
       <div className="flex gap-2">
         <Button type="submit" disabled={pending}>
-          {pending ? t("students.form.submitting") : t("students.form.submit")}
+          {pending
+            ? t("students.form.submitting")
+            : isEdit
+              ? t("students.edit.submit")
+              : t("students.form.submit")}
         </Button>
         <Link
-          href="/students"
+          href={student ? `/students/${student.id}` : "/students"}
           onClick={clearForm}
           className={buttonVariants({ variant: "outline" })}
         >

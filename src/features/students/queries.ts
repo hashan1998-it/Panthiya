@@ -43,7 +43,7 @@ export async function listStudents(
     if (filters.grade !== null) {
       query = query.eq("grade", filters.grade);
     }
-    if (filters.status !== null) {
+    if (filters.status !== "all") {
       query = query.eq("is_active", filters.status === "active");
     }
 

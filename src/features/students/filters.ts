@@ -5,18 +5,20 @@ export const STUDENT_SORTABLE_COLUMNS = ["admission_no", "full_name", "grade"] a
 
 export const STUDENT_GRADES = Array.from({ length: 13 }, (_, index) => index + 1);
 
-export const STUDENT_STATUSES = ["active", "inactive"] as const;
+export const STUDENT_STATUS_FILTERS = ["active", "inactive", "all"] as const;
 
-export type StudentStatus = (typeof STUDENT_STATUSES)[number];
+export type StudentStatusFilter = (typeof STUDENT_STATUS_FILTERS)[number];
+
+export const DEFAULT_STUDENT_STATUS: StudentStatusFilter = "active";
 
 export type StudentFilters = {
   grade: number | null;
-  status: StudentStatus | null;
+  status: StudentStatusFilter;
 };
 
 // Anything missing or invalid in the URL becomes `null`, which means "no filter".
 const gradeSchema = z.coerce.number().int().min(1).max(13).nullable().catch(null);
-const statusSchema = z.enum(STUDENT_STATUSES).nullable().catch(null);
+const statusSchema = z.enum(STUDENT_STATUS_FILTERS).catch(DEFAULT_STUDENT_STATUS);
 
 export function parseStudentFilters(raw: RawSearchParams): StudentFilters {
   return {

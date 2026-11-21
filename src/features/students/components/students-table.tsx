@@ -7,7 +7,7 @@ import { createDataTableColumnHelper, DataTable } from "@/components/shared/data
 import { DataTableSelectFilter } from "@/components/shared/data-table-select-filter";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Badge } from "@/components/ui/badge";
-import { STUDENT_GRADES, STUDENT_SORTABLE_COLUMNS, STUDENT_STATUSES } from "../filters";
+import { STUDENT_GRADES, STUDENT_SORTABLE_COLUMNS, type StudentStatusFilter } from "../filters";
 import type { StudentListItem } from "../queries";
 
 const column = createDataTableColumnHelper<StudentListItem>();
@@ -54,10 +54,10 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
     label: t("students.filters.gradeOption", { grade }),
   }));
 
-  const statusOptions = STUDENT_STATUSES.map((status) => ({
-    value: status,
-    label: t(`students.status.${status}`),
-  }));
+  const statusOptions: { value: StudentStatusFilter; label: string }[] = [
+    { value: "inactive", label: t("students.status.inactive") },
+    { value: "all", label: t("students.filters.allStatuses") },
+  ];
 
   return (
     <DataTable
@@ -78,7 +78,7 @@ export function StudentsTable({ students, rowCount }: StudentsTableProps) {
           <DataTableSelectFilter
             param="status"
             label={t("students.filters.status")}
-            defaultLabel={t("students.filters.allStatuses")}
+            defaultLabel={t("students.status.active")}
             options={statusOptions}
           />
         </>

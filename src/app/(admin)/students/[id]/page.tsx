@@ -3,13 +3,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pencil } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { PageHeader } from "@/components/shared/page-header";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { StudentStatusButton } from "@/features/students/components/student-status-button";
 import { getStudent } from "@/features/students/queries";
 
 type Params = Promise<{ id: string }>;
@@ -52,11 +53,26 @@ async function StudentProfile({ params }: { params: Params }) {
       <PageHeader
         title={student.full_name}
         action={
-          student.is_active ? (
-            <Badge variant="success">{t("status.active")}</Badge>
-          ) : (
-            <Badge variant="neutral">{t("status.inactive")}</Badge>
-          )
+          <>
+            {student.is_active ? (
+              <Badge variant="success" className="self-center">
+                {t("status.active")}
+              </Badge>
+            ) : (
+              <Badge variant="neutral" className="self-center">
+                {t("status.inactive")}
+              </Badge>
+            )}
+            <Link href={`/students/${student.id}/edit`} className={buttonVariants()}>
+              <Pencil data-icon="inline-start" aria-hidden />
+              {t("profile.edit")}
+            </Link>
+            <StudentStatusButton
+              studentId={student.id}
+              fullName={student.full_name}
+              isActive={student.is_active}
+            />
+          </>
         }
       />
       <Card className="max-w-2xl">

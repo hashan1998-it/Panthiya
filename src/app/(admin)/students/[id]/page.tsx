@@ -7,7 +7,6 @@ import { ArrowLeft, Pencil } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { PageHeader } from "@/components/shared/page-header";
-import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
@@ -21,6 +20,7 @@ import {
   getStudentPayments,
 } from "@/features/students/profile-queries";
 import { getStudent } from "@/features/students/queries";
+import { cn } from "@/lib/utils";
 
 type Params = Promise<{ id: string }>;
 
@@ -50,6 +50,8 @@ async function StudentProfile({ params }: { params: Params }) {
     getStudentPayments(student.id),
   ]);
 
+  const statusLabel = student.is_active ? t("status.active") : t("status.inactive");
+
   const details = [
     { label: t("form.fields.admissionNo"), value: student.admission_no },
     { label: t("form.fields.grade"), value: t("filters.gradeOption", { grade: student.grade }) },
@@ -66,17 +68,19 @@ async function StudentProfile({ params }: { params: Params }) {
     <>
       <PageHeader
         title={student.full_name}
+        titleAddon={
+          <span
+            role="img"
+            aria-label={statusLabel}
+            title={statusLabel}
+            className={cn(
+              "size-2.5 shrink-0 rounded-full",
+              student.is_active ? "bg-success" : "bg-destructive",
+            )}
+          />
+        }
         action={
           <>
-            {student.is_active ? (
-              <Badge variant="success" className="self-center">
-                {t("status.active")}
-              </Badge>
-            ) : (
-              <Badge variant="neutral" className="self-center">
-                {t("status.inactive")}
-              </Badge>
-            )}
             <Link href={`/students/${student.id}/edit`} className={buttonVariants()}>
               <Pencil data-icon="inline-start" aria-hidden />
               {t("profile.edit")}

@@ -114,6 +114,12 @@
       "reactivated": "{name} was reactivated",
       "statusFailed": "We couldn't change the student's status. Please try again."
     },
+    "account": {
+      "errors": {
+        "emailInvalid": "Enter a valid email address",
+        "emailTooLong": "Use 254 characters or fewer"
+      }
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit student",

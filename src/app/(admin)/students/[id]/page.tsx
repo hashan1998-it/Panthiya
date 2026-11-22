@@ -7,11 +7,20 @@ import { ArrowLeft, Pencil } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { PageHeader } from "@/components/shared/page-header";
-import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
+import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
+import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
+import { StudentPaymentsTab } from "@/features/students/components/profile/student-payments-tab";
 import { StudentStatusDialog } from "@/features/students/components/student-status-dialog";
+import {
+  getStudentAttendance,
+  getStudentEnrollments,
+  getStudentPayments,
+} from "@/features/students/profile-queries";
 import { getStudent } from "@/features/students/queries";
+import { cn } from "@/lib/utils";
 
 type Params = Promise<{ id: string }>;
 
@@ -33,8 +42,15 @@ async function StudentProfile({ params }: { params: Params }) {
   const student = await getStudent(id);
   if (!student) notFound();
 
-  const t = await getTranslations("students");
-  const format = await getFormatter();
+  const [t, format, enrollments, attendance, payments] = await Promise.all([
+    getTranslations("students"),
+    getFormatter(),
+    getStudentEnrollments(student.id),
+    getStudentAttendance(student.id),
+    getStudentPayments(student.id),
+  ]);
+
+  const statusLabel = student.is_active ? t("status.active") : t("status.inactive");
 
   const details = [
     { label: t("form.fields.admissionNo"), value: student.admission_no },
@@ -52,17 +68,19 @@ async function StudentProfile({ params }: { params: Params }) {
     <>
       <PageHeader
         title={student.full_name}
+        titleAddon={
+          <span
+            role="img"
+            aria-label={statusLabel}
+            title={statusLabel}
+            className={cn(
+              "size-2.5 shrink-0 rounded-full",
+              student.is_active ? "bg-success" : "bg-destructive",
+            )}
+          />
+        }
         action={
           <>
-            {student.is_active ? (
-              <Badge variant="success" className="self-center">
-                {t("status.active")}
-              </Badge>
-            ) : (
-              <Badge variant="neutral" className="self-center">
-                {t("status.inactive")}
-              </Badge>
-            )}
             <Link href={`/students/${student.id}/edit`} className={buttonVariants()}>
               <Pencil data-icon="inline-start" aria-hidden />
               {t("profile.edit")}
@@ -80,21 +98,40 @@ async function StudentProfile({ params }: { params: Params }) {
           </>
         }
       />
-      <Card className="max-w-2xl">
-        <CardHeader>
-          <CardTitle>{t("profile.details")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <dl className="grid gap-4 sm:grid-cols-2">
-            {details.map(({ label, value }) => (
-              <div key={label} className="flex flex-col gap-1">
-                <dt className="text-body-sm text-muted-foreground">{label}</dt>
-                <dd className="text-body-sm text-foreground">{value ?? t("notSet")}</dd>
-              </div>
-            ))}
-          </dl>
-        </CardContent>
-      </Card>
+      <Tabs defaultValue="details">
+        <TabsList activateOnFocus>
+          <TabsTab value="details">{t("profile.tabs.details")}</TabsTab>
+          <TabsTab value="classes">{t("profile.tabs.classes")}</TabsTab>
+          <TabsTab value="attendance">{t("profile.tabs.attendance")}</TabsTab>
+          <TabsTab value="payments">{t("profile.tabs.payments")}</TabsTab>
+        </TabsList>
+        <TabsPanel value="details">
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>{t("profile.details")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <dl className="grid gap-4 sm:grid-cols-2">
+                {details.map(({ label, value }) => (
+                  <div key={label} className="flex flex-col gap-1">
+                    <dt className="text-body-sm text-muted-foreground">{label}</dt>
+                    <dd className="text-body-sm text-foreground">{value ?? t("notSet")}</dd>
+                  </div>
+                ))}
+              </dl>
+            </CardContent>
+          </Card>
+        </TabsPanel>
+        <TabsPanel value="classes">
+          <StudentClassesTab enrollments={enrollments} />
+        </TabsPanel>
+        <TabsPanel value="attendance">
+          <StudentAttendanceTab enrollments={enrollments} attendance={attendance} />
+        </TabsPanel>
+        <TabsPanel value="payments">
+          <StudentPaymentsTab payments={payments} />
+        </TabsPanel>
+      </Tabs>
     </>
   );
 }

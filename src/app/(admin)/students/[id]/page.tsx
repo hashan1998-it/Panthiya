@@ -10,7 +10,16 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
+import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
+import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
+import { StudentPaymentsTab } from "@/features/students/components/profile/student-payments-tab";
 import { StudentStatusDialog } from "@/features/students/components/student-status-dialog";
+import {
+  getStudentAttendance,
+  getStudentEnrollments,
+  getStudentPayments,
+} from "@/features/students/profile-queries";
 import { getStudent } from "@/features/students/queries";
 
 type Params = Promise<{ id: string }>;
@@ -33,8 +42,13 @@ async function StudentProfile({ params }: { params: Params }) {
   const student = await getStudent(id);
   if (!student) notFound();
 
-  const t = await getTranslations("students");
-  const format = await getFormatter();
+  const [t, format, enrollments, attendance, payments] = await Promise.all([
+    getTranslations("students"),
+    getFormatter(),
+    getStudentEnrollments(student.id),
+    getStudentAttendance(student.id),
+    getStudentPayments(student.id),
+  ]);
 
   const details = [
     { label: t("form.fields.admissionNo"), value: student.admission_no },
@@ -80,21 +94,40 @@ async function StudentProfile({ params }: { params: Params }) {
           </>
         }
       />
-      <Card className="max-w-2xl">
-        <CardHeader>
-          <CardTitle>{t("profile.details")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <dl className="grid gap-4 sm:grid-cols-2">
-            {details.map(({ label, value }) => (
-              <div key={label} className="flex flex-col gap-1">
-                <dt className="text-body-sm text-muted-foreground">{label}</dt>
-                <dd className="text-body-sm text-foreground">{value ?? t("notSet")}</dd>
-              </div>
-            ))}
-          </dl>
-        </CardContent>
-      </Card>
+      <Tabs defaultValue="details">
+        <TabsList activateOnFocus>
+          <TabsTab value="details">{t("profile.tabs.details")}</TabsTab>
+          <TabsTab value="classes">{t("profile.tabs.classes")}</TabsTab>
+          <TabsTab value="attendance">{t("profile.tabs.attendance")}</TabsTab>
+          <TabsTab value="payments">{t("profile.tabs.payments")}</TabsTab>
+        </TabsList>
+        <TabsPanel value="details">
+          <Card className="max-w-2xl">
+            <CardHeader>
+              <CardTitle>{t("profile.details")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <dl className="grid gap-4 sm:grid-cols-2">
+                {details.map(({ label, value }) => (
+                  <div key={label} className="flex flex-col gap-1">
+                    <dt className="text-body-sm text-muted-foreground">{label}</dt>
+                    <dd className="text-body-sm text-foreground">{value ?? t("notSet")}</dd>
+                  </div>
+                ))}
+              </dl>
+            </CardContent>
+          </Card>
+        </TabsPanel>
+        <TabsPanel value="classes">
+          <StudentClassesTab enrollments={enrollments} />
+        </TabsPanel>
+        <TabsPanel value="attendance">
+          <StudentAttendanceTab enrollments={enrollments} attendance={attendance} />
+        </TabsPanel>
+        <TabsPanel value="payments">
+          <StudentPaymentsTab payments={payments} />
+        </TabsPanel>
+      </Tabs>
     </>
   );
 }

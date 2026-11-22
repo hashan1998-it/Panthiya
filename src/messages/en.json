@@ -86,7 +86,7 @@
       "attendance": {
         "label": "Attendance by class",
         "overall": "Overall attendance",
-        "overallValue": "{rate} of {total} sessions",
+        "overallValue": "Across {total} sessions.",
         "class": "Class",
         "present": "Present",
         "late": "Late",

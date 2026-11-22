@@ -59,6 +59,57 @@
         "description": "They will show in the students list again.",
         "pending": "Reactivating…"
       },
+      "tabs": {
+        "details": "Details",
+        "classes": "Classes",
+        "attendance": "Attendance",
+        "payments": "Payments"
+      },
+      "classes": {
+        "label": "Enrolled classes",
+        "class": "Class",
+        "classValue": "{subject} · Grade {grade}",
+        "schedule": "Schedule",
+        "scheduleValue": "{day}, {start}–{end}",
+        "monthlyFee": "Monthly fee",
+        "discount": "Discount",
+        "discountNone": "None",
+        "discountHalf": "Half (50%)",
+        "discountFree": "Free (100%)",
+        "discountCustom": "{percent}% off",
+        "status": "Status",
+        "active": "Active",
+        "ended": "Ended {date}",
+        "emptyTitle": "No classes yet",
+        "emptyDescription": "This student isn't enrolled in any classes."
+      },
+      "attendance": {
+        "label": "Attendance by class",
+        "overall": "Overall attendance",
+        "overallValue": "{rate} of {total} sessions",
+        "class": "Class",
+        "present": "Present",
+        "late": "Late",
+        "absent": "Absent",
+        "rate": "Rate",
+        "lateNote": "Late counts as attended.",
+        "emptyTitle": "No attendance yet",
+        "emptyDescription": "Attendance shows here once it's marked for this student's classes."
+      },
+      "payments": {
+        "label": "Payment history",
+        "paidOn": "Paid on",
+        "receiptNo": "Receipt no",
+        "for": "For",
+        "forValue": "{subject} · {month}",
+        "method": "Method",
+        "methodCash": "Cash",
+        "methodBankTransfer": "Bank transfer",
+        "amount": "Amount",
+        "voided": "Voided",
+        "emptyTitle": "No payments yet",
+        "emptyDescription": "Payments for this student's fees will show here."
+      },
       "deactivated": "{name} was deactivated",
       "reactivated": "{name} was reactivated",
       "statusFailed": "We couldn't change the student's status. Please try again."

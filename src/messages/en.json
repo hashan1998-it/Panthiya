@@ -206,6 +206,12 @@
     "emptyDescription": "Classes you add show up here.",
     "addClass": "Add class",
     "nameValue": "{subject} · Grade {grade}",
+    "detail": {
+      "metaTitle": "{name} · Panthiya",
+      "backToClasses": "Back to classes",
+      "details": "Class details",
+      "edit": "Edit"
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit class",

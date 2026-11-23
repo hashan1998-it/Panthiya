@@ -5,4 +5,8 @@ export default defineConfig({
     // Lets tests use the same `@/...` imports as the app (from tsconfig.json).
     tsconfigPaths: true,
   },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["./vitest.setup.ts"],
+  },
 });

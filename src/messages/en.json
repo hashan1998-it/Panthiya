@@ -197,8 +197,7 @@
       "day": "Day",
       "time": "Time",
       "monthlyFee": "Monthly fee",
-      "enrolled": "Students",
-      "actions": "Actions"
+      "enrolled": "Students"
     },
     "gradeValue": "Grade {grade}",
     "timeValue": "{start}–{end}",
@@ -206,11 +205,37 @@
     "emptyDescription": "Classes you add show up here.",
     "addClass": "Add class",
     "nameValue": "{subject} · Grade {grade}",
+    "actions": {
+      "column": "Actions",
+      "menu": "Actions for {name}",
+      "view": "View class"
+    },
+    "detail": {
+      "metaTitle": "{name} · Panthiya",
+      "backToClasses": "Back to classes",
+      "details": "Class details",
+      "edit": "Edit"
+    },
+    "students": {
+      "title": "Enrolled students",
+      "label": "Enrolled students",
+      "admissionNo": "Admission no",
+      "name": "Name",
+      "discount": "Discount",
+      "effectiveFee": "Effective fee",
+      "actions": "Actions",
+      "inactive": "Inactive",
+      "discountNone": "None",
+      "discountHalf": "Half (50%)",
+      "discountFree": "Free (100%)",
+      "discountCustom": "{percent}% off",
+      "emptyTitle": "No students yet",
+      "emptyDescription": "Students enrolled in this class show up here."
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit class",
       "description": "Update the details of {name}.",
-      "label": "Edit {name}",
       "submit": "Save changes",
       "updated": "{name} was updated"
     },

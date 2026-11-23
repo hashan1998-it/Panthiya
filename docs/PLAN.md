@@ -317,7 +317,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 4 — Classes and enrollment (days 7-8)
 
-- [ ] **T-040 Classes list and form** (M)
+- [x] **T-040 Classes list and form** (M)
   - List shows subject, grade, day, time, fee and enrolled count.
   - Add and edit form. End time must be after start time. Fee must be positive.
   - Fees are displayed as `Rs. 2,500.00` everywhere through one shared formatter.

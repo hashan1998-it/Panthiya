@@ -1,8 +1,6 @@
-import Link from "next/link";
-import { BookOpen, Pencil } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
-import { buttonVariants } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -14,6 +12,7 @@ import {
 import { formatFee } from "@/lib/money";
 import { formatWeekday } from "@/lib/schedule";
 import type { ClassListItem } from "../queries";
+import { ClassActionsMenu } from "./class-actions-menu";
 
 type ClassesTableProps = {
   classes: ClassListItem[];
@@ -40,7 +39,7 @@ export async function ClassesTable({ classes }: ClassesTableProps) {
           <TableHead className="text-right">{t("columns.monthlyFee")}</TableHead>
           <TableHead className="text-right">{t("columns.enrolled")}</TableHead>
           <TableHead>
-            <span className="sr-only">{t("columns.actions")}</span>
+            <span className="sr-only">{t("actions.column")}</span>
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -61,15 +60,10 @@ export async function ClassesTable({ classes }: ClassesTableProps) {
             </TableCell>
             <TableCell className="text-right tabular-nums">{klass.enrolled_count}</TableCell>
             <TableCell className="text-right">
-              <Link
-                href={`/classes/${klass.id}/edit`}
-                aria-label={t("edit.label", {
-                  name: t("nameValue", { subject: klass.subject, grade: klass.grade }),
-                })}
-                className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
-              >
-                <Pencil aria-hidden />
-              </Link>
+              <ClassActionsMenu
+                classId={klass.id}
+                name={t("nameValue", { subject: klass.subject, grade: klass.grade })}
+              />
             </TableCell>
           </TableRow>
         ))}

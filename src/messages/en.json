@@ -197,13 +197,23 @@
       "day": "Day",
       "time": "Time",
       "monthlyFee": "Monthly fee",
-      "enrolled": "Students"
+      "enrolled": "Students",
+      "actions": "Actions"
     },
     "gradeValue": "Grade {grade}",
     "timeValue": "{start}–{end}",
     "emptyTitle": "No classes yet",
     "emptyDescription": "Classes you add show up here.",
     "addClass": "Add class",
+    "nameValue": "{subject} · Grade {grade}",
+    "edit": {
+      "metaTitle": "Edit {name} · Panthiya",
+      "title": "Edit class",
+      "description": "Update the details of {name}.",
+      "label": "Edit {name}",
+      "submit": "Save changes",
+      "updated": "{name} was updated"
+    },
     "form": {
       "metaTitle": "Add class · Panthiya",
       "description": "Set the subject, grade, weekly time and monthly fee.",
@@ -212,7 +222,7 @@
       "feeHint": "In rupees, for example 2500",
       "submit": "Save class",
       "submitting": "Saving…",
-      "created": "{subject} · Grade {grade} was added",
+      "created": "{name} was added",
       "fields": {
         "subject": "Subject",
         "grade": "Grade",

@@ -13,7 +13,8 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/c
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { DAYS_OF_WEEK, formatWeekday } from "@/lib/schedule";
-import { createClass } from "../actions";
+import { createClass, updateClass } from "../actions";
+import type { ClassDetail } from "../queries";
 import {
   CLASS_GRADES,
   classSchema,
@@ -33,7 +34,22 @@ const LABEL_KEYS = {
   monthly_fee: "monthlyFee",
 } as const satisfies Record<FieldName, string>;
 
-export function ClassForm() {
+type ClassFormProps = {
+  klass?: ClassDetail;
+};
+
+function toFormValues(klass: ClassDetail): ClassFormValues {
+  return {
+    subject: klass.subject,
+    grade: String(klass.grade),
+    day_of_week: String(klass.day_of_week),
+    start_time: klass.start_time.slice(0, 5),
+    end_time: klass.end_time.slice(0, 5),
+    monthly_fee: String(klass.monthly_fee),
+  };
+}
+
+export function ClassForm({ klass }: ClassFormProps) {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
@@ -58,6 +74,7 @@ export function ClassForm() {
       end_time: "",
       monthly_fee: "",
     },
+    values: klass ? toFormValues(klass) : undefined,
   });
 
   const clearForm = () => {
@@ -86,7 +103,8 @@ export function ClassForm() {
     setFormError(undefined);
 
     startTransition(async () => {
-      const result = await createClass(getValues());
+      const values = getValues();
+      const result = klass ? await updateClass(klass.id, values) : await createClass(values);
 
       if (!result.ok) {
         for (const [name, messages] of Object.entries(result.fieldErrors)) {
@@ -98,7 +116,10 @@ export function ClassForm() {
         return;
       }
 
-      toast.success(t("classes.form.created", { subject: result.subject, grade: result.grade }));
+      const name = t("classes.nameValue", { subject: result.subject, grade: result.grade });
+      toast.success(
+        klass ? t("classes.edit.updated", { name }) : t("classes.form.created", { name }),
+      );
       clearForm();
       router.push("/classes");
     });
@@ -166,7 +187,11 @@ export function ClassForm() {
       )}
       <div className="flex gap-2">
         <Button type="submit" disabled={pending}>
-          {pending ? t("classes.form.submitting") : t("classes.form.submit")}
+          {pending
+            ? t("classes.form.submitting")
+            : klass
+              ? t("classes.edit.submit")
+              : t("classes.form.submit")}
         </Button>
         <Link href="/classes" onClick={onCancel} className={buttonVariants({ variant: "outline" })}>
           {t("common.cancel")}

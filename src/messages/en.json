@@ -187,6 +187,22 @@
       }
     }
   },
+  "classes": {
+    "form": {
+      "errors": {
+        "subjectRequired": "Enter a subject",
+        "subjectTooLong": "Use 50 characters or fewer",
+        "gradeRequired": "Select a grade",
+        "dayRequired": "Select a day",
+        "startTimeRequired": "Enter a start time",
+        "endTimeRequired": "Enter an end time",
+        "endTimeAfterStart": "End time must be after the start time",
+        "feeRequired": "Enter the monthly fee",
+        "feeInvalid": "Enter an amount like 2500 or 2500.50",
+        "feePositive": "The fee must be more than zero"
+      }
+    }
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

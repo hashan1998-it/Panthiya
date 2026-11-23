@@ -117,7 +117,12 @@
     "account": {
       "errors": {
         "emailInvalid": "Enter a valid email address",
-        "emailTooLong": "Use 254 characters or fewer"
+        "emailTooLong": "Use 254 characters or fewer",
+        "emailTaken": "This email is already used by another account",
+        "alreadyHasAccount": "This student already has an account.",
+        "inactive": "Reactivate this student before creating an account.",
+        "notFound": "This student no longer exists.",
+        "createFailed": "We couldn't create the account. Please try again."
       }
     },
     "edit": {

@@ -1,6 +1,8 @@
 import type { Messages } from "next-intl";
 import { z } from "zod";
 
+export const CLASS_GRADES = Array.from({ length: 13 }, (_, index) => index + 1);
+
 export type ClassFormErrorKey = keyof Messages["classes"]["form"]["errors"];
 const error = (key: ClassFormErrorKey) => ({ error: key });
 

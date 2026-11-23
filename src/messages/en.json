@@ -203,7 +203,24 @@
     "timeValue": "{start}–{end}",
     "emptyTitle": "No classes yet",
     "emptyDescription": "Classes you add show up here.",
+    "addClass": "Add class",
     "form": {
+      "metaTitle": "Add class · Panthiya",
+      "description": "Set the subject, grade, weekly time and monthly fee.",
+      "selectGrade": "Select a grade",
+      "selectDay": "Select a day",
+      "feeHint": "In rupees, for example 2500",
+      "submit": "Save class",
+      "submitting": "Saving…",
+      "created": "{subject} · Grade {grade} was added",
+      "fields": {
+        "subject": "Subject",
+        "grade": "Grade",
+        "day": "Day",
+        "startTime": "Start time",
+        "endTime": "End time",
+        "monthlyFee": "Monthly fee"
+      },
       "errors": {
         "subjectRequired": "Enter a subject",
         "subjectTooLong": "Use 50 characters or fewer",

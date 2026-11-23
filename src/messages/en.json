@@ -212,6 +212,21 @@
       "details": "Class details",
       "edit": "Edit"
     },
+    "students": {
+      "title": "Enrolled students",
+      "label": "Enrolled students",
+      "admissionNo": "Admission no",
+      "name": "Name",
+      "discount": "Discount",
+      "effectiveFee": "Effective fee",
+      "inactive": "Inactive",
+      "discountNone": "None",
+      "discountHalf": "Half (50%)",
+      "discountFree": "Free (100%)",
+      "discountCustom": "{percent}% off",
+      "emptyTitle": "No students yet",
+      "emptyDescription": "Students enrolled in this class show up here."
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit class",

@@ -1,0 +1,84 @@
+import Link from "next/link";
+import { Users } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { EmptyState } from "@/components/shared/empty-state";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { effectiveFee, formatFee } from "@/lib/money";
+import type { ClassEnrollment } from "../queries";
+
+type ClassStudentsTableProps = {
+  enrollments: ClassEnrollment[];
+  monthlyFee: number;
+};
+
+export async function ClassStudentsTable({ enrollments, monthlyFee }: ClassStudentsTableProps) {
+  const t = await getTranslations("classes.students");
+
+  if (enrollments.length === 0) {
+    return <EmptyState icon={Users} title={t("emptyTitle")} description={t("emptyDescription")} />;
+  }
+
+  const discountBadge = (enrollment: ClassEnrollment) => {
+    switch (enrollment.discount_type) {
+      case "half":
+        return <Badge variant="discount-half">{t("discountHalf")}</Badge>;
+      case "free":
+        return <Badge variant="discount-free">{t("discountFree")}</Badge>;
+      case "custom":
+        return (
+          <Badge variant="discount-custom">
+            {t("discountCustom", { percent: enrollment.discount_percent })}
+          </Badge>
+        );
+      default:
+        return <span className="text-muted-foreground">{t("discountNone")}</span>;
+    }
+  };
+
+  return (
+    <Table aria-label={t("label")}>
+      <TableHeader>
+        <TableRow>
+          <TableHead>{t("admissionNo")}</TableHead>
+          <TableHead>{t("name")}</TableHead>
+          <TableHead>{t("discount")}</TableHead>
+          <TableHead className="text-right">{t("effectiveFee")}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {enrollments.map((enrollment) => {
+          const { student } = enrollment;
+
+          return (
+            <TableRow key={enrollment.id}>
+              <TableCell className="font-mono">{student.admission_no}</TableCell>
+              <TableCell>
+                <span className="inline-flex items-center gap-2">
+                  <Link
+                    href={`/students/${student.id}`}
+                    className="text-foreground underline-offset-4 hover:underline"
+                  >
+                    {student.full_name}
+                  </Link>
+                  {!student.is_active && <Badge variant="neutral">{t("inactive")}</Badge>}
+                </span>
+              </TableCell>
+              <TableCell>{discountBadge(enrollment)}</TableCell>
+              <TableCell className="text-right tabular-nums">
+                {formatFee(effectiveFee(monthlyFee, enrollment.discount_percent))}
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
+}

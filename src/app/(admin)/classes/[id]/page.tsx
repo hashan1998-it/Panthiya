@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ClassStudentsTable } from "@/features/classes/components/class-students-table";
 import { getClass, getClassEnrollments } from "@/features/classes/queries";
 import { formatFee } from "@/lib/money";
 import { formatWeekday } from "@/lib/schedule";
@@ -81,6 +82,12 @@ async function ClassDetail({ params }: { params: Params }) {
           </dl>
         </CardContent>
       </Card>
+      <section aria-labelledby="class-students" className="flex flex-col gap-4">
+        <h2 id="class-students" className="text-title-md">
+          {t("students.title")}
+        </h2>
+        <ClassStudentsTable enrollments={enrollments} monthlyFee={klass.monthly_fee} />
+      </section>
     </>
   );
 }

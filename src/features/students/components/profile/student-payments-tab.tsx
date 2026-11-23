@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatFee } from "@/lib/money";
 import { cn } from "@/lib/utils";
 import type { StudentPayment } from "../../profile-queries";
 
@@ -64,7 +65,7 @@ export async function StudentPaymentsTab({ payments }: StudentPaymentsTabProps) 
                   <span
                     className={cn("tabular-nums", voided && "text-muted-foreground line-through")}
                   >
-                    {format.number(payment.amount, "money")}
+                    {formatFee(payment.amount)}
                   </span>
                 </span>
               </TableCell>

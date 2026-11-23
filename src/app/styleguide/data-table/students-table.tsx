@@ -3,12 +3,8 @@
 import { createDataTableColumnHelper, DataTable } from "@/components/shared/data-table";
 import { DataTableSelectFilter } from "@/components/shared/data-table-select-filter";
 import { Badge } from "@/components/ui/badge";
+import { formatFee } from "@/lib/money";
 import { DEMO_GRADES, DEMO_SORTABLE_COLUMNS, type DemoStudent } from "./sample-students";
-
-const feeFormatter = new Intl.NumberFormat("en-LK", {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 const GRADE_OPTIONS = DEMO_GRADES.map((grade) => ({
   value: String(grade),
@@ -35,7 +31,7 @@ const columns = column.columns([
   column.accessor("phone", { header: "Phone" }),
   column.accessor("fee", {
     header: "Monthly fee",
-    cell: (info) => `Rs. ${feeFormatter.format(info.getValue())}`,
+    cell: (info) => formatFee(info.getValue()),
     meta: { align: "right" },
   }),
   column.accessor("active", {

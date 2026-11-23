@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatFee } from "@/lib/money";
 import type { StudentEnrollment } from "../../profile-queries";
 
 const FIRST_SUNDAY_OF_2026 = Date.UTC(2026, 0, 4);
@@ -77,7 +78,7 @@ export async function StudentClassesTab({ enrollments }: StudentClassesTabProps)
                 })}
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {format.number(klass.monthly_fee, "money")}
+                {formatFee(klass.monthly_fee)}
               </TableCell>
               <TableCell>{discountLabel(enrollment)}</TableCell>
               <TableCell>

@@ -50,3 +50,21 @@ export const getClass = cache(async (id: string): Promise<ClassDetail | null> =>
 
   return data;
 });
+
+const ENROLLMENT_COLUMNS =
+  "id, discount_type, discount_percent, enrolled_on, student:students(id, admission_no, full_name, is_active)";
+
+export async function getClassEnrollments(classId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("enrollments")
+    .select(ENROLLMENT_COLUMNS)
+    .eq("class_id", classId)
+    .is("ended_on", null);
+
+  if (error) throw error;
+
+  return data.toSorted((a, b) => a.student.full_name.localeCompare(b.student.full_name));
+}
+
+export type ClassEnrollment = Awaited<ReturnType<typeof getClassEnrollments>>[number];

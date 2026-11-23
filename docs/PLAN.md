@@ -304,7 +304,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Shows details, enrolled classes with discount, attendance rate and payment history in tabs.
   - An unknown id shows the not-found page.
 
-- [ ] **T-034 Create student login** (M)
+- [x] **T-034 Create student login** (M)
   - A button on the profile creates an auth account for the student and links it through `profile_id`.
   - It runs on the server only, using the service role key.
   - The button is replaced by an "Account active" state once an account exists. Creating a second account for the same student is impossible.

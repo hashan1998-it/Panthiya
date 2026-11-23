@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Users } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -11,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { StudentActionsMenu } from "@/features/students/components/student-actions-menu";
 import { effectiveFee, formatFee } from "@/lib/money";
 import type { ClassEnrollment } from "../queries";
 
@@ -51,6 +51,9 @@ export async function ClassStudentsTable({ enrollments, monthlyFee }: ClassStude
           <TableHead>{t("name")}</TableHead>
           <TableHead>{t("discount")}</TableHead>
           <TableHead className="text-right">{t("effectiveFee")}</TableHead>
+          <TableHead>
+            <span className="sr-only">{t("actions")}</span>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -62,18 +65,16 @@ export async function ClassStudentsTable({ enrollments, monthlyFee }: ClassStude
               <TableCell className="font-mono">{student.admission_no}</TableCell>
               <TableCell>
                 <span className="inline-flex items-center gap-2">
-                  <Link
-                    href={`/students/${student.id}`}
-                    className="text-foreground underline-offset-4 hover:underline"
-                  >
-                    {student.full_name}
-                  </Link>
+                  <span className="text-foreground">{student.full_name}</span>
                   {!student.is_active && <Badge variant="neutral">{t("inactive")}</Badge>}
                 </span>
               </TableCell>
               <TableCell>{discountBadge(enrollment)}</TableCell>
               <TableCell className="text-right tabular-nums">
                 {formatFee(effectiveFee(monthlyFee, enrollment.discount_percent))}
+              </TableCell>
+              <TableCell className="text-right">
+                <StudentActionsMenu student={student} />
               </TableCell>
             </TableRow>
           );

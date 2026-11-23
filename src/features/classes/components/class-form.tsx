@@ -121,7 +121,7 @@ export function ClassForm({ klass }: ClassFormProps) {
         klass ? t("classes.edit.updated", { name }) : t("classes.form.created", { name }),
       );
       clearForm();
-      router.push("/classes");
+      router.push(`/classes/${result.id}`);
     });
   };
 
@@ -193,7 +193,11 @@ export function ClassForm({ klass }: ClassFormProps) {
               ? t("classes.edit.submit")
               : t("classes.form.submit")}
         </Button>
-        <Link href="/classes" onClick={onCancel} className={buttonVariants({ variant: "outline" })}>
+        <Link
+          href={klass ? `/classes/${klass.id}` : "/classes"}
+          onClick={onCancel}
+          className={buttonVariants({ variant: "outline" })}
+        >
           {t("common.cancel")}
         </Link>
       </div>

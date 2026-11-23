@@ -16,7 +16,7 @@ import type { StudentListItem } from "../queries";
 import { StudentStatusDialog } from "./student-status-dialog";
 
 type StudentActionsMenuProps = {
-  student: StudentListItem;
+  student: Pick<StudentListItem, "id" | "full_name" | "is_active">;
 };
 
 export function StudentActionsMenu({ student }: StudentActionsMenuProps) {

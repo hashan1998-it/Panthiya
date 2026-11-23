@@ -1,5 +1,5 @@
 import { BookOpen } from "lucide-react";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -10,10 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatFee } from "@/lib/money";
+import { formatWeekday } from "@/lib/schedule";
 import type { StudentEnrollment } from "../../profile-queries";
-
-const FIRST_SUNDAY_OF_2026 = Date.UTC(2026, 0, 4);
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 type StudentClassesTabProps = {
   enrollments: StudentEnrollment[];
@@ -22,18 +21,13 @@ type StudentClassesTabProps = {
 export async function StudentClassesTab({ enrollments }: StudentClassesTabProps) {
   const t = await getTranslations("students.profile.classes");
   const format = await getFormatter();
+  const locale = await getLocale();
 
   if (enrollments.length === 0) {
     return (
       <EmptyState icon={BookOpen} title={t("emptyTitle")} description={t("emptyDescription")} />
     );
   }
-
-  const weekday = (dayOfWeek: number) =>
-    format.dateTime(new Date(FIRST_SUNDAY_OF_2026 + dayOfWeek * DAY_MS), {
-      weekday: "long",
-      timeZone: "UTC",
-    });
 
   const discountLabel = (enrollment: StudentEnrollment) => {
     switch (enrollment.discount_type) {
@@ -71,13 +65,13 @@ export async function StudentClassesTab({ enrollments }: StudentClassesTabProps)
               </TableCell>
               <TableCell>
                 {t("scheduleValue", {
-                  day: weekday(klass.day_of_week),
+                  day: formatWeekday(klass.day_of_week, locale),
                   start: klass.start_time.slice(0, 5),
                   end: klass.end_time.slice(0, 5),
                 })}
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {format.number(klass.monthly_fee, "money")}
+                {formatFee(klass.monthly_fee)}
               </TableCell>
               <TableCell>{discountLabel(enrollment)}</TableCell>
               <TableCell>

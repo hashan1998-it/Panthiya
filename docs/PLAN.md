@@ -310,7 +310,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - The button is replaced by an "Account active" state once an account exists. Creating a second account for the same student is impossible.
   - The new student can log in and sees only their own data.
 
-- [ ] **T-035 Tests for students** (M)
+- [x] **T-035 Tests for students** (M)
   - Vitest and React Testing Library are set up and run in CI.
   - Unit tests for the student Zod schema (valid and invalid cases).
   - Component test: submitting the empty form shows the required-field errors.

@@ -187,6 +187,66 @@
       }
     }
   },
+  "classes": {
+    "metaTitle": "Classes · Panthiya",
+    "description": "Every class with its schedule, fee and number of students.",
+    "label": "Classes",
+    "columns": {
+      "subject": "Subject",
+      "grade": "Grade",
+      "day": "Day",
+      "time": "Time",
+      "monthlyFee": "Monthly fee",
+      "enrolled": "Students",
+      "actions": "Actions"
+    },
+    "gradeValue": "Grade {grade}",
+    "timeValue": "{start}–{end}",
+    "emptyTitle": "No classes yet",
+    "emptyDescription": "Classes you add show up here.",
+    "addClass": "Add class",
+    "nameValue": "{subject} · Grade {grade}",
+    "edit": {
+      "metaTitle": "Edit {name} · Panthiya",
+      "title": "Edit class",
+      "description": "Update the details of {name}.",
+      "label": "Edit {name}",
+      "submit": "Save changes",
+      "updated": "{name} was updated"
+    },
+    "form": {
+      "metaTitle": "Add class · Panthiya",
+      "description": "Set the subject, grade, weekly time and monthly fee.",
+      "selectGrade": "Select a grade",
+      "selectDay": "Select a day",
+      "feeHint": "In rupees, for example 2500",
+      "submit": "Save class",
+      "submitting": "Saving…",
+      "created": "{name} was added",
+      "fields": {
+        "subject": "Subject",
+        "grade": "Grade",
+        "day": "Day",
+        "startTime": "Start time",
+        "endTime": "End time",
+        "monthlyFee": "Monthly fee"
+      },
+      "errors": {
+        "subjectRequired": "Enter a subject",
+        "subjectTooLong": "Use 50 characters or fewer",
+        "gradeRequired": "Select a grade",
+        "dayRequired": "Select a day",
+        "startTimeRequired": "Enter a start time",
+        "endTimeRequired": "Enter an end time",
+        "endTimeAfterStart": "End time must be after the start time",
+        "feeRequired": "Enter the monthly fee",
+        "feeInvalid": "Enter an amount like 2500 or 2500.50",
+        "feePositive": "The fee must be more than zero",
+        "saveFailed": "We couldn't save the class. Please try again.",
+        "notFound": "This class no longer exists."
+      }
+    }
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

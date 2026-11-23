@@ -18,11 +18,13 @@ export type StudentList = {
   rowCount: number;
 };
 
-export type StudentDetail = Omit<Tables<"students">, "created_at" | "profile_id">;
+export type StudentDetail = Omit<Tables<"students">, "created_at" | "profile_id"> & {
+  has_account: boolean;
+};
 
 const LIST_COLUMNS = "id, admission_no, full_name, grade, phone, is_active";
 const DETAIL_COLUMNS =
-  "id, admission_no, full_name, grade, phone, parent_name, parent_phone, joined_on, is_active";
+  "id, admission_no, full_name, grade, phone, parent_name, parent_phone, joined_on, is_active, profile_id";
 const RANGE_NOT_SATISFIABLE = "PGRST103";
 
 export async function listStudents(
@@ -87,6 +89,8 @@ export const getStudent = cache(async (id: string): Promise<StudentDetail | null
     .maybeSingle();
 
   if (error) throw error;
+  if (!data) return null;
 
-  return data;
+  const { profile_id, ...student } = data;
+  return { ...student, has_account: profile_id !== null };
 });

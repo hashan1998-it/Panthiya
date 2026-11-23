@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { studentSchema, type StudentFormValues } from "./schema";
+import { studentAccountSchema, studentSchema, type StudentFormValues } from "./schema";
 
 const valid: StudentFormValues = {
   admission_no: "adm-0031",
@@ -76,5 +76,33 @@ describe("studentSchema", () => {
     expect(fieldErrors({ ...valid, grade: "" })).toEqual({ grade: ["gradeRequired"] });
     expect(fieldErrors({ ...valid, grade: "14" })).toEqual({ grade: ["gradeRequired"] });
     expect(fieldErrors({ ...valid, grade: "abc" })).toEqual({ grade: ["gradeRequired"] });
+  });
+});
+
+function accountErrors(email: string) {
+  const result = studentAccountSchema.safeParse({ email });
+  if (result.success) return {};
+  return z.flattenError(result.error).fieldErrors;
+}
+
+describe("studentAccountSchema", () => {
+  it("trims and lowercases a valid email", () => {
+    expect(studentAccountSchema.parse({ email: "  Nethmi.Silva@Example.com " })).toEqual({
+      email: "nethmi.silva@example.com",
+    });
+  });
+
+  it("rejects an empty or invalid email", () => {
+    expect(accountErrors("")).toEqual({ email: ["emailInvalid"] });
+    expect(accountErrors("   ")).toEqual({ email: ["emailInvalid"] });
+    expect(accountErrors("nethmi")).toEqual({ email: ["emailInvalid"] });
+    expect(accountErrors("nethmi@")).toEqual({ email: ["emailInvalid"] });
+  });
+
+  it("rejects an email longer than 254 characters", () => {
+    const email = `${"a".repeat(64)}@${"b".repeat(60)}.${"c".repeat(60)}.${"d".repeat(63)}.com`;
+    expect(email).toHaveLength(254);
+    expect(accountErrors(email)).toEqual({});
+    expect(accountErrors(`a${email}`)).toEqual({ email: ["emailTooLong"] });
   });
 });

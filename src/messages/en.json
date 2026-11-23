@@ -114,6 +114,38 @@
       "reactivated": "{name} was reactivated",
       "statusFailed": "We couldn't change the student's status. Please try again."
     },
+    "account": {
+      "createLogin": "Create login",
+      "label": "Student login",
+      "active": "Active",
+      "none": "Not created",
+      "createDialog": {
+        "title": "Create a login for {name}",
+        "description": "Enter the student's email. We'll make a temporary password for you to share with them.",
+        "email": "Email",
+        "submit": "Create login",
+        "pending": "Creating…"
+      },
+      "createdDialog": {
+        "title": "Login created",
+        "description": "Share these details with {name}. The temporary password is shown only once, so copy it before you close this window.",
+        "email": "Email",
+        "password": "Temporary password",
+        "copy": "Copy password",
+        "copied": "Password copied",
+        "copyFailed": "We couldn't copy the password. Select it and copy it yourself.",
+        "done": "Done"
+      },
+      "errors": {
+        "emailInvalid": "Enter a valid email address",
+        "emailTooLong": "Use 254 characters or fewer",
+        "emailTaken": "This email is already used by another account",
+        "alreadyHasAccount": "This student already has an account.",
+        "inactive": "Reactivate this student before creating an account.",
+        "notFound": "This student no longer exists.",
+        "createFailed": "We couldn't create the account. Please try again."
+      }
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit student",

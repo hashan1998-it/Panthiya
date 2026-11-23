@@ -53,3 +53,17 @@ export const studentSchema = z
 
 export type StudentFormValues = z.input<typeof studentSchema>;
 export type StudentInput = z.output<typeof studentSchema>;
+
+export type StudentAccountErrorKey = keyof Messages["students"]["account"]["errors"];
+const accountError = (key: StudentAccountErrorKey) => ({ error: key });
+
+export const studentAccountSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .max(254, accountError("emailTooLong"))
+    .pipe(z.email(accountError("emailInvalid"))),
+});
+
+export type StudentAccountValues = z.input<typeof studentAccountSchema>;

@@ -300,7 +300,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - The edit form reuses the add form component, pre-filled.
   - Deactivate asks for confirmation. Deactivated students are hidden by default but their history is kept.
 
-- [ ] **T-033 Student profile** (M)
+- [x] **T-033 Student profile** (M)
   - Shows details, enrolled classes with discount, attendance rate and payment history in tabs.
   - An unknown id shows the not-found page.
 

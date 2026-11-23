@@ -214,7 +214,9 @@
         "endTimeAfterStart": "End time must be after the start time",
         "feeRequired": "Enter the monthly fee",
         "feeInvalid": "Enter an amount like 2500 or 2500.50",
-        "feePositive": "The fee must be more than zero"
+        "feePositive": "The fee must be more than zero",
+        "saveFailed": "We couldn't save the class. Please try again.",
+        "notFound": "This class no longer exists."
       }
     }
   },

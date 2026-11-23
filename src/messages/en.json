@@ -116,7 +116,9 @@
     },
     "account": {
       "createLogin": "Create login",
-      "active": "Account active",
+      "label": "Student login",
+      "active": "Active",
+      "none": "Not created",
       "createDialog": {
         "title": "Create a login for {name}",
         "description": "Enter the student's email. We'll make a temporary password for you to share with them.",

@@ -15,7 +15,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -51,7 +50,7 @@ export function StudentAccount({ studentId, fullName, hasAccount }: StudentAccou
     reset,
   } = useForm<StudentAccountValues>({
     resolver: zodResolver(studentAccountSchema),
-    mode: "onTouched",
+    mode: "onSubmit",
     defaultValues: { email: "" },
   });
 
@@ -97,11 +96,7 @@ export function StudentAccount({ studentId, fullName, hasAccount }: StudentAccou
 
   return (
     <>
-      {hasAccount && !open ? (
-        <Badge variant="success" className="h-10 px-4">
-          {t("active")}
-        </Badge>
-      ) : (
+      {(!hasAccount || open) && (
         <Button variant="outline" onClick={() => onOpenChange(true)}>
           <KeyRound data-icon="inline-start" aria-hidden />
           {t("createLogin")}

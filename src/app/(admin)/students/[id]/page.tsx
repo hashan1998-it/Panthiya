@@ -7,12 +7,14 @@ import { ArrowLeft, Pencil } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { PageHeader } from "@/components/shared/page-header";
+import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
 import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
 import { StudentPaymentsTab } from "@/features/students/components/profile/student-payments-tab";
+import { StudentAccount } from "@/features/students/components/student-account";
 import { StudentStatusDialog } from "@/features/students/components/student-status-dialog";
 import {
   getStudentAttendance,
@@ -62,6 +64,14 @@ async function StudentProfile({ params }: { params: Params }) {
       label: t("form.fields.joinedOn"),
       value: format.dateTime(new Date(student.joined_on), { dateStyle: "long" }),
     },
+    {
+      label: t("account.label"),
+      value: student.has_account ? (
+        <Badge variant="success">{t("account.active")}</Badge>
+      ) : (
+        t("account.none")
+      ),
+    },
   ];
 
   return (
@@ -85,6 +95,13 @@ async function StudentProfile({ params }: { params: Params }) {
               <Pencil data-icon="inline-start" aria-hidden />
               {t("profile.edit")}
             </Link>
+            {student.is_active && (
+              <StudentAccount
+                studentId={student.id}
+                fullName={student.full_name}
+                hasAccount={student.has_account}
+              />
+            )}
             <StudentStatusDialog
               studentId={student.id}
               fullName={student.full_name}

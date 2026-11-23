@@ -188,6 +188,21 @@
     }
   },
   "classes": {
+    "metaTitle": "Classes · Panthiya",
+    "description": "Every class with its schedule, fee and number of students.",
+    "label": "Classes",
+    "columns": {
+      "subject": "Subject",
+      "grade": "Grade",
+      "day": "Day",
+      "time": "Time",
+      "monthlyFee": "Monthly fee",
+      "enrolled": "Students"
+    },
+    "gradeValue": "Grade {grade}",
+    "timeValue": "{start}–{end}",
+    "emptyTitle": "No classes yet",
+    "emptyDescription": "Classes you add show up here.",
     "form": {
       "errors": {
         "subjectRequired": "Enter a subject",

@@ -331,7 +331,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Unenroll asks for confirmation, sets `ended_on` and keeps past attendance and payments. Re-enrolling the same student clears `ended_on` instead of inserting a new row.
   - The enrolled count updates without a full page reload.
 
-- [ ] **T-043 Fee calculation module** (S)
+- [x] **T-043 Fee calculation module** (S)
   - A pure function in `lib/fees.ts` returns the amount due for a fee and a discount.
   - Unit tests cover none, half, free, custom, 0%, 100% and rounding.
 

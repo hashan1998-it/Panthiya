@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control";
 import { ThemeSwitcher } from "./theme-switcher";
 import { ToastDemo } from "./toast-demo";
 
@@ -158,6 +159,23 @@ export default function StyleguidePage() {
           <Badge variant="discount-free">Free card</Badge>
           <Badge variant="discount-custom">Custom 20%</Badge>
         </div>
+      </Section>
+
+      <Section title="Segmented control">
+        <SegmentedControl defaultValue="present" aria-label="Attendance for Nimal Perera">
+          <SegmentedControlItem value="present">
+            <Check aria-hidden />
+            Present
+          </SegmentedControlItem>
+          <SegmentedControlItem value="late">
+            <Clock aria-hidden />
+            Late
+          </SegmentedControlItem>
+          <SegmentedControlItem value="absent">
+            <X aria-hidden />
+            Absent
+          </SegmentedControlItem>
+        </SegmentedControl>
       </Section>
 
       <Section title="Card">

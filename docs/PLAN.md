@@ -322,7 +322,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Add and edit form. End time must be after start time. Fee must be positive.
   - Fees are displayed as `Rs. 2,500.00` everywhere through one shared formatter.
 
-- [ ] **T-041 Class detail** (M)
+- [x] **T-041 Class detail** (M)
   - Shows class information and the enrolled students with their discount type and effective fee.
 
 - [ ] **T-042 Enroll students** (L)

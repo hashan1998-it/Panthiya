@@ -10,16 +10,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { StudentActionsMenu } from "@/features/students/components/student-actions-menu";
 import { effectiveFee, formatFee } from "@/lib/money";
 import type { ClassEnrollment } from "../queries";
+import { EnrolledStudentActions } from "./enrolled-student-actions";
 
 type ClassStudentsTableProps = {
   enrollments: ClassEnrollment[];
   monthlyFee: number;
+  className: string;
 };
 
-export async function ClassStudentsTable({ enrollments, monthlyFee }: ClassStudentsTableProps) {
+export async function ClassStudentsTable({
+  enrollments,
+  monthlyFee,
+  className,
+}: ClassStudentsTableProps) {
   const t = await getTranslations("classes.students");
 
   if (enrollments.length === 0) {
@@ -74,7 +79,11 @@ export async function ClassStudentsTable({ enrollments, monthlyFee }: ClassStude
                 {formatFee(effectiveFee(monthlyFee, enrollment.discount_percent))}
               </TableCell>
               <TableCell className="text-right">
-                <StudentActionsMenu student={student} />
+                <EnrolledStudentActions
+                  enrollmentId={enrollment.id}
+                  student={student}
+                  className={className}
+                />
               </TableCell>
             </TableRow>
           );

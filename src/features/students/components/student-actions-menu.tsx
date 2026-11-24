@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import Link from "next/link";
 import { Eye, MoreHorizontal, Pencil, UserCheck, UserX } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -17,9 +17,10 @@ import { StudentStatusDialog } from "./student-status-dialog";
 
 type StudentActionsMenuProps = {
   student: Pick<StudentListItem, "id" | "full_name" | "is_active">;
+  extraItems?: ReactNode;
 };
 
-export function StudentActionsMenu({ student }: StudentActionsMenuProps) {
+export function StudentActionsMenu({ student, extraItems }: StudentActionsMenuProps) {
   const t = useTranslations("students");
   const [statusDialogOpen, setStatusDialogOpen] = useState(false);
   const profileHref = `/students/${student.id}`;
@@ -50,6 +51,7 @@ export function StudentActionsMenu({ student }: StudentActionsMenuProps) {
             {student.is_active ? <UserX aria-hidden /> : <UserCheck aria-hidden />}
             {student.is_active ? t("profile.deactivate") : t("profile.reactivate")}
           </DropdownMenuItem>
+          {extraItems}
         </DropdownMenuContent>
       </DropdownMenu>
       <StudentStatusDialog

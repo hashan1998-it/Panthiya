@@ -10,7 +10,8 @@ import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ClassStudentsTable } from "@/features/classes/components/class-students-table";
-import { getClass, getClassEnrollments } from "@/features/classes/queries";
+import { EnrollStudentsDialog } from "@/features/classes/components/enroll-students-dialog";
+import { getClass, getClassEnrollments, getEnrollableStudents } from "@/features/classes/queries";
 import { formatFee } from "@/lib/money";
 import { formatWeekday } from "@/lib/schedule";
 
@@ -35,11 +36,13 @@ async function ClassDetail({ params }: { params: Params }) {
   const klass = await getClass(id);
   if (!klass) notFound();
 
-  const [t, locale, enrollments] = await Promise.all([
+  const [t, locale, enrollments, enrollableStudents] = await Promise.all([
     getTranslations("classes"),
     getLocale(),
     getClassEnrollments(klass.id),
+    getEnrollableStudents(klass.id),
   ]);
+  const name = t("nameValue", { subject: klass.subject, grade: klass.grade });
 
   const details = [
     { label: t("form.fields.subject"), value: klass.subject },
@@ -59,7 +62,7 @@ async function ClassDetail({ params }: { params: Params }) {
   return (
     <>
       <PageHeader
-        title={t("nameValue", { subject: klass.subject, grade: klass.grade })}
+        title={name}
         action={
           <Link href={`/classes/${klass.id}/edit`} className={buttonVariants()}>
             <Pencil data-icon="inline-start" aria-hidden />
@@ -83,10 +86,22 @@ async function ClassDetail({ params }: { params: Params }) {
         </CardContent>
       </Card>
       <section aria-labelledby="class-students" className="flex flex-col gap-4">
-        <h2 id="class-students" className="text-title-md">
-          {t("students.title")}
-        </h2>
-        <ClassStudentsTable enrollments={enrollments} monthlyFee={klass.monthly_fee} />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 id="class-students" className="text-title-md">
+            {t("students.title")}
+          </h2>
+          <EnrollStudentsDialog
+            classId={klass.id}
+            className={name}
+            grade={klass.grade}
+            students={enrollableStudents}
+          />
+        </div>
+        <ClassStudentsTable
+          enrollments={enrollments}
+          monthlyFee={klass.monthly_fee}
+          className={name}
+        />
       </section>
     </>
   );

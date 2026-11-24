@@ -232,6 +232,14 @@
       "emptyTitle": "No students yet",
       "emptyDescription": "Students enrolled in this class show up here."
     },
+    "enroll": {
+      "errors": {
+        "selectStudents": "Select at least one student",
+        "percentInvalid": "Enter a whole number from 1 to 99",
+        "saveFailed": "We couldn't enroll the students. Please try again.",
+        "notFound": "This class no longer exists."
+      }
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit class",

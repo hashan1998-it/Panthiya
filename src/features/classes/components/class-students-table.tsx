@@ -10,7 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { effectiveFee, formatFee } from "@/lib/money";
+import { calculateAmountDue } from "@/lib/fees";
+import { formatFee } from "@/lib/money";
 import type { ClassEnrollment } from "../queries";
 import { EnrolledStudentActions } from "./enrolled-student-actions";
 
@@ -76,7 +77,7 @@ export async function ClassStudentsTable({
               </TableCell>
               <TableCell>{discountBadge(enrollment)}</TableCell>
               <TableCell className="text-right tabular-nums">
-                {formatFee(effectiveFee(monthlyFee, enrollment.discount_percent))}
+                {formatFee(calculateAmountDue(monthlyFee, enrollment.discount_percent))}
               </TableCell>
               <TableCell className="text-right">
                 <EnrolledStudentActions

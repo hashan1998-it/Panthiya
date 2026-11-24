@@ -306,6 +306,16 @@
     }
   },
   "attendance": {
+    "metaTitle": "Attendance · Panthiya",
+    "description": "Mark who came to each class session.",
+    "class": "Class",
+    "selectClass": "Select a class",
+    "date": "Session date",
+    "todayOption": "{date} (today)",
+    "classOption": "{subject} · Grade {grade} · {day} {start}",
+    "chooseTitle": "Choose a class",
+    "chooseDescription": "Pick a class and a session date to mark attendance.",
+    "summary": "{marked} of {total, plural, one {# student} other {# students}} marked",
     "errors": {
       "noMarks": "Mark at least one student before saving",
       "invalidDate": "Pick one of the class dates from the list",

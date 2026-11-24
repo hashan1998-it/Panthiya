@@ -305,6 +305,14 @@
       }
     }
   },
+  "attendance": {
+    "errors": {
+      "noMarks": "Mark at least one student before saving",
+      "invalidDate": "Pick one of the class dates from the list",
+      "notFound": "This class no longer exists.",
+      "saveFailed": "We couldn't save the attendance. Please try again."
+    }
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

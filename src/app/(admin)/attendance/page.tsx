@@ -8,6 +8,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AttendancePicker } from "@/features/attendance/components/attendance-picker";
+import { AttendanceSheet } from "@/features/attendance/components/attendance-sheet";
 import { getAttendanceRoster, listAttendanceClasses } from "@/features/attendance/queries";
 import { isSessionDate, listSessionDates } from "@/features/attendance/session-dates";
 import { getToday } from "@/lib/dates";
@@ -37,7 +38,6 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
     : null;
 
   const roster = klass && sessionDate ? await getAttendanceRoster(klass.id, sessionDate) : [];
-  const marked = roster.filter((student) => student.status !== null).length;
 
   return (
     <>
@@ -48,9 +48,12 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
         today={today}
       />
       {klass && sessionDate ? (
-        <p className="text-body-sm text-muted-foreground">
-          {t("summary", { total: roster.length, marked })}
-        </p>
+        <AttendanceSheet
+          key={`${klass.id}:${sessionDate}`}
+          classId={klass.id}
+          sessionDate={sessionDate}
+          roster={roster}
+        />
       ) : (
         <EmptyState
           icon={CalendarCheck}

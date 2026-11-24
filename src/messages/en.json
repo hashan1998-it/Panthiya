@@ -315,7 +315,22 @@
     "classOption": "{subject} · Grade {grade} · {day} {start}",
     "chooseTitle": "Choose a class",
     "chooseDescription": "Pick a class and a session date to mark attendance.",
-    "summary": "{marked} of {total, plural, one {# student} other {# students}} marked",
+    "sheet": {
+      "listLabel": "Students in this session",
+      "statusFor": "Attendance for {name}",
+      "present": "Present",
+      "late": "Late",
+      "absent": "Absent",
+      "markAllPresent": "Mark all present",
+      "save": "Save attendance",
+      "saving": "Saving…",
+      "marked": "{marked} of {total, plural, one {# student} other {# students}} marked",
+      "unsaved": "{count, plural, one {# unsaved change} other {# unsaved changes}}",
+      "allSaved": "All changes saved",
+      "saved": "{count, plural, one {# mark saved} other {# marks saved}}",
+      "emptyTitle": "No students for this session",
+      "emptyDescription": "Nobody was enrolled in this class on this date."
+    },
     "errors": {
       "noMarks": "Mark at least one student before saving",
       "invalidDate": "Pick one of the class dates from the list",

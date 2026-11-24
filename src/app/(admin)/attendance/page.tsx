@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
+import { UnsavedChangesProvider } from "@/components/shared/unsaved-changes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AttendancePicker } from "@/features/attendance/components/attendance-picker";
 import { AttendanceSheet } from "@/features/attendance/components/attendance-sheet";
@@ -40,7 +41,7 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
   const roster = klass && sessionDate ? await getAttendanceRoster(klass.id, sessionDate) : [];
 
   return (
-    <>
+    <UnsavedChangesProvider>
       <AttendancePicker
         classes={classes}
         classId={klass?.id ?? null}
@@ -61,7 +62,7 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
           description={t("chooseDescription")}
         />
       )}
-    </>
+    </UnsavedChangesProvider>
   );
 }
 

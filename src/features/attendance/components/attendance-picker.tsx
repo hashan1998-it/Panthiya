@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useUnsavedChanges } from "@/components/shared/unsaved-changes";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { NativeSelect } from "@/components/ui/native-select";
 import { formatWeekday } from "@/lib/schedule";
@@ -20,11 +21,13 @@ export function AttendancePicker({ classes, classId, sessionDate, today }: Atten
   const format = useFormatter();
   const locale = useLocale();
   const router = useRouter();
+  const { confirmLeave } = useUnsavedChanges();
 
   const selectedClass = classes.find((klass) => klass.id === classId);
   const sessionDates = selectedClass ? listSessionDates(selectedClass.day_of_week, today) : [];
 
   const go = (nextClassId: string, nextDate?: string) => {
+    if (!confirmLeave()) return;
     if (!nextClassId) {
       router.replace("/attendance", { scroll: false });
       return;

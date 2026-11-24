@@ -1,10 +1,11 @@
 "use client";
 
-import { useOptimistic, useState, useTransition } from "react";
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 import { Check, CheckCheck, Clock, Users, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { EmptyState } from "@/components/shared/empty-state";
+import { useUnsavedChanges } from "@/components/shared/unsaved-changes";
 import { Button } from "@/components/ui/button";
 import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control";
 import { saveAttendance } from "../actions";
@@ -32,6 +33,7 @@ export function AttendanceSheet({ classId, sessionDate, roster }: AttendanceShee
   const [optimisticSaved, setOptimisticSaved] = useOptimistic(saved);
   const [draft, setDraft] = useState<Marks>(() => toMarks(roster));
   const [pending, startTransition] = useTransition();
+  const { setDirty } = useUnsavedChanges();
 
   const changes = roster.flatMap((student) => {
     const status = draft[student.id];
@@ -40,6 +42,12 @@ export function AttendanceSheet({ classId, sessionDate, roster }: AttendanceShee
       : [];
   });
   const markedCount = roster.filter((student) => draft[student.id]).length;
+  const hasChanges = changes.length > 0;
+
+  useEffect(() => {
+    setDirty(hasChanges);
+    return () => setDirty(false);
+  }, [hasChanges, setDirty]);
 
   if (roster.length === 0) {
     return <EmptyState icon={Users} title={t("emptyTitle")} description={t("emptyDescription")} />;

@@ -4,7 +4,8 @@
     "loading": "Loading…",
     "comingSoon": "Coming soon.",
     "close": "Close",
-    "getStarted": "Get started"
+    "getStarted": "Get started",
+    "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },
   "dashboard": {
     "metaTitle": "Dashboard · Panthiya"

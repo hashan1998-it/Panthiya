@@ -97,7 +97,11 @@ async function ClassDetail({ params }: { params: Params }) {
             students={enrollableStudents}
           />
         </div>
-        <ClassStudentsTable enrollments={enrollments} monthlyFee={klass.monthly_fee} />
+        <ClassStudentsTable
+          enrollments={enrollments}
+          monthlyFee={klass.monthly_fee}
+          className={name}
+        />
       </section>
     </>
   );

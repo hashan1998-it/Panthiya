@@ -257,6 +257,14 @@
         "notFound": "This class no longer exists."
       }
     },
+    "unenroll": {
+      "action": "Unenroll",
+      "title": "Unenroll {name} from {className}?",
+      "description": "They leave the class from today. Their past attendance and payments are kept, and you can enroll them again later.",
+      "pending": "Unenrolling…",
+      "done": "{name} was unenrolled",
+      "failed": "We couldn't unenroll the student. Please try again."
+    },
     "edit": {
       "metaTitle": "Edit {name} · Panthiya",
       "title": "Edit class",

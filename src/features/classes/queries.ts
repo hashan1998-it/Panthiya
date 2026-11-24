@@ -68,3 +68,26 @@ export async function getClassEnrollments(classId: string) {
 }
 
 export type ClassEnrollment = Awaited<ReturnType<typeof getClassEnrollments>>[number];
+
+export type EnrollableStudent = Pick<
+  Tables<"students">,
+  "id" | "admission_no" | "full_name" | "grade"
+>;
+
+export async function getEnrollableStudents(classId: string): Promise<EnrollableStudent[]> {
+  const supabase = await createClient();
+  const [students, enrolled] = await Promise.all([
+    supabase
+      .from("students")
+      .select("id, admission_no, full_name, grade")
+      .eq("is_active", true)
+      .order("full_name"),
+    supabase.from("enrollments").select("student_id").eq("class_id", classId).is("ended_on", null),
+  ]);
+
+  if (students.error) throw students.error;
+  if (enrolled.error) throw enrolled.error;
+
+  const enrolledIds = new Set(enrolled.data.map((enrollment) => enrollment.student_id));
+  return students.data.filter((student) => !enrolledIds.has(student.id));
+}

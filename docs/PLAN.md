@@ -325,7 +325,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 - [x] **T-041 Class detail** (M)
   - Shows class information and the enrolled students with their discount type and effective fee.
 
-- [ ] **T-042 Enroll students** (L)
+- [x] **T-042 Enroll students** (L)
   - A dialog with a searchable list of students who are not already in the class. Multiple students can be selected and enrolled at once.
   - Discount type is chosen per enrollment. Choosing "custom" reveals a percentage input.
   - Unenroll asks for confirmation, sets `ended_on` and keeps past attendance and payments. Re-enrolling the same student clears `ended_on` instead of inserting a new row.

@@ -233,6 +233,23 @@
       "emptyDescription": "Students enrolled in this class show up here."
     },
     "enroll": {
+      "trigger": "Enroll students",
+      "title": "Enroll students in {name}",
+      "description": "Select the students to add and choose a discount for each one.",
+      "search": "Search by name or admission no",
+      "showAllGrades": "Show all grades",
+      "listLabel": "Students who can be enrolled",
+      "empty": "Every active student is already in this class.",
+      "noMatch": "No students match. Try another search or show all grades.",
+      "discountFor": "Discount for {name}",
+      "percentFor": "Discount percent for {name}",
+      "discountNone": "No discount",
+      "discountHalf": "Half (50%)",
+      "discountFree": "Free (100%)",
+      "discountCustom": "Custom %",
+      "submit": "{count, plural, =0 {Enroll students} one {Enroll # student} other {Enroll # students}}",
+      "pending": "Enrolling…",
+      "enrolled": "{count, plural, =0 {No students were enrolled} one {# student was enrolled} other {# students were enrolled}}",
       "errors": {
         "selectStudents": "Select at least one student",
         "percentInvalid": "Enter a whole number from 1 to 99",

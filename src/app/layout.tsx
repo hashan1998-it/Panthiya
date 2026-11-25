@@ -21,6 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+export const instant = false;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
 

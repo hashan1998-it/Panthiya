@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatFee } from "@/lib/money";
 import { DUE_SORTABLE_COLUMNS, DUE_STATUSES, type DueStatus } from "../filters";
 import type { DueListItem, FeeClass } from "../queries";
+import { DueActionsMenu } from "./due-actions-menu";
 
 const column = createDataTableColumnHelper<DueListItem>();
 
@@ -66,6 +67,12 @@ export function FeesTable({ dues, rowCount, classes }: FeesTableProps) {
               {t(`status.${info.getValue()}`)}
             </Badge>
           ),
+        }),
+        column.display({
+          id: "actions",
+          header: () => <span className="sr-only">{t("actions.column")}</span>,
+          cell: (info) => <DueActionsMenu due={info.row.original} />,
+          meta: { align: "right" },
         }),
       ]),
     [t],

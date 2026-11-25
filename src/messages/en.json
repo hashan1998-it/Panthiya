@@ -402,7 +402,26 @@
       "upToDate": "All dues for {month} already exist",
       "noEnrollments": "There are no active enrollments in {month}"
     },
+    "actions": {
+      "column": "Actions",
+      "menu": "Actions for {name}"
+    },
     "payment": {
+      "record": "Record payment",
+      "title": "Record payment",
+      "description": "{name} · {className}. Balance: {balance}.",
+      "fields": {
+        "amount": "Amount (Rs.)",
+        "paidOn": "Date paid",
+        "method": "Method"
+      },
+      "methods": {
+        "cash": "Cash",
+        "bank_transfer": "Bank transfer"
+      },
+      "submit": "Record payment",
+      "pending": "Recording…",
+      "recorded": "Payment recorded. Receipt {receiptNo}",
       "errors": {
         "notFound": "This due no longer exists.",
         "amountRequired": "Enter the amount",

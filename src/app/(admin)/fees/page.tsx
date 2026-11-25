@@ -2,12 +2,13 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { MonthPicker } from "@/components/shared/month-picker";
 import { PageHeader } from "@/components/shared/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GenerateDuesButton } from "@/features/fees/components/generate-dues-button";
-import { getDuesSummary } from "@/features/fees/queries";
+import { parseDueFilters } from "@/features/fees/filters";
+import { getFeesTotals } from "@/features/fees/queries";
 import { listDueMonths, pickDueMonth } from "@/features/fees/schema";
 import { getToday } from "@/lib/dates";
 import { formatFee } from "@/lib/money";
@@ -27,22 +28,16 @@ async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
   const raw = await searchParams;
   const today = getToday();
   const month = pickDueMonth(readParam(raw, "month"), today);
-  const [t, format, summary] = await Promise.all([
+  const filters = parseDueFilters(raw);
+  const [t, totals] = await Promise.all([
     getTranslations("fees.summary"),
-    getFormatter(),
-    getDuesSummary(month),
+    getFeesTotals(month, filters.classId),
   ]);
 
-  const monthLabel = format.dateTime(new Date(`${month}-01T00:00:00Z`), {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-
   const stats = [
-    { label: t("dues", { month: monthLabel }), value: t("duesValue", { count: summary.count }) },
-    { label: t("total"), value: formatFee(summary.totalDue) },
-    { label: t("free"), value: t("freeValue", { count: summary.freeCount }) },
+    { label: t("due"), value: formatFee(totals.due) },
+    { label: t("collected"), value: formatFee(totals.collected) },
+    { label: t("outstanding"), value: formatFee(totals.outstanding) },
   ];
 
   return (

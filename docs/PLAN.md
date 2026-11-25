@@ -403,7 +403,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - `/me/attendance` and `/me/payments` show history with a link to each receipt.
   - There are no edit controls anywhere in the portal.
 
-- [ ] **T-081 Dark mode** (S)
+- [x] **T-081 Dark mode** (S)
   - Light / dark / system switch. The choice persists and there is no flash of the wrong theme on load.
   - Every page checked in dark mode for contrast.
 

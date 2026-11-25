@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/me", labelKey: "overview" },
   { href: "/me/attendance", labelKey: "attendance" },
   { href: "/me/payments", labelKey: "payments" },
+  { href: "/me/settings", labelKey: "settings" },
 ] as const;
 
 export function PortalNav() {
@@ -27,7 +28,7 @@ export function PortalNav() {
                 href={href}
                 aria-current={current ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-9 items-center rounded-full px-4 text-body-sm whitespace-nowrap text-muted-foreground hover:text-foreground",
+                  "inline-flex h-9 items-center rounded-full px-3 text-body-sm whitespace-nowrap text-muted-foreground hover:text-foreground sm:px-4",
                   current && "bg-muted font-medium text-foreground",
                 )}
               >

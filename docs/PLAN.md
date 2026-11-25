@@ -407,7 +407,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Light / dark / system switch. The choice persists and there is no flash of the wrong theme on load.
   - Every page checked in dark mode for contrast.
 
-- [ ] **T-082 Sinhala translation** (M)
+- [x] **T-082 Sinhala translation** (M)
   - `si.json` is complete. A language switch in the header saves to `profiles.locale`.
   - A check (script or test) fails if `si.json` is missing any key from `en.json`.
   - Dates and currency follow the selected locale.

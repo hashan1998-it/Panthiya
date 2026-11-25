@@ -555,6 +555,38 @@
       "summary": "{total, plural, one {# enrollment} other {# enrollments}} across {classes, plural, one {# class} other {# classes}}."
     }
   },
+  "settings": {
+    "metaTitle": "Settings · Panthiya",
+    "title": "Settings",
+    "description": "Your password, language and theme.",
+    "password": {
+      "title": "Password",
+      "description": "Use at least 8 characters. You stay signed in on this device.",
+      "current": "Current password",
+      "next": "New password",
+      "confirm": "Confirm new password",
+      "submit": "Change password",
+      "pending": "Changing…",
+      "changed": "Your password was changed",
+      "errors": {
+        "currentRequired": "Enter your current password",
+        "currentWrong": "The current password is not correct",
+        "tooShort": "Use at least 8 characters",
+        "tooLong": "Use 72 characters or fewer",
+        "mismatch": "The passwords don't match",
+        "sameAsCurrent": "Choose a password different from your current one",
+        "saveFailed": "We couldn't change your password. Please try again."
+      }
+    },
+    "language": {
+      "title": "Language",
+      "description": "Saved to your account, so it follows you to other devices."
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Saved on this device. System follows your device's light or dark setting."
+    }
+  },
   "receipt": {
     "metaTitle": "Receipt · Panthiya",
     "title": "Fee receipt",
@@ -580,7 +612,8 @@
       "label": "Student portal",
       "overview": "Overview",
       "attendance": "Attendance",
-      "payments": "Payments"
+      "payments": "Payments",
+      "settings": "Settings"
     },
     "greeting": "Hello, {name}",
     "description": "{admissionNo} · Grade {grade}",

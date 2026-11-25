@@ -91,6 +91,40 @@ describe("listMonthSessionDates", () => {
     ]);
   });
 
+  it("includes 29 February in a leap year", () => {
+    expect(listMonthSessionDates(2, "2028-02", "2028-03-10")).toEqual([
+      "2028-02-01",
+      "2028-02-08",
+      "2028-02-15",
+      "2028-02-22",
+      "2028-02-29",
+    ]);
+  });
+
+  it("stops at 28 February in a normal year", () => {
+    expect(listMonthSessionDates(0, "2027-02", "2027-03-10")).toEqual([
+      "2027-02-07",
+      "2027-02-14",
+      "2027-02-21",
+      "2027-02-28",
+    ]);
+  });
+
+  it("starts on the 1st when the month begins on the class day", () => {
+    expect(listMonthSessionDates(2, "2026-12", "2026-12-31")).toEqual([
+      "2026-12-01",
+      "2026-12-08",
+      "2026-12-15",
+      "2026-12-22",
+      "2026-12-29",
+    ]);
+  });
+
+  it("has only today, or nothing, on the 1st of the month", () => {
+    expect(listMonthSessionDates(2, "2026-12", "2026-12-01")).toEqual(["2026-12-01"]);
+    expect(listMonthSessionDates(3, "2026-12", "2026-12-01")).toEqual([]);
+  });
+
   it("returns nothing for a future month or a bad month", () => {
     expect(listMonthSessionDates(2, "2026-12", TUESDAY)).toEqual([]);
     expect(listMonthSessionDates(2, "2026-13", TUESDAY)).toEqual([]);

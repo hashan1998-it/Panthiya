@@ -365,7 +365,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - "Record payment" opens a dialog with amount (defaults to the remaining balance, can be less), date and method. Each payment gets a receipt number from the database sequence.
   - A payment can be voided by the admin, with confirmation. Voiding sets `voided_at`; the row and its receipt number are kept.
 
-- [ ] **T-062 Receipt** (M)
+- [x] **T-062 Receipt** (M)
   - `/fees/receipt/[paymentId]` shows a clean receipt: receipt number, student, class, month, amount, date.
   - The print view hides the sidebar and header and fits on one A5 or A4 page.
   - A student can open receipts for their own payments only.

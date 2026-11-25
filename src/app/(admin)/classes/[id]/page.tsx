@@ -9,13 +9,18 @@ import { PageHeader } from "@/components/shared/page-header";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ClassAttendance } from "@/features/attendance/components/class-attendance";
+import { pickMonth } from "@/features/attendance/session-dates";
 import { ClassStudentsTable } from "@/features/classes/components/class-students-table";
 import { EnrollStudentsDialog } from "@/features/classes/components/enroll-students-dialog";
 import { getClass, getClassEnrollments, getEnrollableStudents } from "@/features/classes/queries";
+import { getToday } from "@/lib/dates";
 import { formatFee } from "@/lib/money";
 import { formatWeekday } from "@/lib/schedule";
+import { readParam } from "@/lib/table-params";
 
 type Params = Promise<{ id: string }>;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   await connection();
@@ -29,10 +34,18 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: t("detail.metaTitle", { name }) };
 }
 
-async function ClassDetail({ params }: { params: Params }) {
+async function ClassDetail({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
   await connection();
 
-  const { id } = await params;
+  const [{ id }, raw] = await Promise.all([params, searchParams]);
+  const today = getToday();
+  const month = pickMonth(readParam(raw, "month"), today);
   const klass = await getClass(id);
   if (!klass) notFound();
 
@@ -103,11 +116,23 @@ async function ClassDetail({ params }: { params: Params }) {
           className={name}
         />
       </section>
+      <ClassAttendance
+        classId={klass.id}
+        dayOfWeek={klass.day_of_week}
+        month={month}
+        today={today}
+      />
     </>
   );
 }
 
-export default async function ClassPage({ params }: { params: Params }) {
+export default async function ClassPage({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
   const t = await getTranslations("classes.detail");
 
   return (
@@ -120,7 +145,7 @@ export default async function ClassPage({ params }: { params: Params }) {
         {t("backToClasses")}
       </Link>
       <Suspense fallback={<PageSkeleton />}>
-        <ClassDetail params={params} />
+        <ClassDetail params={params} searchParams={searchParams} />
       </Suspense>
     </div>
   );

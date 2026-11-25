@@ -6,6 +6,7 @@ import {
   listRecentMonths,
   listSessionDates,
   MONTH_COUNT,
+  pickMonth,
   SESSION_DATE_COUNT,
 } from "./session-dates";
 
@@ -116,5 +117,19 @@ describe("isMonth", () => {
     expect(isMonth("2026-1")).toBe(false);
     expect(isMonth("2026-00")).toBe(false);
     expect(isMonth("2026-11-01")).toBe(false);
+  });
+});
+
+describe("pickMonth", () => {
+  it("keeps a month from the selector", () => {
+    expect(pickMonth("2026-10", TUESDAY)).toBe("2026-10");
+    expect(pickMonth("2025-12", TUESDAY)).toBe("2025-12");
+  });
+
+  it("falls back to the current month for anything else", () => {
+    expect(pickMonth(undefined, TUESDAY)).toBe("2026-11");
+    expect(pickMonth("2026-12", TUESDAY)).toBe("2026-11");
+    expect(pickMonth("2025-11", TUESDAY)).toBe("2026-11");
+    expect(pickMonth("oops", TUESDAY)).toBe("2026-11");
   });
 });

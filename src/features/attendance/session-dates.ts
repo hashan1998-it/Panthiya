@@ -61,3 +61,7 @@ export function listRecentMonths(today: string, count: number = MONTH_COUNT): st
     return date.toISOString().slice(0, 7);
   });
 }
+
+export function pickMonth(value: string | undefined, today: string): string {
+  return value && listRecentMonths(today).includes(value) ? value : today.slice(0, 7);
+}

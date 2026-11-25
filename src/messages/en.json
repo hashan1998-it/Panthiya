@@ -340,7 +340,14 @@
       "late": "Late",
       "absent": "Absent",
       "notMarked": "Not marked",
-      "noSession": "No class"
+      "noSession": "No class",
+      "classTitle": "Attendance",
+      "student": "Student",
+      "inactive": "Inactive",
+      "noSessionsTitle": "No sessions yet",
+      "noSessionsDescription": "This class has no session dates in this month up to today.",
+      "noStudentsTitle": "No students this month",
+      "noStudentsDescription": "Nobody was enrolled in this class during this month."
     },
     "errors": {
       "noMarks": "Mark at least one student before saving",

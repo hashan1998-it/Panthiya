@@ -561,7 +561,47 @@
   },
   "me": {
     "metaTitle": "My classes · Panthiya",
-    "title": "My classes"
+    "title": "My classes",
+    "nav": {
+      "label": "Student portal",
+      "overview": "Overview",
+      "attendance": "Attendance",
+      "payments": "Payments"
+    },
+    "greeting": "Hello, {name}",
+    "description": "{admissionNo} · Grade {grade}",
+    "classValue": "{subject} · Grade {grade}",
+    "next": {
+      "title": "Next class",
+      "none": "No upcoming classes",
+      "today": "Today, {start}–{end}",
+      "on": "{date}, {start}–{end}"
+    },
+    "rate": {
+      "title": "Attendance rate",
+      "none": "Not marked yet",
+      "hint": "{count, plural, one {Across # session} other {Across # sessions}}"
+    },
+    "unpaid": {
+      "title": "Unpaid fees",
+      "none": "All paid",
+      "hint": "{count, plural, =0 {Nothing to pay} one {# unpaid due} other {# unpaid dues}}",
+      "listTitle": "Fees to pay",
+      "label": "Unpaid dues",
+      "month": "Month",
+      "class": "Class",
+      "balance": "Balance"
+    },
+    "attendance": {
+      "metaTitle": "My attendance · Panthiya",
+      "title": "My attendance"
+    },
+    "payments": {
+      "metaTitle": "My payments · Panthiya",
+      "title": "My payments",
+      "description": "Every payment you have made. Choose a receipt number to open or print it.",
+      "emptyDescription": "Your payments and receipts will show here."
+    }
   },
   "errors": {
     "generic": {

@@ -1,10 +1,13 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { connection } from "next/server";
+import { ListTodo } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { MonthPicker } from "@/components/shared/month-picker";
 import { PageHeader } from "@/components/shared/page-header";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FeesTable } from "@/features/fees/components/fees-table";
 import { GenerateDuesButton } from "@/features/fees/components/generate-dues-button";
@@ -68,7 +71,16 @@ export default function FeesPage({ searchParams }: { searchParams: SearchParams 
 
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title={t("nav.fees")} description={t("fees.description")} />
+      <PageHeader
+        title={t("nav.fees")}
+        description={t("fees.description")}
+        action={
+          <Link href="/fees/unpaid" className={buttonVariants({ variant: "outline" })}>
+            <ListTodo data-icon="inline-start" aria-hidden />
+            {t("fees.unpaid.link")}
+          </Link>
+        }
+      />
       <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>
         <FeesMonth searchParams={searchParams} />
       </Suspense>

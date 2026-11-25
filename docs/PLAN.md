@@ -344,7 +344,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - The UI updates optimistically and rolls back with an error toast if the save fails.
   - Leaving the page with unsaved changes shows a warning.
 
-- [ ] **T-051 Attendance history** (M)
+- [x] **T-051 Attendance history** (M)
   - Per class: a grid of students by session dates with a status mark in each cell and a percentage per student.
   - Per student: shown in the profile's attendance tab.
   - A month selector limits the range.

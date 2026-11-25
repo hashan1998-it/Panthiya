@@ -5,6 +5,7 @@ import { connection } from "next/server";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { ExportLink } from "@/components/shared/export-link";
 import { PageHeader } from "@/components/shared/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -40,10 +41,13 @@ export default function StudentsPage({ searchParams }: { searchParams: SearchPar
         title={t("nav.students")}
         description={t("students.description")}
         action={
-          <Link href="/students/new" className={buttonVariants()}>
-            <Plus data-icon="inline-start" aria-hidden />
-            {t("students.addStudent")}
-          </Link>
+          <>
+            <ExportLink href="/students/export" />
+            <Link href="/students/new" className={buttonVariants()}>
+              <Plus data-icon="inline-start" aria-hidden />
+              {t("students.addStudent")}
+            </Link>
+          </>
         }
       />
       <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>

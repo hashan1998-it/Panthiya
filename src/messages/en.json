@@ -498,6 +498,35 @@
       "generateFailed": "We couldn't generate the dues. Please try again."
     }
   },
+  "reports": {
+    "metaTitle": "Reports · Panthiya",
+    "description": "Income, attendance and class sizes at a glance.",
+    "showTable": "Show as a table",
+    "income": {
+      "title": "Income per month",
+      "description": "Payments received in each of the last {count} months, by the date they were paid. Voided payments are left out.",
+      "series": "Collected",
+      "month": "Month",
+      "summary": "{total} collected in this period. The best month was {month} with {amount}.",
+      "summaryEmpty": "No payments were received in this period."
+    },
+    "attendance": {
+      "title": "Attendance rate per class",
+      "description": "Present and late, out of every session marked so far, for each active class.",
+      "series": "Attendance rate",
+      "class": "Class",
+      "noData": "Not marked yet",
+      "summary": "The lowest rate is {name} at {rate}.",
+      "summaryEmpty": "No attendance has been marked yet."
+    },
+    "students": {
+      "title": "Students per class",
+      "description": "Current enrollments in each active class.",
+      "series": "Students",
+      "class": "Class",
+      "summary": "{total, plural, one {# enrollment} other {# enrollments}} across {classes, plural, one {# class} other {# classes}}."
+    }
+  },
   "receipt": {
     "metaTitle": "Receipt · Panthiya",
     "title": "Fee receipt",

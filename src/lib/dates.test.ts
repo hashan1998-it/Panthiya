@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCurrentMonth, getToday } from "./dates";
+import { getCurrentMonth, getDayOfWeek, getToday } from "./dates";
 
 // Sri Lanka is UTC+05:30 all year (no daylight saving).
 // So Sri Lankan midnight is 18:30 UTC on the day before.
@@ -29,5 +29,18 @@ describe("getCurrentMonth", () => {
 
   it("moves to the next year on New Year's Eve at 18:30 UTC", () => {
     expect(getCurrentMonth(new Date("2026-12-31T18:30:00Z"))).toBe("2027-01");
+  });
+});
+
+describe("getDayOfWeek", () => {
+  it("numbers the days from Sunday = 0", () => {
+    expect(getDayOfWeek("2026-11-22")).toBe(0);
+    expect(getDayOfWeek("2026-11-25")).toBe(3);
+    expect(getDayOfWeek("2026-11-28")).toBe(6);
+  });
+
+  it("works across a year boundary and on 29 February", () => {
+    expect(getDayOfWeek("2027-01-01")).toBe(5);
+    expect(getDayOfWeek("2028-02-29")).toBe(2);
   });
 });

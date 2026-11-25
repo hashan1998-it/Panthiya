@@ -370,7 +370,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - The print view hides the sidebar and header and fits on one A5 or A4 page.
   - A student can open receipts for their own payments only.
 
-- [ ] **T-063 Unpaid list** (S)
+- [x] **T-063 Unpaid list** (S)
   - A view of students with outstanding dues, including how many months are overdue, sorted by the highest amount.
 
 ### Phase 7 — Dashboard, reports, timetable (days 13-15)

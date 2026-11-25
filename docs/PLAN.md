@@ -360,7 +360,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Running it twice for the same month creates no duplicates (`insert ... on conflict do nothing`).
   - Enrollments with a free card get a row with `amount_due = 0` that counts as paid.
 
-- [ ] **T-061 Fees page** (L)
+- [x] **T-061 Fees page** (L)
   - Month selector, class filter and status filter (paid / partial / unpaid / all). Totals for due, collected and outstanding are shown above the table.
   - "Record payment" opens a dialog with amount (defaults to the remaining balance, can be less), date and method. Each payment gets a receipt number from the database sequence.
   - A payment can be voided by the admin, with confirmation. Voiding sets `voided_at`; the row and its receipt number are kept.

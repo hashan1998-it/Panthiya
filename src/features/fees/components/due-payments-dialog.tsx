@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useFormatter, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
@@ -104,7 +105,12 @@ function PaymentsList({ dueId }: { dueId: string }) {
         <li key={payment.id} className="flex items-center gap-3 py-3">
           <div className="flex min-w-0 flex-1 flex-col">
             <span className="flex items-center gap-2 text-body-sm text-foreground">
-              <span className="font-mono">{payment.receipt_no}</span>
+              <Link
+                href={`/fees/receipt/${payment.id}`}
+                className="font-mono underline underline-offset-4"
+              >
+                {payment.receipt_no}
+              </Link>
               {payment.voided_at && <Badge variant="neutral">{t("payments.voided")}</Badge>}
             </span>
             <span className="text-caption text-muted-foreground">

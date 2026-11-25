@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Wallet } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
@@ -49,7 +50,14 @@ export async function StudentPaymentsTab({ payments }: StudentPaymentsTabProps) 
               <TableCell className="tabular-nums">
                 {format.dateTime(new Date(payment.paid_on), { dateStyle: "medium" })}
               </TableCell>
-              <TableCell className="font-mono">{payment.receipt_no}</TableCell>
+              <TableCell className="font-mono">
+                <Link
+                  href={`/fees/receipt/${payment.id}`}
+                  className="text-foreground underline underline-offset-4"
+                >
+                  {payment.receipt_no}
+                </Link>
+              </TableCell>
               <TableCell className="text-foreground">
                 {t("forValue", {
                   subject: payment.due.enrollment.class?.subject ?? "",

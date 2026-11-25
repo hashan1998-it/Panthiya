@@ -7,6 +7,7 @@ const LANDING_PAGE = "/";
 const LOGIN_PAGE = "/login";
 const PUBLIC_PAGES = [LOGIN_PAGE, "/styleguide"];
 const STUDENT_PAGES = ["/me"];
+const SHARED_PAGES = ["/fees/receipt"];
 
 function isSameOrSubPage(pathname: string, page: string) {
   return pathname === page || pathname.startsWith(`${page}/`);
@@ -59,7 +60,7 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (getPageOwner(pathname) === role) {
+  if (matchesAnyPage(pathname, SHARED_PAGES) || getPageOwner(pathname) === role) {
     response.headers.set("cache-control", "private, no-store");
     return response;
   }

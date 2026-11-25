@@ -460,6 +460,24 @@
       "generateFailed": "We couldn't generate the dues. Please try again."
     }
   },
+  "receipt": {
+    "metaTitle": "Receipt · Panthiya",
+    "title": "Fee receipt",
+    "back": "Back",
+    "print": "Print",
+    "fields": {
+      "receiptNo": "Receipt no",
+      "paidOn": "Date paid",
+      "student": "Student",
+      "admissionNo": "Admission no",
+      "class": "Class",
+      "month": "For the month of",
+      "method": "Method",
+      "amount": "Amount paid"
+    },
+    "voided": "Voided",
+    "voidedNote": "This payment was voided on {date}. It does not count towards the fee."
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

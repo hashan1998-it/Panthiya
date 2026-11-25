@@ -402,6 +402,21 @@
       "upToDate": "All dues for {month} already exist",
       "noEnrollments": "There are no active enrollments in {month}"
     },
+    "payment": {
+      "errors": {
+        "notFound": "This due no longer exists.",
+        "amountRequired": "Enter the amount",
+        "amountInvalid": "Enter an amount like 2500 or 2500.50",
+        "amountPositive": "The amount must be more than 0",
+        "amountTooHigh": "The amount can't be more than the balance",
+        "dateInvalid": "Enter a valid date",
+        "dateInFuture": "The date can't be in the future",
+        "methodRequired": "Choose how it was paid",
+        "alreadyPaid": "This due is already paid.",
+        "saveFailed": "We couldn't record the payment. Please try again.",
+        "voidFailed": "We couldn't void the payment. Please try again."
+      }
+    },
     "errors": {
       "invalidMonth": "Pick one of the months from the list",
       "generateFailed": "We couldn't generate the dues. Please try again."

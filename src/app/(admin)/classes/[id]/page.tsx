@@ -10,7 +10,7 @@ import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ClassAttendance } from "@/features/attendance/components/class-attendance";
-import { pickMonth } from "@/features/attendance/session-dates";
+import { pickMonth } from "@/lib/months";
 import { ClassStudentsTable } from "@/features/classes/components/class-students-table";
 import { EnrollStudentsDialog } from "@/features/classes/components/enroll-students-dialog";
 import { getClass, getClassEnrollments, getEnrollableStudents } from "@/features/classes/queries";

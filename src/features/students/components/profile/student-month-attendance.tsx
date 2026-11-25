@@ -1,11 +1,12 @@
 import { CalendarCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
+import { MonthPicker } from "@/components/shared/month-picker";
 import { AttendanceGrid } from "@/features/attendance/components/attendance-grid";
-import { MonthPicker } from "@/features/attendance/components/month-picker";
 import type { StudentMonthMark } from "@/features/attendance/queries";
 import { listMonthSessionDates } from "@/features/attendance/session-dates";
 import type { AttendanceStatus } from "@/features/attendance/summary";
+import { listRecentMonths } from "@/lib/months";
 import type { StudentEnrollment } from "../../profile-queries";
 
 type StudentMonthAttendanceProps = {
@@ -64,7 +65,7 @@ export async function StudentMonthAttendance({
         <MonthPicker
           id="student-attendance-month"
           month={month}
-          today={today}
+          months={listRecentMonths(today)}
           params={{ tab: "attendance" }}
         />
       </div>

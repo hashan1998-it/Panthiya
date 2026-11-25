@@ -349,7 +349,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Per student: shown in the profile's attendance tab.
   - A month selector limits the range.
 
-- [ ] **T-052 Tests for attendance** (S)
+- [x] **T-052 Tests for attendance** (S)
   - Unit tests for the helper that lists valid session dates for a class in a month.
   - Unit tests for the attendance percentage calculation, including zero sessions.
 

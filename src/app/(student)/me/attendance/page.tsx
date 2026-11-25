@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
+import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/shared/page-header";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getStudentMonthAttendance } from "@/features/attendance/queries";
 import { getMyStudent } from "@/features/portal/queries";
 import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
@@ -19,22 +22,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("metaTitle") };
 }
 
-export default async function MyAttendancePage({ searchParams }: { searchParams: SearchParams }) {
+async function MyAttendance({ searchParams }: { searchParams: SearchParams }) {
   await connection();
 
   const today = getToday();
   const [raw, student] = await Promise.all([searchParams, getMyStudent()]);
   const month = pickMonth(readParam(raw, "month"), today);
-  const [t, enrollments, attendance, monthMarks] = await Promise.all([
-    getTranslations("me.attendance"),
+  const [enrollments, attendance, monthMarks] = await Promise.all([
     getStudentEnrollments(student.id),
     getStudentAttendance(student.id),
     getStudentMonthAttendance(student.id, month),
   ]);
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader title={t("title")} />
+    <>
       <StudentAttendanceTab enrollments={enrollments} attendance={attendance} />
       <StudentMonthAttendance
         enrollments={enrollments}
@@ -42,6 +43,19 @@ export default async function MyAttendancePage({ searchParams }: { searchParams:
         month={month}
         today={today}
       />
+    </>
+  );
+}
+
+export default function MyAttendancePage({ searchParams }: { searchParams: SearchParams }) {
+  const t = useTranslations("me.attendance");
+
+  return (
+    <div className="flex flex-col gap-8">
+      <PageHeader title={t("title")} />
+      <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>
+        <MyAttendance searchParams={searchParams} />
+      </Suspense>
     </div>
   );
 }

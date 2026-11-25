@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/shared/page-header";
+import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { summarizeAttendance } from "@/features/attendance/summary";
 import { UnpaidDues } from "@/features/portal/components/unpaid-dues";
 import { findNextClass } from "@/features/portal/next-class";
@@ -27,7 +29,7 @@ function Stat({ label, value, hint }: { label: string; value: string; hint?: str
   );
 }
 
-export default async function MePage() {
+async function Overview() {
   await connection();
 
   const today = getToday();
@@ -99,5 +101,13 @@ export default async function MePage() {
         <StudentClassesTab enrollments={enrollments} />
       </section>
     </div>
+  );
+}
+
+export default function MePage() {
+  return (
+    <Suspense fallback={<PageSkeleton />}>
+      <Overview />
+    </Suspense>
   );
 }

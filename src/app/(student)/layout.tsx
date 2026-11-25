@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import SignOutButton from "@/app/(auth)/components/sign-out-button";
 import { RoleGate } from "@/components/role-gate";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { PortalNav } from "@/features/portal/components/portal-nav";
 
 export default function StudentLayout({ children }: LayoutProps<"/">) {
@@ -13,7 +14,10 @@ export default function StudentLayout({ children }: LayoutProps<"/">) {
         <div className="mx-auto flex w-full max-w-300 flex-col gap-3 px-4 py-3 md:px-6">
           <div className="flex items-center justify-between gap-4">
             <span className="text-title-md">{t("title")}</span>
-            <SignOutButton />
+            <div className="flex items-center gap-1">
+              <ThemeToggle />
+              <SignOutButton />
+            </div>
           </div>
           <PortalNav />
         </div>

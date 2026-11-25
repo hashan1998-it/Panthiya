@@ -337,7 +337,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 5 — Attendance (days 9-10)
 
-- [ ] **T-050 Attendance entry** (L)
+- [x] **T-050 Attendance entry** (L)
   - Choose a class and a date. The date picker only allows days that match the class's day of week and never a future date.
   - Every enrolled student is listed with present / absent / late controls. "Mark all present" exists.
   - Saving is an upsert: opening the same class and date again shows the saved values and editing them does not create duplicates.

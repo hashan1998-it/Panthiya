@@ -11,8 +11,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
+import { getStudentMonthAttendance } from "@/features/attendance/queries";
+import { pickMonth } from "@/features/attendance/session-dates";
 import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
 import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
+import { StudentMonthAttendance } from "@/features/students/components/profile/student-month-attendance";
 import { StudentPaymentsTab } from "@/features/students/components/profile/student-payments-tab";
 import { StudentAccount } from "@/features/students/components/student-account";
 import { StudentStatusDialog } from "@/features/students/components/student-status-dialog";
@@ -22,9 +25,14 @@ import {
   getStudentPayments,
 } from "@/features/students/profile-queries";
 import { getStudent } from "@/features/students/queries";
+import { getToday } from "@/lib/dates";
+import { readParam } from "@/lib/table-params";
 import { cn } from "@/lib/utils";
 
 type Params = Promise<{ id: string }>;
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+const TABS = ["details", "classes", "attendance", "payments"] as const;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   await connection();
@@ -37,19 +45,29 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: t("metaTitle", { name: student.full_name }) };
 }
 
-async function StudentProfile({ params }: { params: Params }) {
+async function StudentProfile({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
   await connection();
 
-  const { id } = await params;
+  const [{ id }, raw] = await Promise.all([params, searchParams]);
+  const today = getToday();
+  const month = pickMonth(readParam(raw, "month"), today);
+  const tab = TABS.find((value) => value === readParam(raw, "tab")) ?? "details";
   const student = await getStudent(id);
   if (!student) notFound();
 
-  const [t, format, enrollments, attendance, payments] = await Promise.all([
+  const [t, format, enrollments, attendance, payments, monthMarks] = await Promise.all([
     getTranslations("students"),
     getFormatter(),
     getStudentEnrollments(student.id),
     getStudentAttendance(student.id),
     getStudentPayments(student.id),
+    getStudentMonthAttendance(student.id, month),
   ]);
 
   const statusLabel = student.is_active ? t("status.active") : t("status.inactive");
@@ -115,7 +133,7 @@ async function StudentProfile({ params }: { params: Params }) {
           </>
         }
       />
-      <Tabs defaultValue="details">
+      <Tabs defaultValue={tab}>
         <TabsList activateOnFocus>
           <TabsTab value="details">{t("profile.tabs.details")}</TabsTab>
           <TabsTab value="classes">{t("profile.tabs.classes")}</TabsTab>
@@ -143,7 +161,15 @@ async function StudentProfile({ params }: { params: Params }) {
           <StudentClassesTab enrollments={enrollments} />
         </TabsPanel>
         <TabsPanel value="attendance">
-          <StudentAttendanceTab enrollments={enrollments} attendance={attendance} />
+          <div className="flex flex-col gap-8">
+            <StudentAttendanceTab enrollments={enrollments} attendance={attendance} />
+            <StudentMonthAttendance
+              enrollments={enrollments}
+              marks={monthMarks}
+              month={month}
+              today={today}
+            />
+          </div>
         </TabsPanel>
         <TabsPanel value="payments">
           <StudentPaymentsTab payments={payments} />
@@ -153,7 +179,13 @@ async function StudentProfile({ params }: { params: Params }) {
   );
 }
 
-export default async function StudentPage({ params }: { params: Params }) {
+export default async function StudentPage({
+  params,
+  searchParams,
+}: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
   const t = await getTranslations("students.profile");
 
   return (
@@ -166,7 +198,7 @@ export default async function StudentPage({ params }: { params: Params }) {
         {t("backToStudents")}
       </Link>
       <Suspense fallback={<PageSkeleton />}>
-        <StudentProfile params={params} />
+        <StudentProfile params={params} searchParams={searchParams} />
       </Suspense>
     </div>
   );

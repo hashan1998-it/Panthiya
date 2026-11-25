@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { isSessionDate, listSessionDates, SESSION_DATE_COUNT } from "./session-dates";
+import {
+  isMonth,
+  isSessionDate,
+  listMonthSessionDates,
+  listRecentMonths,
+  listSessionDates,
+  MONTH_COUNT,
+  pickMonth,
+  SESSION_DATE_COUNT,
+} from "./session-dates";
 
 const TUESDAY = "2026-11-24";
 
@@ -48,5 +57,79 @@ describe("isSessionDate", () => {
     expect(isSessionDate("2026-02-31", 2, TUESDAY)).toBe(false);
     expect(isSessionDate("next tuesday", 2, TUESDAY)).toBe(false);
     expect(isSessionDate("", 2, TUESDAY)).toBe(false);
+  });
+});
+
+describe("listMonthSessionDates", () => {
+  it("lists every class day in a past month, oldest first", () => {
+    expect(listMonthSessionDates(6, "2026-10", TUESDAY)).toEqual([
+      "2026-10-03",
+      "2026-10-10",
+      "2026-10-17",
+      "2026-10-24",
+      "2026-10-31",
+    ]);
+    expect(listMonthSessionDates(0, "2026-02", TUESDAY)).toEqual([
+      "2026-02-01",
+      "2026-02-08",
+      "2026-02-15",
+      "2026-02-22",
+    ]);
+  });
+
+  it("stops at today in the current month", () => {
+    expect(listMonthSessionDates(2, "2026-11", TUESDAY)).toEqual([
+      "2026-11-03",
+      "2026-11-10",
+      "2026-11-17",
+      "2026-11-24",
+    ]);
+    expect(listMonthSessionDates(3, "2026-11", TUESDAY)).toEqual([
+      "2026-11-04",
+      "2026-11-11",
+      "2026-11-18",
+    ]);
+  });
+
+  it("returns nothing for a future month or a bad month", () => {
+    expect(listMonthSessionDates(2, "2026-12", TUESDAY)).toEqual([]);
+    expect(listMonthSessionDates(2, "2026-13", TUESDAY)).toEqual([]);
+    expect(listMonthSessionDates(2, "november", TUESDAY)).toEqual([]);
+  });
+});
+
+describe("listRecentMonths", () => {
+  it("lists months back from the current one, across a year", () => {
+    expect(listRecentMonths("2026-02-15", 4)).toEqual(["2026-02", "2026-01", "2025-12", "2025-11"]);
+  });
+
+  it("lists twelve months by default", () => {
+    const months = listRecentMonths(TUESDAY);
+    expect(months).toHaveLength(MONTH_COUNT);
+    expect(months.at(0)).toBe("2026-11");
+    expect(months.at(-1)).toBe("2025-12");
+  });
+});
+
+describe("isMonth", () => {
+  it("accepts YYYY-MM only", () => {
+    expect(isMonth("2026-11")).toBe(true);
+    expect(isMonth("2026-1")).toBe(false);
+    expect(isMonth("2026-00")).toBe(false);
+    expect(isMonth("2026-11-01")).toBe(false);
+  });
+});
+
+describe("pickMonth", () => {
+  it("keeps a month from the selector", () => {
+    expect(pickMonth("2026-10", TUESDAY)).toBe("2026-10");
+    expect(pickMonth("2025-12", TUESDAY)).toBe("2025-12");
+  });
+
+  it("falls back to the current month for anything else", () => {
+    expect(pickMonth(undefined, TUESDAY)).toBe("2026-11");
+    expect(pickMonth("2026-12", TUESDAY)).toBe("2026-11");
+    expect(pickMonth("2025-11", TUESDAY)).toBe("2026-11");
+    expect(pickMonth("oops", TUESDAY)).toBe("2026-11");
   });
 });

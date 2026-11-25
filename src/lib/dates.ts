@@ -27,3 +27,7 @@ export function getCurrentMonth(now: Date = new Date()): string {
   const { year, month } = getColomboDateParts(now);
   return `${year}-${month}`;
 }
+
+export function getDayOfWeek(date: string): number {
+  return new Date(`${date}T00:00:00Z`).getUTCDay();
+}

@@ -222,6 +222,13 @@ export type Database = {
             foreignKeyName: "payments_due_id_fkey";
             columns: ["due_id"];
             isOneToOne: false;
+            referencedRelation: "due_balances";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "payments_due_id_fkey";
+            columns: ["due_id"];
+            isOneToOne: false;
             referencedRelation: "dues";
             referencedColumns: ["id"];
           },
@@ -305,7 +312,47 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      due_balances: {
+        Row: {
+          admission_no: string;
+          amount_due: number;
+          balance: number | null;
+          class_id: string;
+          enrollment_id: string;
+          full_name: string;
+          grade: number;
+          id: string;
+          month: string;
+          paid_amount: number | null;
+          status: Database["public"]["Enums"]["due_status"] | null;
+          student_id: string;
+          subject: string;
+        };
+        ComputedFields: never;
+        Relationships: [
+          {
+            foreignKeyName: "dues_enrollment_id_fkey";
+            columns: ["enrollment_id"];
+            isOneToOne: false;
+            referencedRelation: "enrollments";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "enrollments_class_id_fkey";
+            columns: ["class_id"];
+            isOneToOne: false;
+            referencedRelation: "classes";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "enrollments_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Functions: {
       current_student_id: { Args: Record<PropertyKey, never>; Returns: string };
@@ -315,6 +362,7 @@ export type Database = {
       app_locale: "en" | "si";
       attendance_status: "present" | "absent" | "late";
       discount_type: "none" | "half" | "free" | "custom";
+      due_status: "paid" | "partial" | "unpaid";
       payment_method: "cash" | "bank_transfer";
       user_role: "admin" | "student";
     };
@@ -434,6 +482,7 @@ export const Constants = {
       app_locale: ["en", "si"],
       attendance_status: ["present", "absent", "late"],
       discount_type: ["none", "half", "free", "custom"],
+      due_status: ["paid", "partial", "unpaid"],
       payment_method: ["cash", "bank_transfer"],
       user_role: ["admin", "student"],
     },

@@ -363,11 +363,35 @@
     "metaTitle": "Fees · Panthiya",
     "description": "Monthly dues for every active enrollment.",
     "summary": {
-      "dues": "Dues for {month}",
-      "duesValue": "{count, plural, =0 {Not generated yet} one {# due} other {# dues}}",
-      "total": "Total due",
-      "free": "Free cards",
-      "freeValue": "{count, plural, =0 {None} one {# counted as paid} other {# counted as paid}}"
+      "due": "Due",
+      "collected": "Collected",
+      "outstanding": "Outstanding"
+    },
+    "columns": {
+      "admissionNo": "Adm. no",
+      "name": "Name",
+      "class": "Class",
+      "due": "Due",
+      "paid": "Paid",
+      "balance": "Balance",
+      "status": "Status"
+    },
+    "classValue": "{subject} · Grade {grade}",
+    "status": {
+      "paid": "Paid",
+      "partial": "Partial",
+      "unpaid": "Unpaid"
+    },
+    "filters": {
+      "class": "Class",
+      "allClasses": "All classes",
+      "status": "Status",
+      "allStatuses": "All"
+    },
+    "searchPlaceholder": "Search by name or admission no",
+    "empty": {
+      "title": "No dues for this month yet",
+      "description": "Use “Generate dues” to add one due for every active enrollment."
     },
     "generate": {
       "action": "Generate dues",
@@ -377,6 +401,59 @@
       "created": "{count, plural, one {# due was created} other {# dues were created}} for {month}",
       "upToDate": "All dues for {month} already exist",
       "noEnrollments": "There are no active enrollments in {month}"
+    },
+    "actions": {
+      "column": "Actions",
+      "menu": "Actions for {name}"
+    },
+    "payments": {
+      "action": "Payments",
+      "title": "Payments",
+      "description": "{name} · {className}",
+      "listLabel": "Payments for this due",
+      "loading": "Loading payments…",
+      "empty": "No payments yet.",
+      "loadFailed": "We couldn't load the payments. Please try again.",
+      "summary": "{date} · {method}",
+      "voided": "Voided",
+      "void": {
+        "action": "Void",
+        "label": "Void receipt {receiptNo}",
+        "title": "Void receipt {receiptNo}?",
+        "description": "This payment of {amount} stops counting towards the due. The receipt number is kept and is never reused.",
+        "pending": "Voiding…",
+        "done": "Receipt {receiptNo} was voided",
+        "failed": "We couldn't void the payment. Please try again."
+      }
+    },
+    "payment": {
+      "record": "Record payment",
+      "title": "Record payment",
+      "description": "{name} · {className}. Balance: {balance}.",
+      "fields": {
+        "amount": "Amount (Rs.)",
+        "paidOn": "Date paid",
+        "method": "Method"
+      },
+      "methods": {
+        "cash": "Cash",
+        "bank_transfer": "Bank transfer"
+      },
+      "submit": "Record payment",
+      "pending": "Recording…",
+      "recorded": "Payment recorded. Receipt {receiptNo}",
+      "errors": {
+        "notFound": "This due no longer exists.",
+        "amountRequired": "Enter the amount",
+        "amountInvalid": "Enter an amount like 2500 or 2500.50",
+        "amountPositive": "The amount must be more than 0",
+        "amountTooHigh": "The amount can't be more than the balance",
+        "dateInvalid": "Enter a valid date",
+        "dateInFuture": "The date can't be in the future",
+        "methodRequired": "Choose how it was paid",
+        "alreadyPaid": "This due is already paid.",
+        "saveFailed": "We couldn't record the payment. Please try again."
+      }
     },
     "errors": {
       "invalidMonth": "Pick one of the months from the list",

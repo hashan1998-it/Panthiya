@@ -332,6 +332,16 @@
       "emptyTitle": "No students for this session",
       "emptyDescription": "Nobody was enrolled in this class on this date."
     },
+    "history": {
+      "month": "Month",
+      "rate": "Rate",
+      "noRate": "—",
+      "present": "Present",
+      "late": "Late",
+      "absent": "Absent",
+      "notMarked": "Not marked",
+      "noSession": "No class"
+    },
     "errors": {
       "noMarks": "Mark at least one student before saving",
       "invalidDate": "Pick one of the class dates from the list",

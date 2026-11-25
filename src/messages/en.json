@@ -367,6 +367,26 @@
       "collected": "Collected",
       "outstanding": "Outstanding"
     },
+    "unpaid": {
+      "link": "Unpaid list",
+      "metaTitle": "Unpaid · Panthiya",
+      "title": "Unpaid",
+      "description": "Students who still owe fees, highest amount first.",
+      "summary": "{count, plural, one {# student owes} other {# students owe}} {amount} in total, up to {month}.",
+      "label": "Students with outstanding fees",
+      "columns": {
+        "student": "Student",
+        "classes": "Classes",
+        "months": "Months overdue",
+        "oldest": "Oldest unpaid month",
+        "outstanding": "Outstanding"
+      },
+      "monthsValue": "{count, plural, one {# month} other {# months}}",
+      "empty": {
+        "title": "Nobody owes anything",
+        "description": "Every due up to this month is paid."
+      }
+    },
     "columns": {
       "admissionNo": "Adm. no",
       "name": "Name",

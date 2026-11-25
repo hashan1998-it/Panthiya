@@ -398,7 +398,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 8 — Student portal, i18n, theme (days 16-17)
 
-- [ ] **T-080 Student portal** (M)
+- [x] **T-080 Student portal** (M)
   - `/me` shows the student's classes, next class, attendance rate and unpaid dues.
   - `/me/attendance` and `/me/payments` show history with a link to each receipt.
   - There are no edit controls anywhere in the portal.

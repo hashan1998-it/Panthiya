@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -32,9 +32,12 @@ export function PasswordForm() {
     reset,
   } = useForm<ChangePasswordValues>({
     resolver: zodResolver(changePasswordSchema),
-    mode: "onTouched",
+    mode: "onSubmit",
+    reValidateMode: "onChange",
     defaultValues: { current: "", next: "", confirm: "" },
   });
+
+  useEffect(() => () => reset(), [reset]);
 
   const onValid = () => {
     startTransition(async () => {

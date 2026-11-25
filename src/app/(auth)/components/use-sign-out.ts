@@ -12,9 +12,7 @@ export function useSignOut() {
   const [state, formAction, pending] = useActionState(signOut, initialState);
 
   useEffect(() => {
-    if (state.signedOut) {
-      window.location.replace("/login");
-    } else if (state.error) {
+    if (state.error) {
       toast.error(t(`errors.${state.error}`));
     }
   }, [state, t]);
@@ -22,6 +20,6 @@ export function useSignOut() {
   return {
     formAction,
     signOut: () => startTransition(formAction),
-    busy: pending || Boolean(state.signedOut),
+    busy: pending,
   };
 }

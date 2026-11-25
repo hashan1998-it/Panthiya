@@ -31,3 +31,12 @@ export function summarizeAttendanceByClass(
     [...rowsByClass].map(([classId, classRows]) => [classId, summarizeAttendance(classRows)]),
   );
 }
+
+export function summarizeAttendanceOnDates(
+  marks: Readonly<Record<string, AttendanceStatus>>,
+  dates: readonly string[],
+): AttendanceSummary {
+  return summarizeAttendance(
+    dates.flatMap((date) => (marks[date] ? [{ status: marks[date] }] : [])),
+  );
+}

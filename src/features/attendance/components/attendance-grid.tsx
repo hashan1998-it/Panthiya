@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { summarizeAttendance, type AttendanceStatus } from "../summary";
+import { summarizeAttendanceOnDates, type AttendanceStatus } from "../summary";
 
 export type AttendanceGridRow = {
   id: string;
@@ -46,9 +46,7 @@ export function AttendanceGrid({ label, rowHeader, dates, rows }: AttendanceGrid
     });
 
   const percent = (row: AttendanceGridRow) => {
-    const summary = summarizeAttendance(
-      dates.flatMap((date) => (row.marks[date] ? [{ status: row.marks[date] }] : [])),
-    );
+    const summary = summarizeAttendanceOnDates(row.marks, dates);
     return summary.rate === null ? t("noRate") : format.number(summary.rate, { style: "percent" });
   };
 

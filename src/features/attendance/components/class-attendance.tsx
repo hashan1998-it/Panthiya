@@ -1,11 +1,12 @@
 import { CalendarCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
+import { MonthPicker } from "@/components/shared/month-picker";
 import { Badge } from "@/components/ui/badge";
+import { listRecentMonths } from "@/lib/months";
 import { getClassMonthAttendance } from "../queries";
 import { listMonthSessionDates } from "../session-dates";
 import { AttendanceGrid } from "./attendance-grid";
-import { MonthPicker } from "./month-picker";
 
 type ClassAttendanceProps = {
   classId: string;
@@ -25,7 +26,7 @@ export async function ClassAttendance({ classId, dayOfWeek, month, today }: Clas
         <h2 id="class-attendance" className="text-title-md">
           {t("classTitle")}
         </h2>
-        <MonthPicker id="class-attendance-month" month={month} today={today} />
+        <MonthPicker id="class-attendance-month" month={month} months={listRecentMonths(today)} />
       </div>
       {dates.length === 0 || rows.length === 0 ? (
         <EmptyState

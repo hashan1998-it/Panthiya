@@ -5,6 +5,7 @@
     "comingSoon": "Coming soon.",
     "close": "Close",
     "getStarted": "Get started",
+    "month": "Month",
     "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },
   "dashboard": {
@@ -333,7 +334,6 @@
       "emptyDescription": "Nobody was enrolled in this class on this date."
     },
     "history": {
-      "month": "Month",
       "rate": "Rate",
       "noRate": "—",
       "present": "Present",

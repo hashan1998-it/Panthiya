@@ -1,5 +1,7 @@
 export type CsvValue = string | number | null | undefined;
 
+export const EXPORT_ROW_LIMIT = 1000;
+
 const BOM = "﻿";
 const NEEDS_QUOTES = /[",\r\n]|^\s|\s$/;
 const FORMULA_START = /^[=+\-@\t\r]/;

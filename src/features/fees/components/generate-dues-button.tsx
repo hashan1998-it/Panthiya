@@ -1,22 +1,15 @@
 "use client";
 
 import { CalendarPlus } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { Button } from "@/components/ui/button";
 import { generateDues } from "../actions";
 
-export function GenerateDuesButton({ month }: { month: string }) {
+export function GenerateDuesButton({ month, monthLabel }: { month: string; monthLabel: string }) {
   const t = useTranslations("fees.generate");
   const tErrors = useTranslations("fees.errors");
-  const format = useFormatter();
-
-  const monthLabel = format.dateTime(new Date(`${month}-01T00:00:00Z`), {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
 
   const onConfirm = async () => {
     const result = await generateDues({ month });

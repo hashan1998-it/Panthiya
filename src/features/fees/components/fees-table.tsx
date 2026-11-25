@@ -7,7 +7,7 @@ import { createDataTableColumnHelper, DataTable } from "@/components/shared/data
 import { DataTableSelectFilter } from "@/components/shared/data-table-select-filter";
 import { EmptyState } from "@/components/shared/empty-state";
 import { Badge } from "@/components/ui/badge";
-import { formatFee } from "@/lib/money";
+import { useFormatFee } from "@/lib/use-format-fee";
 import { DUE_SORTABLE_COLUMNS, DUE_STATUSES, type DueStatus } from "../filters";
 import type { DueListItem, FeeClass } from "../queries";
 import { DueActionsMenu } from "./due-actions-menu";
@@ -27,6 +27,7 @@ type FeesTableProps = {
 };
 
 export function FeesTable({ dues, rowCount, classes }: FeesTableProps) {
+  const formatFee = useFormatFee();
   const t = useTranslations("fees");
 
   const columns = useMemo(
@@ -75,7 +76,7 @@ export function FeesTable({ dues, rowCount, classes }: FeesTableProps) {
           meta: { align: "right" },
         }),
       ]),
-    [t],
+    [t, formatFee],
   );
 
   const classOptions = classes.map((klass) => ({

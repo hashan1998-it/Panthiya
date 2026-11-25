@@ -16,7 +16,8 @@ import { DUE_SORTABLE_COLUMNS, parseDueFilters } from "@/features/fees/filters";
 import { getFeesTotals, listDues, listFeeClasses } from "@/features/fees/queries";
 import { listDueMonths, pickDueMonth } from "@/features/fees/schema";
 import { getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getMonthOptions } from "@/lib/get-date-labels";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { parseTableParams, readParam } from "@/lib/table-params";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -28,6 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
+  const formatFee = await getFormatFee();
   await connection();
 
   const raw = await searchParams;
@@ -35,12 +37,14 @@ async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
   const month = pickDueMonth(readParam(raw, "month"), today);
   const filters = parseDueFilters(raw);
   const params = parseTableParams(raw, DUE_SORTABLE_COLUMNS);
-  const [t, totals, { dues, rowCount }, classes] = await Promise.all([
+  const [t, totals, { dues, rowCount }, classes, monthOptions] = await Promise.all([
     getTranslations("fees.summary"),
     getFeesTotals(month, filters.classId),
     listDues(month, params, filters),
     listFeeClasses(),
+    getMonthOptions(listDueMonths(today)),
   ]);
+  const monthLabel = monthOptions.find((option) => option.value === month)?.label ?? month;
 
   const stats = [
     { label: t("due"), value: formatFee(totals.due) },
@@ -51,8 +55,8 @@ async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <MonthPicker id="fees-month" month={month} months={listDueMonths(today)} />
-        <GenerateDuesButton month={month} />
+        <MonthPicker id="fees-month" month={month} options={monthOptions} />
+        <GenerateDuesButton month={month} monthLabel={monthLabel} />
       </div>
       <dl className="grid gap-4 sm:grid-cols-3">
         {stats.map(({ label, value }) => (

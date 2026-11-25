@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import {
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatFee } from "@/lib/money";
+import { useFormatFee } from "@/lib/use-format-fee";
 import { listDuePayments, voidPayment, type DuePayment } from "../payment-actions";
 import type { DueListItem } from "../queries";
 
@@ -55,8 +55,8 @@ type ListState =
   { status: "loading" } | { status: "failed" } | { status: "ready"; payments: DuePayment[] };
 
 function PaymentsList({ dueId }: { dueId: string }) {
+  const formatFee = useFormatFee();
   const t = useTranslations("fees");
-  const format = useFormatter();
   const [state, setState] = useState<ListState>({ status: "loading" });
 
   useEffect(() => {
@@ -115,10 +115,7 @@ function PaymentsList({ dueId }: { dueId: string }) {
             </span>
             <span className="text-caption text-muted-foreground">
               {t("payments.summary", {
-                date: format.dateTime(new Date(`${payment.paid_on}T00:00:00Z`), {
-                  dateStyle: "medium",
-                  timeZone: "UTC",
-                }),
+                date: payment.paidOnLabel,
                 method: t(`payment.methods.${payment.method}`),
               })}
             </span>
@@ -145,6 +142,7 @@ type VoidPaymentButtonProps = {
 };
 
 function VoidPaymentButton({ payment, onVoided }: VoidPaymentButtonProps) {
+  const formatFee = useFormatFee();
   const t = useTranslations("fees.payments.void");
 
   const onConfirm = async () => {

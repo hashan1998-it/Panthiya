@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { listStudentsOutstanding } from "@/features/fees/queries";
 import { getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("fees.unpaid");
@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function UnpaidList() {
+  const formatFee = await getFormatFee();
   await connection();
 
   const today = getToday();

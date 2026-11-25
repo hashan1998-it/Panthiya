@@ -11,7 +11,7 @@ import { PrintButton } from "@/features/fees/components/print-button";
 import { getReceipt } from "@/features/fees/queries";
 import { getCurrentProfile } from "@/lib/auth/get-current-profile";
 import { TIME_ZONE } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 
 type ReceiptParams = Promise<{ paymentId: string }>;
 
@@ -22,6 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function ReceiptContent({ params }: { params: ReceiptParams }) {
+  const formatFee = await getFormatFee();
   const profile = await getCurrentProfile();
   if (!profile) redirect("/login");
 

@@ -7,10 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import type { UnpaidDue } from "../queries";
 
 export async function UnpaidDues({ dues }: { dues: UnpaidDue[] }) {
+  const formatFee = await getFormatFee();
   const [t, format] = await Promise.all([getTranslations("me"), getFormatter()]);
 
   if (dues.length === 0) return null;

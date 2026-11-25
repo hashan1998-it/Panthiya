@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Timetable } from "@/features/timetable/components/timetable";
 import { listTimetableClasses } from "@/features/timetable/queries";
 import { getDayOfWeek, getToday } from "@/lib/dates";
+import { getWeekdayNames } from "@/lib/get-date-labels";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("timetable");
@@ -18,9 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
 async function TimetableContent() {
   await connection();
 
-  const classes = await listTimetableClasses();
+  const [classes, weekdays] = await Promise.all([listTimetableClasses(), getWeekdayNames()]);
 
-  return <Timetable classes={classes} today={getDayOfWeek(getToday())} />;
+  return <Timetable classes={classes} today={getDayOfWeek(getToday())} weekdays={weekdays} />;
 }
 
 export default function TimetablePage() {

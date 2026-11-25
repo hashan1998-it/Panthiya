@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { getFormatter } from "next-intl/server";
 import { z } from "zod";
 import { requireRole } from "@/lib/auth/require-role";
 import { getToday } from "@/lib/dates";
@@ -31,7 +32,7 @@ export type VoidPaymentResult = { ok: true; receiptNo: string } | { ok: false };
 export type DuePayment = Pick<
   Tables<"payments">,
   "id" | "receipt_no" | "amount" | "paid_on" | "method" | "voided_at"
->;
+> & { paidOnLabel: string };
 
 export type DuePaymentsResult = { ok: true; payments: DuePayment[] } | { ok: false };
 
@@ -48,7 +49,18 @@ export async function listDuePayments(dueId: string): Promise<DuePaymentsResult>
     .order("created_at");
 
   if (error) return { ok: false };
-  return { ok: true, payments: data };
+
+  const format = await getFormatter();
+  return {
+    ok: true,
+    payments: data.map((payment) => ({
+      ...payment,
+      paidOnLabel: format.dateTime(new Date(`${payment.paid_on}T00:00:00Z`), {
+        dateStyle: "medium",
+        timeZone: "UTC",
+      }),
+    })),
+  };
 }
 
 export async function recordPayment(values: PaymentFormValues): Promise<RecordPaymentResult> {

@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { ClassForm } from "@/features/classes/components/class-form";
 import { getClass } from "@/features/classes/queries";
+import { getWeekdayNames } from "@/lib/get-date-labels";
 
 type Params = Promise<{ id: string }>;
 
@@ -29,13 +30,13 @@ async function EditClass({ params }: { params: Params }) {
   const klass = await getClass(id);
   if (!klass) notFound();
 
-  const t = await getTranslations("classes");
+  const [t, weekdays] = await Promise.all([getTranslations("classes"), getWeekdayNames()]);
   const name = t("nameValue", { subject: klass.subject, grade: klass.grade });
 
   return (
     <>
       <PageHeader title={t("edit.title")} description={t("edit.description", { name })} />
-      <ClassForm klass={klass} />
+      <ClassForm klass={klass} weekdays={weekdays} />
     </>
   );
 }

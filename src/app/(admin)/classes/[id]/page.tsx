@@ -15,7 +15,7 @@ import { ClassStudentsTable } from "@/features/classes/components/class-students
 import { EnrollStudentsDialog } from "@/features/classes/components/enroll-students-dialog";
 import { getClass, getClassEnrollments, getEnrollableStudents } from "@/features/classes/queries";
 import { getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { formatWeekday } from "@/lib/schedule";
 import { readParam } from "@/lib/table-params";
 
@@ -41,6 +41,7 @@ async function ClassDetail({
   params: Params;
   searchParams: SearchParams;
 }) {
+  const formatFee = await getFormatFee();
   await connection();
 
   const [{ id }, raw] = await Promise.all([params, searchParams]);

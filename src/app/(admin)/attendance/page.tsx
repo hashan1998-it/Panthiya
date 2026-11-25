@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { CalendarCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { UnsavedChangesProvider } from "@/components/shared/unsaved-changes";
@@ -13,6 +13,7 @@ import { AttendanceSheet } from "@/features/attendance/components/attendance-she
 import { getAttendanceRoster, listAttendanceClasses } from "@/features/attendance/queries";
 import { isSessionDate, listSessionDates } from "@/features/attendance/session-dates";
 import { getToday } from "@/lib/dates";
+import { getWeekdayNames } from "@/lib/get-date-labels";
 import { readParam } from "@/lib/table-params";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -38,7 +39,18 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
       : listSessionDates(klass.day_of_week, today, 1)[0]
     : null;
 
-  const roster = klass && sessionDate ? await getAttendanceRoster(klass.id, sessionDate) : [];
+  const [roster, format, weekdays] = await Promise.all([
+    klass && sessionDate ? getAttendanceRoster(klass.id, sessionDate) : [],
+    getFormatter(),
+    getWeekdayNames(),
+  ]);
+  const dateOptions = (klass ? listSessionDates(klass.day_of_week, today) : []).map((date) => {
+    const label = format.dateTime(new Date(`${date}T00:00:00Z`), {
+      dateStyle: "full",
+      timeZone: "UTC",
+    });
+    return { value: date, label: date === today ? t("todayOption", { date: label }) : label };
+  });
 
   return (
     <UnsavedChangesProvider>
@@ -46,7 +58,8 @@ async function AttendanceEntry({ searchParams }: { searchParams: SearchParams })
         classes={classes}
         classId={klass?.id ?? null}
         sessionDate={sessionDate}
-        today={today}
+        dateOptions={dateOptions}
+        weekdays={weekdays}
       />
       {klass && sessionDate ? (
         <AttendanceSheet

@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { toContainsPattern } from "@/lib/search";
 import { getPageInfo, type TableParams } from "@/lib/table-params";
@@ -42,6 +43,40 @@ const RANGE_NOT_SATISFIABLE = "PGRST103";
 
 function toCents(amount: number | null) {
   return Math.round((amount ?? 0) * 100);
+}
+
+export type Receipt = Pick<
+  Tables<"payments">,
+  "id" | "receipt_no" | "amount" | "paid_on" | "method" | "voided_at"
+> & {
+  month: string;
+  student: Pick<Tables<"students">, "admission_no" | "full_name">;
+  class: Pick<Tables<"classes">, "subject" | "grade">;
+};
+
+export async function getReceipt(paymentId: string): Promise<Receipt | null> {
+  if (!z.guid().safeParse(paymentId).success) return null;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("payments")
+    .select(
+      "id, receipt_no, amount, paid_on, method, voided_at, due:dues!inner(month, enrollment:enrollments!inner(student:students!inner(admission_no, full_name), class:classes!inner(subject, grade)))",
+    )
+    .eq("id", paymentId)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+
+  const { due, ...payment } = data;
+
+  return {
+    ...payment,
+    month: due.month.slice(0, 7),
+    student: due.enrollment.student,
+    class: due.enrollment.class,
+  };
 }
 
 export async function listFeeClasses(): Promise<FeeClass[]> {

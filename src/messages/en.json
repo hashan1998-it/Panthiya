@@ -9,7 +9,25 @@
     "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },
   "dashboard": {
-    "metaTitle": "Dashboard · Panthiya"
+    "metaTitle": "Dashboard · Panthiya",
+    "description": "Today at a glance.",
+    "stats": {
+      "activeStudents": "Active students",
+      "classesToday": "Classes today",
+      "collected": "Collected this month",
+      "outstanding": "Outstanding this month",
+      "monthHint": "Dues for {month}"
+    },
+    "today": {
+      "title": "Today's classes",
+      "date": "{date}",
+      "label": "Classes on {date}",
+      "students": "{count, plural, one {# student} other {# students}}",
+      "time": "{start}–{end}",
+      "markAttendance": "Mark attendance for {name}",
+      "emptyTitle": "No classes today",
+      "emptyDescription": "Nothing is scheduled for {date}."
+    }
   },
   "students": {
     "metaTitle": "Students · Panthiya",

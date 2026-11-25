@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getCurrentMonth, getDayOfWeek, getToday } from "./dates";
+import { getCurrentMonth, getCurrentTime, getDayOfWeek, getToday } from "./dates";
 
 // Sri Lanka is UTC+05:30 all year (no daylight saving).
 // So Sri Lankan midnight is 18:30 UTC on the day before.
@@ -42,5 +42,16 @@ describe("getDayOfWeek", () => {
   it("works across a year boundary and on 29 February", () => {
     expect(getDayOfWeek("2027-01-01")).toBe(5);
     expect(getDayOfWeek("2028-02-29")).toBe(2);
+  });
+});
+
+describe("getCurrentTime", () => {
+  it("gives the Sri Lankan time as HH:MM on a 24-hour clock", () => {
+    expect(getCurrentTime(new Date("2026-11-25T00:00:00Z"))).toBe("05:30");
+    expect(getCurrentTime(new Date("2026-11-25T10:15:00Z"))).toBe("15:45");
+  });
+
+  it("shows midnight as 00:00", () => {
+    expect(getCurrentTime(new Date("2026-11-24T18:30:00Z"))).toBe("00:00");
   });
 });

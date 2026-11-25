@@ -367,6 +367,32 @@
       "collected": "Collected",
       "outstanding": "Outstanding"
     },
+    "columns": {
+      "admissionNo": "Adm. no",
+      "name": "Name",
+      "class": "Class",
+      "due": "Due",
+      "paid": "Paid",
+      "balance": "Balance",
+      "status": "Status"
+    },
+    "classValue": "{subject} · Grade {grade}",
+    "status": {
+      "paid": "Paid",
+      "partial": "Partial",
+      "unpaid": "Unpaid"
+    },
+    "filters": {
+      "class": "Class",
+      "allClasses": "All classes",
+      "status": "Status",
+      "allStatuses": "All"
+    },
+    "searchPlaceholder": "Search by name or admission no",
+    "empty": {
+      "title": "No dues for this month yet",
+      "description": "Use “Generate dues” to add one due for every active enrollment."
+    },
     "generate": {
       "action": "Generate dues",
       "title": "Generate dues for {month}?",

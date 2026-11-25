@@ -391,7 +391,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - On mobile it switches to one day at a time with a day selector.
   - Clicking a block opens the class detail.
 
-- [ ] **T-073 CSV export** (M)
+- [x] **T-073 CSV export** (M)
   - Export buttons on students, attendance history and fees. The file respects the active filters.
   - Sinhala text and commas inside values open correctly in Excel (UTF-8 BOM, quoted fields).
   - Unit tests for the CSV serialiser.

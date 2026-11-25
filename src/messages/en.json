@@ -347,7 +347,10 @@
       "noSessionsTitle": "No sessions yet",
       "noSessionsDescription": "This class has no session dates in this month up to today.",
       "noStudentsTitle": "No students this month",
-      "noStudentsDescription": "Nobody was enrolled in this class during this month."
+      "noStudentsDescription": "Nobody was enrolled in this class during this month.",
+      "studentTitle": "Attendance by month",
+      "class": "Class",
+      "noStudentSessionsDescription": "This student had no class sessions in this month up to today."
     },
     "errors": {
       "noMarks": "Mark at least one student before saving",

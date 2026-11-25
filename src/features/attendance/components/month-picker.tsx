@@ -9,9 +9,10 @@ type MonthPickerProps = {
   id: string;
   month: string;
   today: string;
+  params?: Record<string, string>;
 };
 
-export function MonthPicker({ id, month, today }: MonthPickerProps) {
+export function MonthPicker({ id, month, today, params: extraParams }: MonthPickerProps) {
   const t = useTranslations("attendance.history");
   const format = useFormatter();
   const router = useRouter();
@@ -21,6 +22,7 @@ export function MonthPicker({ id, month, today }: MonthPickerProps) {
   const onChange = (nextMonth: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("month", nextMonth);
+    for (const [key, value] of Object.entries(extraParams ?? {})) params.set(key, value);
     router.replace(`${pathname}?${params}`, { scroll: false });
   };
 

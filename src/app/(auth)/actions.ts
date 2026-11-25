@@ -2,7 +2,7 @@
 
 import z from "zod";
 import type { Messages } from "next-intl";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import { getHomePath } from "@/lib/auth/get-home-path";
 import { getUserRole } from "@/lib/auth/get-user-role";
 import { createClient } from "@/lib/supabase/server";
@@ -20,7 +20,6 @@ export type SignInState = {
 
 export type SignOutState = {
   error?: SignOutErrorKey;
-  signedOut?: boolean;
 };
 
 export async function signIn(_prevState: SignInState, formData: FormData): Promise<SignInState> {
@@ -56,5 +55,5 @@ export async function signOut(): Promise<SignOutState> {
     return { error: "failed" };
   }
 
-  return { signedOut: true };
+  redirect("/login", RedirectType.replace);
 }

@@ -4,6 +4,7 @@ import { toContainsPattern } from "@/lib/search";
 import { getPageInfo, type TableParams } from "@/lib/table-params";
 import type { Tables } from "@/types/database";
 import { DUE_SORTABLE_COLUMNS, type DueFilters, type DueStatus } from "./filters";
+import { summarizeOutstanding, type StudentOutstanding } from "./outstanding";
 import { getMonthBounds } from "./schema";
 
 type DueSortColumn = (typeof DUE_SORTABLE_COLUMNS)[number];
@@ -77,6 +78,19 @@ export async function getReceipt(paymentId: string): Promise<Receipt | null> {
     student: due.enrollment.student,
     class: due.enrollment.class,
   };
+}
+
+export async function listStudentsOutstanding(today: string): Promise<StudentOutstanding[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("due_balances")
+    .select("student_id, admission_no, full_name, month, subject, grade, balance")
+    .gt("balance", 0)
+    .lte("month", getMonthBounds(today.slice(0, 7)).first);
+
+  if (error) throw error;
+
+  return summarizeOutstanding(data.map((due) => ({ ...due, balance: due.balance ?? 0 })));
 }
 
 export async function listFeeClasses(): Promise<FeeClass[]> {

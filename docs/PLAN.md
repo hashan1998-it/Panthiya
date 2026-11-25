@@ -380,7 +380,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Today's classes list links to that class's attendance page for today.
   - Each section loads independently with its own skeleton (Suspense), so one slow query does not block the page.
 
-- [ ] **T-071 Reports** (L)
+- [x] **T-071 Reports** (L)
   - Charts: income per month for the last 6 months, attendance rate per class, students per class.
   - Aggregation happens in SQL (view or RPC), not by loading all rows into the browser.
   - Charts are readable in dark mode and have a text alternative for screen readers.

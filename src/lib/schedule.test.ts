@@ -13,4 +13,9 @@ describe("formatWeekday", () => {
       "Saturday",
     ]);
   });
+
+  it("can use short names", () => {
+    expect(formatWeekday(1, "en", "short")).toBe("Mon");
+    expect(formatWeekday(0, "en", "short")).toBe("Sun");
+  });
 });

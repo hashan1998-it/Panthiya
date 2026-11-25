@@ -1,19 +1,19 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { NativeSelect } from "@/components/ui/native-select";
+import type { Option } from "@/lib/get-date-labels";
 
 type MonthPickerProps = {
   id: string;
   month: string;
-  months: string[];
+  options: Option[];
   params?: Record<string, string>;
 };
 
-export function MonthPicker({ id, month, months, params: extraParams }: MonthPickerProps) {
+export function MonthPicker({ id, month, options, params: extraParams }: MonthPickerProps) {
   const t = useTranslations("common");
-  const format = useFormatter();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -31,13 +31,9 @@ export function MonthPicker({ id, month, months, params: extraParams }: MonthPic
         {t("month")}
       </label>
       <NativeSelect id={id} value={month} onChange={(event) => onChange(event.target.value)}>
-        {months.map((value) => (
-          <option key={value} value={value}>
-            {format.dateTime(new Date(`${value}-01T00:00:00Z`), {
-              month: "long",
-              year: "numeric",
-              timeZone: "UTC",
-            })}
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </NativeSelect>

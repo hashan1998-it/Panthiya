@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { ExportLink } from "@/components/shared/export-link";
 import { MonthPicker } from "@/components/shared/month-picker";
 import { Badge } from "@/components/ui/badge";
+import { getMonthOptions } from "@/lib/get-date-labels";
 import { listRecentMonths } from "@/lib/months";
 import { getClassMonthAttendance } from "../queries";
 import { listMonthSessionDates } from "../session-dates";
@@ -28,7 +29,11 @@ export async function ClassAttendance({ classId, dayOfWeek, month, today }: Clas
           {t("classTitle")}
         </h2>
         <div className="flex flex-wrap items-center gap-3">
-          <MonthPicker id="class-attendance-month" month={month} months={listRecentMonths(today)} />
+          <MonthPicker
+            id="class-attendance-month"
+            month={month}
+            options={await getMonthOptions(listRecentMonths(today))}
+          />
           <ExportLink href={`/classes/${classId}/attendance/export`} />
         </div>
       </div>

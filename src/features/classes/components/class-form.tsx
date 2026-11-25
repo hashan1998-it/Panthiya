@@ -4,7 +4,7 @@ import { type MouseEvent, type ReactNode, useState, useTransition } from "react"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { canGoBackInApp } from "@/components/navigation-tracker";
@@ -12,7 +12,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
-import { DAYS_OF_WEEK, formatWeekday } from "@/lib/schedule";
+import type { WeekdayName } from "@/lib/get-date-labels";
+import { DAYS_OF_WEEK } from "@/lib/schedule";
 import { createClass, updateClass } from "../actions";
 import type { ClassDetail } from "../queries";
 import {
@@ -36,6 +37,7 @@ const LABEL_KEYS = {
 
 type ClassFormProps = {
   klass?: ClassDetail;
+  weekdays: WeekdayName[];
 };
 
 function toFormValues(klass: ClassDetail): ClassFormValues {
@@ -49,9 +51,8 @@ function toFormValues(klass: ClassDetail): ClassFormValues {
   };
 }
 
-export function ClassForm({ klass }: ClassFormProps) {
+export function ClassForm({ klass, weekdays }: ClassFormProps) {
   const t = useTranslations();
-  const locale = useLocale();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [formError, setFormError] = useState<ClassFormErrorKey>();
@@ -167,7 +168,7 @@ export function ClassForm({ klass }: ClassFormProps) {
             <option value="">{t("classes.form.selectDay")}</option>
             {DAYS_OF_WEEK.map((day) => (
               <option key={day} value={day}>
-                {formatWeekday(day, locale)}
+                {weekdays[day].long}
               </option>
             ))}
           </NativeSelect>,

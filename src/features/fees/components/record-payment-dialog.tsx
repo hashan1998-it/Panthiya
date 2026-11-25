@@ -19,7 +19,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { useFormatFee } from "@/lib/use-format-fee";
 import { recordPayment } from "../payment-actions";
 import {
   PAYMENT_METHODS,
@@ -49,6 +49,7 @@ type RecordPaymentDialogProps = {
 };
 
 export function RecordPaymentDialog({ due, open, onOpenChange }: RecordPaymentDialogProps) {
+  const formatFee = useFormatFee();
   const t = useTranslations("fees");
   const [pending, setPending] = useState(false);
 

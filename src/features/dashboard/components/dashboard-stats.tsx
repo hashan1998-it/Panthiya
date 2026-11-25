@@ -3,7 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getFeesTotals } from "@/features/fees/queries";
 import { getCurrentMonth, getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { countActiveStudents, listClassesOn } from "../queries";
 
 function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
@@ -40,6 +40,7 @@ export async function ClassesTodayStat() {
 }
 
 export async function FeesStats() {
+  const formatFee = await getFormatFee();
   await connection();
 
   const month = getCurrentMonth();

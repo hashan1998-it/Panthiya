@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import SignOutButton from "@/app/(auth)/components/sign-out-button";
+import { LanguageSwitch } from "@/components/language-switch";
 import { RoleGate } from "@/components/role-gate";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -15,6 +16,7 @@ export default function StudentLayout({ children }: LayoutProps<"/">) {
           <div className="flex items-center justify-between gap-4">
             <span className="text-title-md">{t("title")}</span>
             <div className="flex items-center gap-1">
+              <LanguageSwitch />
               <ThemeToggle />
               <SignOutButton />
             </div>

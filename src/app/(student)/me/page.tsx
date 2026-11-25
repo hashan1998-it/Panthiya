@@ -11,7 +11,7 @@ import { getMyStudent, listMyUnpaidDues } from "@/features/portal/queries";
 import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
 import { getStudentAttendance, getStudentEnrollments } from "@/features/students/profile-queries";
 import { getCurrentTime, getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("me");
@@ -30,6 +30,7 @@ function Stat({ label, value, hint }: { label: string; value: string; hint?: str
 }
 
 async function Overview() {
+  const formatFee = await getFormatFee();
   await connection();
 
   const today = getToday();

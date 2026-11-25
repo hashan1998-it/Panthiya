@@ -1,30 +1,33 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useUnsavedChanges } from "@/components/shared/unsaved-changes";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { NativeSelect } from "@/components/ui/native-select";
-import { formatWeekday } from "@/lib/schedule";
+import type { Option, WeekdayName } from "@/lib/get-date-labels";
 import type { AttendanceClass } from "../queries";
-import { listSessionDates } from "../session-dates";
 
 type AttendancePickerProps = {
   classes: AttendanceClass[];
   classId: string | null;
   sessionDate: string | null;
-  today: string;
+  dateOptions: Option[];
+  weekdays: WeekdayName[];
 };
 
-export function AttendancePicker({ classes, classId, sessionDate, today }: AttendancePickerProps) {
+export function AttendancePicker({
+  classes,
+  classId,
+  sessionDate,
+  dateOptions,
+  weekdays,
+}: AttendancePickerProps) {
   const t = useTranslations("attendance");
-  const format = useFormatter();
-  const locale = useLocale();
   const router = useRouter();
   const { confirmLeave } = useUnsavedChanges();
 
   const selectedClass = classes.find((klass) => klass.id === classId);
-  const sessionDates = selectedClass ? listSessionDates(selectedClass.day_of_week, today) : [];
 
   const go = (nextClassId: string, nextDate?: string) => {
     if (!confirmLeave()) return;
@@ -35,14 +38,6 @@ export function AttendancePicker({ classes, classId, sessionDate, today }: Atten
     const params = new URLSearchParams({ class: nextClassId });
     if (nextDate) params.set("date", nextDate);
     router.replace(`/attendance?${params}`, { scroll: false });
-  };
-
-  const dateLabel = (date: string) => {
-    const label = format.dateTime(new Date(`${date}T00:00:00Z`), {
-      dateStyle: "full",
-      timeZone: "UTC",
-    });
-    return date === today ? t("todayOption", { date: label }) : label;
   };
 
   return (
@@ -61,7 +56,7 @@ export function AttendancePicker({ classes, classId, sessionDate, today }: Atten
               {t("classOption", {
                 subject: klass.subject,
                 grade: klass.grade,
-                day: formatWeekday(klass.day_of_week, locale),
+                day: weekdays[klass.day_of_week].long,
                 start: klass.start_time.slice(0, 5),
               })}
             </option>
@@ -77,9 +72,9 @@ export function AttendancePicker({ classes, classId, sessionDate, today }: Atten
           disabled={!selectedClass}
           onChange={(event) => go(classId ?? "", event.target.value)}
         >
-          {sessionDates.map((date) => (
-            <option key={date} value={date}>
-              {dateLabel(date)}
+          {dateOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
             </option>
           ))}
         </NativeSelect>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useFormatter } from "next-intl";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
@@ -8,7 +7,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { formatFee } from "@/lib/money";
+import { useFormatFee } from "@/lib/use-format-fee";
 
 export type BarReportFormat = "fee" | "percent" | "count";
 
@@ -26,8 +25,18 @@ type BarReportProps = {
 
 const ROW_HEIGHT = 40;
 
+const percentFormat = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 0,
+});
+const countFormat = new Intl.NumberFormat("en-US");
+const compactFormat = new Intl.NumberFormat("en-US", {
+  notation: "compact",
+  maximumFractionDigits: 1,
+});
+
 export function BarReport({ data, seriesLabel, format, layout }: BarReportProps) {
-  const formatter = useFormatter();
+  const formatFee = useFormatFee();
 
   const config = {
     value: { label: seriesLabel, color: "var(--chart-1)" },
@@ -37,13 +46,11 @@ export function BarReport({ data, seriesLabel, format, layout }: BarReportProps)
     format === "fee"
       ? formatFee(value)
       : format === "percent"
-        ? formatter.number(value, { style: "percent", maximumFractionDigits: 0 })
-        : formatter.number(value);
+        ? percentFormat.format(value)
+        : countFormat.format(value);
 
   const formatTick = (value: number) =>
-    format === "fee"
-      ? formatter.number(value, { notation: "compact", maximumFractionDigits: 1 })
-      : formatValue(value);
+    format === "fee" ? compactFormat.format(value) : formatValue(value);
 
   const tooltip = (
     <ChartTooltip

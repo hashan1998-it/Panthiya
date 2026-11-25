@@ -6,6 +6,7 @@ import { AttendanceGrid } from "@/features/attendance/components/attendance-grid
 import type { StudentMonthMark } from "@/features/attendance/queries";
 import { listMonthSessionDates } from "@/features/attendance/session-dates";
 import type { AttendanceStatus } from "@/features/attendance/summary";
+import { getMonthOptions } from "@/lib/get-date-labels";
 import { listRecentMonths } from "@/lib/months";
 import type { StudentEnrollment } from "../../profile-queries";
 
@@ -65,7 +66,7 @@ export async function StudentMonthAttendance({
         <MonthPicker
           id="student-attendance-month"
           month={month}
-          months={listRecentMonths(today)}
+          options={await getMonthOptions(listRecentMonths(today))}
           params={{ tab: "attendance" }}
         />
       </div>

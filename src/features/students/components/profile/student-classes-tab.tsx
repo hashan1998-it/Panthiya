@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { formatWeekday } from "@/lib/schedule";
 import type { StudentEnrollment } from "../../profile-queries";
 
@@ -19,6 +19,7 @@ type StudentClassesTabProps = {
 };
 
 export async function StudentClassesTab({ enrollments }: StudentClassesTabProps) {
+  const formatFee = await getFormatFee();
   const t = await getTranslations("students.profile.classes");
   const format = await getFormatter();
   const locale = await getLocale();

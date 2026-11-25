@@ -136,11 +136,16 @@ export function AttendanceSheet({ classId, sessionDate, roster }: AttendanceShee
                 value={status}
                 onValueChange={(value) => value && setStatus(student.id, value)}
                 disabled={pending}
+                className="w-full sm:w-fit"
               >
                 {(["present", "late", "absent"] as const).map((value) => {
                   const Icon = STATUS_ICONS[value];
                   return (
-                    <SegmentedControlItem key={value} value={value}>
+                    <SegmentedControlItem
+                      key={value}
+                      value={value}
+                      className="flex-auto px-1 text-caption sm:flex-none sm:px-3 sm:text-body-sm"
+                    >
                       <Icon aria-hidden />
                       {t(value)}
                     </SegmentedControlItem>

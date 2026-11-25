@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { formatWeekday } from "@/lib/schedule";
 import type { ClassListItem } from "../queries";
 import { ClassActionsMenu } from "./class-actions-menu";
@@ -19,6 +19,7 @@ type ClassesTableProps = {
 };
 
 export async function ClassesTable({ classes }: ClassesTableProps) {
+  const formatFee = await getFormatFee();
   const t = await getTranslations("classes");
   const locale = await getLocale();
 

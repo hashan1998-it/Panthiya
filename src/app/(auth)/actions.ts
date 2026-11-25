@@ -5,6 +5,7 @@ import type { Messages } from "next-intl";
 import { RedirectType, redirect } from "next/navigation";
 import { getHomePath } from "@/lib/auth/get-home-path";
 import { getUserRole } from "@/lib/auth/get-user-role";
+import { saveLocaleCookie } from "@/lib/locale-cookie";
 import { createClient } from "@/lib/supabase/server";
 import { type SignInErrorKey, signInSchema } from "./schema";
 
@@ -44,6 +45,13 @@ export async function signIn(_prevState: SignInState, formData: FormData): Promi
     await supabase.auth.signOut();
     return { error: "accountLoadFailed", fieldErrors: {} };
   }
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("locale")
+    .eq("id", authData.user.id)
+    .single();
+  if (profile) await saveLocaleCookie(profile.locale);
 
   redirect(getHomePath(role));
 }

@@ -17,3 +17,14 @@ describe("formatFee", () => {
     expect(formatFee(0)).toBe("Rs. 0.00");
   });
 });
+
+describe("formatFee in Sinhala", () => {
+  it("uses the Sinhala rupee sign with the same digits", () => {
+    expect(formatFee(2500, "si")).toBe("රු. 2,500.00");
+    expect(formatFee(1250.5, "si")).toBe("රු. 1,250.50");
+  });
+
+  it("stays in English by default", () => {
+    expect(formatFee(2500, "en")).toBe("Rs. 2,500.00");
+  });
+});

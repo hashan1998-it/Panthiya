@@ -1,1 +1,699 @@
-{}
+{
+  "common": {
+    "cancel": "අවලංගු කරන්න",
+    "loading": "පූරණය වෙමින්…",
+    "comingSoon": "ළඟදීම.",
+    "close": "වසන්න",
+    "getStarted": "පටන් ගන්න",
+    "exportCsv": "CSV ලෙස ගන්න",
+    "theme": {
+      "title": "තේමාව",
+      "label": "තේමාව: {theme}",
+      "light": "ආලෝක",
+      "dark": "අඳුරු",
+      "system": "පද්ධතිය අනුව"
+    },
+    "language": {
+      "title": "භාෂාව",
+      "label": "භාෂාව: {language}",
+      "en": "English",
+      "si": "සිංහල",
+      "failed": "භාෂාව වෙනස් කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+    },
+    "month": "මාසය",
+    "unsavedChanges": "සුරකින්නේ නැති වෙනස්කම් තියෙනවා. සුරකින්නේ නැතුව යන්නද?"
+  },
+  "dashboard": {
+    "metaTitle": "උපකරණ පුවරුව · Panthiya",
+    "description": "අද දවසේ සාරාංශය.",
+    "stats": {
+      "activeStudents": "සක්‍රිය සිසුන්",
+      "classesToday": "අද පන්ති",
+      "collected": "මේ මාසේ එකතු වුණු මුදල",
+      "outstanding": "මේ මාසේ හිඟ මුදල",
+      "monthHint": "{month} ගාස්තු"
+    },
+    "today": {
+      "title": "අද පන්ති",
+      "date": "{date}",
+      "label": "{date} දින පන්ති",
+      "students": "{count, plural, one {සිසුන් #} other {සිසුන් #}}",
+      "time": "{start}–{end}",
+      "markAttendance": "{name} පැමිණීම සටහන් කරන්න",
+      "emptyTitle": "අද පන්ති නැහැ",
+      "emptyDescription": "{date} දිනට කිසිම පන්තියක් නැහැ."
+    }
+  },
+  "students": {
+    "metaTitle": "සිසුන් · Panthiya",
+    "description": "හැම සිසුවෙක්ම සොයන්න සහ පෙරන්න.",
+    "searchPlaceholder": "නමෙන් හෝ ඇතුළත් වීමේ අංකයෙන් සොයන්න",
+    "notSet": "—",
+    "columns": {
+      "admissionNo": "ඇතුළත් වීමේ අංකය",
+      "name": "නම",
+      "grade": "ශ්‍රේණිය",
+      "phone": "දුරකථනය",
+      "status": "තත්ත්වය"
+    },
+    "filters": {
+      "grade": "ශ්‍රේණිය",
+      "allGrades": "සියලු ශ්‍රේණි",
+      "gradeOption": "{grade} ශ්‍රේණිය",
+      "status": "තත්ත්වය",
+      "allStatuses": "සියල්ල"
+    },
+    "status": {
+      "active": "සක්‍රියයි",
+      "inactive": "අක්‍රියයි"
+    },
+    "empty": {
+      "title": "තවම සිසුන් නැහැ",
+      "description": "ඔබ එකතු කරන සිසුන් මෙතන පෙන්වයි."
+    },
+    "addStudent": "සිසුවෙක් එකතු කරන්න",
+    "actions": {
+      "column": "ක්‍රියා",
+      "menu": "{name} සඳහා ක්‍රියා",
+      "viewProfile": "පැතිකඩ බලන්න"
+    },
+    "profile": {
+      "metaTitle": "{name} · Panthiya",
+      "backToStudents": "සිසුන් වෙත ආපසු",
+      "details": "විස්තර",
+      "edit": "සංස්කරණය",
+      "deactivate": "අක්‍රිය කරන්න",
+      "reactivate": "නැවත සක්‍රිය කරන්න",
+      "deactivateDialog": {
+        "title": "{name} අක්‍රිය කරන්නද?",
+        "description": "මේ සිසුවා සිසුන් ලැයිස්තුවෙන් සැඟවෙයි. පැමිණීම් සහ ගෙවීම් ඉතිහාසය ඉතිරි වෙයි, පසුව නැවත සක්‍රිය කරන්නත් පුළුවන්.",
+        "pending": "අක්‍රිය කරමින්…"
+      },
+      "reactivateDialog": {
+        "title": "{name} නැවත සක්‍රිය කරන්නද?",
+        "description": "මේ සිසුවා නැවත සිසුන් ලැයිස්තුවේ පෙන්වයි.",
+        "pending": "සක්‍රිය කරමින්…"
+      },
+      "tabs": {
+        "details": "විස්තර",
+        "classes": "පන්ති",
+        "attendance": "පැමිණීම",
+        "payments": "ගෙවීම්"
+      },
+      "classes": {
+        "label": "ලියාපදිංචි පන්ති",
+        "class": "පන්තිය",
+        "classValue": "{subject} · {grade} ශ්‍රේණිය",
+        "schedule": "කාලසටහන",
+        "scheduleValue": "{day}, {start}–{end}",
+        "monthlyFee": "මාසික ගාස්තුව",
+        "discount": "වට්ටම",
+        "discountNone": "නැහැ",
+        "discountHalf": "අඩක් (50%)",
+        "discountFree": "නොමිලේ (100%)",
+        "discountCustom": "{percent}% අඩුවෙන්",
+        "status": "තත්ත්වය",
+        "active": "සක්‍රියයි",
+        "ended": "{date} අවසන් වුණා",
+        "emptyTitle": "තවම පන්ති නැහැ",
+        "emptyDescription": "මේ සිසුවා කිසිම පන්තියකට ලියාපදිංචි වෙලා නැහැ."
+      },
+      "attendance": {
+        "label": "පන්තිය අනුව පැමිණීම",
+        "overall": "සමස්ත පැමිණීම",
+        "overallValue": "පන්ති වාර {total}ක් අතරින්.",
+        "class": "පන්තිය",
+        "present": "පැමිණියා",
+        "late": "ප්‍රමාදයි",
+        "absent": "නොපැමිණියා",
+        "rate": "අනුපාතය",
+        "lateNote": "ප්‍රමාද වුණත් පැමිණියා ලෙස ගණන් වෙයි.",
+        "emptyTitle": "තවම පැමිණීම් නැහැ",
+        "emptyDescription": "මේ සිසුවාගේ පන්තිවලට පැමිණීම සටහන් කළාම මෙතන පෙන්වයි."
+      },
+      "payments": {
+        "label": "ගෙවීම් ඉතිහාසය",
+        "paidOn": "ගෙවූ දිනය",
+        "receiptNo": "රිසිට් අංකය",
+        "for": "සඳහා",
+        "forValue": "{subject} · {month}",
+        "method": "ක්‍රමය",
+        "methodCash": "මුදලින්",
+        "methodBankTransfer": "බැංකු මාරු කිරීම",
+        "amount": "මුදල",
+        "voided": "අවලංගුයි",
+        "emptyTitle": "තවම ගෙවීම් නැහැ",
+        "emptyDescription": "මේ සිසුවාගේ ගාස්තු ගෙවීම් මෙතන පෙන්වයි."
+      },
+      "deactivated": "{name} අක්‍රිය කළා",
+      "reactivated": "{name} නැවත සක්‍රිය කළා",
+      "statusFailed": "සිසුවාගේ තත්ත්වය වෙනස් කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+    },
+    "account": {
+      "createLogin": "පිවිසුමක් හදන්න",
+      "label": "සිසු පිවිසුම",
+      "active": "සක්‍රියයි",
+      "none": "හදලා නැහැ",
+      "createDialog": {
+        "title": "{name} සඳහා පිවිසුමක් හදන්න",
+        "description": "සිසුවාගේ ඊමේල් ලිපිනය දෙන්න. ඔබට ඔවුන්ට දෙන්න තාවකාලික මුරපදයක් අපි හදනවා.",
+        "email": "ඊමේල්",
+        "submit": "පිවිසුම හදන්න",
+        "pending": "හදමින්…"
+      },
+      "createdDialog": {
+        "title": "පිවිසුම හැදුවා",
+        "description": "මේ විස්තර {name} එක්ක බෙදාගන්න. තාවකාලික මුරපදය පෙන්වන්නේ එක පාරයි, ඒ නිසා මේ කවුළුව වසන්න කලින් පිටපත් කරගන්න.",
+        "email": "ඊමේල්",
+        "password": "තාවකාලික මුරපදය",
+        "copy": "මුරපදය පිටපත් කරන්න",
+        "copied": "මුරපදය පිටපත් කළා",
+        "copyFailed": "මුරපදය පිටපත් කරන්න බැරි වුණා. එය තෝරලා ඔබම පිටපත් කරගන්න.",
+        "done": "හරි"
+      },
+      "errors": {
+        "emailInvalid": "වලංගු ඊමේල් ලිපිනයක් දෙන්න",
+        "emailTooLong": "අකුරු 254කට වඩා අඩුවෙන් දෙන්න",
+        "emailTaken": "මේ ඊමේල් එක වෙනත් ගිණුමක් දැනටමත් පාවිච්චි කරනවා",
+        "alreadyHasAccount": "මේ සිසුවාට දැනටමත් ගිණුමක් තියෙනවා.",
+        "inactive": "ගිණුමක් හදන්න කලින් මේ සිසුවා නැවත සක්‍රිය කරන්න.",
+        "notFound": "මේ සිසුවා තවදුරටත් නැහැ.",
+        "createFailed": "ගිණුම හදන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+      }
+    },
+    "edit": {
+      "metaTitle": "{name} සංස්කරණය · Panthiya",
+      "title": "සිසුවා සංස්කරණය",
+      "description": "{name}ගේ විස්තර යාවත්කාලීන කරන්න.",
+      "submit": "වෙනස්කම් සුරකින්න",
+      "updated": "{name} යාවත්කාලීන කළා"
+    },
+    "form": {
+      "metaTitle": "සිසුවෙක් එකතු කරන්න · Panthiya",
+      "description": "සිසුවාගේ විස්තර පුරවන්න. අඩුම තරමින් එක දුරකථන අංකයක් දෙන්න.",
+      "optional": "අත්‍යවශ්‍ය නැහැ",
+      "phoneHint": "ශ්‍රී ලංකා අංකයක්, උදා: 077 123 4567",
+      "selectGrade": "ශ්‍රේණියක් තෝරන්න",
+      "submit": "සිසුවා සුරකින්න",
+      "submitting": "සුරකිමින්…",
+      "created": "{name} එකතු කළා",
+      "fields": {
+        "admissionNo": "ඇතුළත් වීමේ අංකය",
+        "fullName": "සම්පූර්ණ නම",
+        "grade": "ශ්‍රේණිය",
+        "phone": "සිසුවාගේ දුරකථනය",
+        "parentName": "දෙමාපියන්ගේ නම",
+        "parentPhone": "දෙමාපියන්ගේ දුරකථනය",
+        "joinedOn": "බැඳුණු දිනය"
+      },
+      "errors": {
+        "admissionNoRequired": "ඇතුළත් වීමේ අංකයක් දෙන්න",
+        "admissionNoTooLong": "අකුරු 20කට වඩා අඩුවෙන් දෙන්න",
+        "admissionNoTaken": "මේ ඇතුළත් වීමේ අංකය දැනටමත් පාවිච්චි වෙලා",
+        "fullNameRequired": "සිසුවාගේ නම දෙන්න",
+        "fullNameTooLong": "අකුරු 100කට වඩා අඩුවෙන් දෙන්න",
+        "gradeRequired": "ශ්‍රේණියක් තෝරන්න",
+        "phoneInvalid": "වලංගු ශ්‍රී ලංකා දුරකථන අංකයක් දෙන්න",
+        "contactRequired": "සිසුවාගේ හෝ දෙමාපියන්ගේ දුරකථන අංකයක් දෙන්න",
+        "parentNameTooLong": "අකුරු 100කට වඩා අඩුවෙන් දෙන්න",
+        "joinedOnRequired": "සිසුවා බැඳුණු දිනය දෙන්න",
+        "saveFailed": "සිසුවා සුරකින්න බැරි වුණා. නැවත උත්සාහ කරන්න.",
+        "notFound": "මේ සිසුවා තවදුරටත් නැහැ."
+      }
+    }
+  },
+  "classes": {
+    "metaTitle": "පන්ති · Panthiya",
+    "description": "හැම පන්තියක්ම, කාලසටහන, ගාස්තුව සහ සිසුන් ගණන එක්ක.",
+    "label": "පන්ති",
+    "columns": {
+      "subject": "විෂයය",
+      "grade": "ශ්‍රේණිය",
+      "day": "දිනය",
+      "time": "වේලාව",
+      "monthlyFee": "මාසික ගාස්තුව",
+      "enrolled": "සිසුන්"
+    },
+    "gradeValue": "{grade} ශ්‍රේණිය",
+    "timeValue": "{start}–{end}",
+    "emptyTitle": "තවම පන්ති නැහැ",
+    "emptyDescription": "ඔබ එකතු කරන පන්ති මෙතන පෙන්වයි.",
+    "addClass": "පන්තියක් එකතු කරන්න",
+    "nameValue": "{subject} · {grade} ශ්‍රේණිය",
+    "actions": {
+      "column": "ක්‍රියා",
+      "menu": "{name} සඳහා ක්‍රියා",
+      "view": "පන්තිය බලන්න"
+    },
+    "detail": {
+      "metaTitle": "{name} · Panthiya",
+      "backToClasses": "පන්ති වෙත ආපසු",
+      "details": "පන්තියේ විස්තර",
+      "edit": "සංස්කරණය"
+    },
+    "students": {
+      "title": "ලියාපදිංචි සිසුන්",
+      "label": "ලියාපදිංචි සිසුන්",
+      "admissionNo": "ඇතුළත් වීමේ අංකය",
+      "name": "නම",
+      "discount": "වට්ටම",
+      "effectiveFee": "ගෙවිය යුතු ගාස්තුව",
+      "actions": "ක්‍රියා",
+      "inactive": "අක්‍රියයි",
+      "discountNone": "නැහැ",
+      "discountHalf": "අඩක් (50%)",
+      "discountFree": "නොමිලේ (100%)",
+      "discountCustom": "{percent}% අඩුවෙන්",
+      "emptyTitle": "තවම සිසුන් නැහැ",
+      "emptyDescription": "මේ පන්තියට ලියාපදිංචි කරන සිසුන් මෙතන පෙන්වයි."
+    },
+    "enroll": {
+      "trigger": "සිසුන් ලියාපදිංචි කරන්න",
+      "title": "{name} වෙත සිසුන් ලියාපදිංචි කරන්න",
+      "description": "එකතු කරන්න ඕන සිසුන් තෝරලා, එක් එක් කෙනාට වට්ටමක් තෝරන්න.",
+      "search": "නමෙන් හෝ ඇතුළත් වීමේ අංකයෙන් සොයන්න",
+      "showAllGrades": "සියලු ශ්‍රේණි පෙන්වන්න",
+      "listLabel": "ලියාපදිංචි කළ හැකි සිසුන්",
+      "empty": "සක්‍රිය හැම සිසුවෙක්ම දැනටමත් මේ පන්තියේ ඉන්නවා.",
+      "noMatch": "ගැළපෙන සිසුන් නැහැ. වෙනත් සෙවුමක් කරන්න, නැත්නම් සියලු ශ්‍රේණි පෙන්වන්න.",
+      "discountFor": "{name} සඳහා වට්ටම",
+      "percentFor": "{name} සඳහා වට්ටම් ප්‍රතිශතය",
+      "discountNone": "වට්ටමක් නැහැ",
+      "discountHalf": "අඩක් (50%)",
+      "discountFree": "නොමිලේ (100%)",
+      "discountCustom": "වෙනත් %",
+      "submit": "{count, plural, =0 {සිසුන් ලියාපදිංචි කරන්න} one {සිසුන් # ලියාපදිංචි කරන්න} other {සිසුන් # ලියාපදිංචි කරන්න}}",
+      "pending": "ලියාපදිංචි කරමින්…",
+      "enrolled": "{count, plural, =0 {කිසිම සිසුවෙක් ලියාපදිංචි කළේ නැහැ} one {සිසුන් # ලියාපදිංචි කළා} other {සිසුන් # ලියාපදිංචි කළා}}",
+      "errors": {
+        "selectStudents": "අඩුම තරමින් එක සිසුවෙක් තෝරන්න",
+        "percentInvalid": "1 සිට 99 දක්වා පූර්ණ සංඛ්‍යාවක් දෙන්න",
+        "saveFailed": "සිසුන් ලියාපදිංචි කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න.",
+        "notFound": "මේ පන්තිය තවදුරටත් නැහැ."
+      }
+    },
+    "unenroll": {
+      "action": "ලියාපදිංචිය ඉවත් කරන්න",
+      "title": "{name} {className} එකෙන් ඉවත් කරන්නද?",
+      "description": "අද සිට ඔවුන් මේ පන්තියෙන් ඉවත් වෙනවා. කලින් පැමිණීම් සහ ගෙවීම් ඉතිරි වෙයි, පසුව නැවත ලියාපදිංචි කරන්නත් පුළුවන්.",
+      "pending": "ඉවත් කරමින්…",
+      "done": "{name} ඉවත් කළා",
+      "failed": "සිසුවා ඉවත් කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+    },
+    "edit": {
+      "metaTitle": "{name} සංස්කරණය · Panthiya",
+      "title": "පන්තිය සංස්කරණය",
+      "description": "{name} විස්තර යාවත්කාලීන කරන්න.",
+      "submit": "වෙනස්කම් සුරකින්න",
+      "updated": "{name} යාවත්කාලීන කළා"
+    },
+    "form": {
+      "metaTitle": "පන්තියක් එකතු කරන්න · Panthiya",
+      "description": "විෂයය, ශ්‍රේණිය, සතියේ වේලාව සහ මාසික ගාස්තුව දෙන්න.",
+      "selectGrade": "ශ්‍රේණියක් තෝරන්න",
+      "selectDay": "දිනයක් තෝරන්න",
+      "feeHint": "රුපියල් වලින්, උදා: 2500",
+      "submit": "පන්තිය සුරකින්න",
+      "submitting": "සුරකිමින්…",
+      "created": "{name} එකතු කළා",
+      "fields": {
+        "subject": "විෂයය",
+        "grade": "ශ්‍රේණිය",
+        "day": "දිනය",
+        "startTime": "ආරම්භ වේලාව",
+        "endTime": "අවසන් වේලාව",
+        "monthlyFee": "මාසික ගාස්තුව"
+      },
+      "errors": {
+        "subjectRequired": "විෂයයක් දෙන්න",
+        "subjectTooLong": "අකුරු 50කට වඩා අඩුවෙන් දෙන්න",
+        "gradeRequired": "ශ්‍රේණියක් තෝරන්න",
+        "dayRequired": "දිනයක් තෝරන්න",
+        "startTimeRequired": "ආරම්භ වේලාවක් දෙන්න",
+        "endTimeRequired": "අවසන් වේලාවක් දෙන්න",
+        "endTimeAfterStart": "අවසන් වේලාව ආරම්භ වේලාවට පසුව විය යුතුයි",
+        "feeRequired": "මාසික ගාස්තුව දෙන්න",
+        "feeInvalid": "2500 හෝ 2500.50 වගේ මුදලක් දෙන්න",
+        "feePositive": "ගාස්තුව බිංදුවට වඩා වැඩි විය යුතුයි",
+        "saveFailed": "පන්තිය සුරකින්න බැරි වුණා. නැවත උත්සාහ කරන්න.",
+        "notFound": "මේ පන්තිය තවදුරටත් නැහැ."
+      }
+    }
+  },
+  "attendance": {
+    "metaTitle": "පැමිණීම · Panthiya",
+    "description": "හැම පන්ති වාරයකටම කවුද ආවේ කියලා සටහන් කරන්න.",
+    "class": "පන්තිය",
+    "selectClass": "පන්තියක් තෝරන්න",
+    "date": "පන්ති දිනය",
+    "todayOption": "{date} (අද)",
+    "classOption": "{subject} · {grade} ශ්‍රේණිය · {day} {start}",
+    "chooseTitle": "පන්තියක් තෝරන්න",
+    "chooseDescription": "පැමිණීම සටහන් කරන්න පන්තියක් සහ දිනයක් තෝරන්න.",
+    "sheet": {
+      "listLabel": "මේ වාරයේ සිසුන්",
+      "statusFor": "{name}ගේ පැමිණීම",
+      "present": "පැමිණියා",
+      "late": "ප්‍රමාදයි",
+      "absent": "නොපැමිණියා",
+      "markAllPresent": "හැමෝම පැමිණියා ලෙස සලකුණු කරන්න",
+      "save": "පැමිණීම සුරකින්න",
+      "saving": "සුරකිමින්…",
+      "marked": "{total, plural, one {සිසුන් # න්} other {සිසුන් # න්}} {marked} ක් සලකුණු කළා",
+      "unsaved": "{count, plural, one {සුරකින්නේ නැති වෙනස්කම් #} other {සුරකින්නේ නැති වෙනස්කම් #}}",
+      "allSaved": "හැම වෙනස්කමක්ම සුරැකුවා",
+      "saved": "{count, plural, one {සලකුණු # ක් සුරැකුවා} other {සලකුණු # ක් සුරැකුවා}}",
+      "emptyTitle": "මේ වාරයට සිසුන් නැහැ",
+      "emptyDescription": "මේ දිනයේ මේ පන්තියට කවුරුවත් ලියාපදිංචි වෙලා හිටියේ නැහැ."
+    },
+    "history": {
+      "rate": "අනුපාතය",
+      "admissionNo": "ඇතුළත් වීමේ අංකය",
+      "noRate": "—",
+      "present": "පැමිණියා",
+      "late": "ප්‍රමාදයි",
+      "absent": "නොපැමිණියා",
+      "notMarked": "සලකුණු කර නැහැ",
+      "noSession": "පන්තියක් නැහැ",
+      "classTitle": "පැමිණීම",
+      "student": "සිසුවා",
+      "inactive": "අක්‍රියයි",
+      "noSessionsTitle": "තවම පන්ති වාර නැහැ",
+      "noSessionsDescription": "මේ මාසයේ අද දක්වා මේ පන්තියට පන්ති දින නැහැ.",
+      "noStudentsTitle": "මේ මාසයේ සිසුන් නැහැ",
+      "noStudentsDescription": "මේ මාසයේ මේ පන්තියට කවුරුවත් ලියාපදිංචි වෙලා හිටියේ නැහැ.",
+      "studentTitle": "මාසය අනුව පැමිණීම",
+      "class": "පන්තිය",
+      "noStudentSessionsDescription": "මේ මාසයේ අද දක්වා මේ සිසුවාට පන්ති වාර තිබුණේ නැහැ."
+    },
+    "errors": {
+      "noMarks": "සුරකින්න කලින් අඩුම තරමින් එක සිසුවෙක් සලකුණු කරන්න",
+      "invalidDate": "ලැයිස්තුවෙන් පන්ති දිනයක් තෝරන්න",
+      "notFound": "මේ පන්තිය තවදුරටත් නැහැ.",
+      "saveFailed": "පැමිණීම සුරකින්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+    }
+  },
+  "fees": {
+    "metaTitle": "ගාස්තු · Panthiya",
+    "description": "සක්‍රිය හැම ලියාපදිංචියකටම මාසික ගාස්තු.",
+    "summary": {
+      "due": "ගෙවිය යුතු",
+      "collected": "එකතු වුණු",
+      "outstanding": "හිඟ"
+    },
+    "export": {
+      "month": "මාසය"
+    },
+    "unpaid": {
+      "link": "නොගෙවූ ලැයිස්තුව",
+      "metaTitle": "නොගෙවූ · Panthiya",
+      "title": "නොගෙවූ",
+      "description": "තවම ගාස්තු ගෙවන්න තියෙන සිසුන්, වැඩිම මුදල මුලින්.",
+      "summary": "{month} දක්වා {count, plural, one {සිසුන් # දෙනෙක්} other {සිසුන් # දෙනෙක්}} මුළු {amount} ක් ගෙවිය යුතුයි.",
+      "label": "හිඟ ගාස්තු තියෙන සිසුන්",
+      "columns": {
+        "student": "සිසුවා",
+        "classes": "පන්ති",
+        "months": "පමා වූ මාස",
+        "oldest": "පැරණිම නොගෙවූ මාසය",
+        "outstanding": "හිඟ"
+      },
+      "monthsValue": "{count, plural, one {මාස #} other {මාස #}}",
+      "empty": {
+        "title": "කිසිවෙක් ණය නැහැ",
+        "description": "මේ මාසය දක්වා හැම ගාස්තුවක්ම ගෙවලා."
+      }
+    },
+    "columns": {
+      "admissionNo": "ඇ. අංකය",
+      "name": "නම",
+      "class": "පන්තිය",
+      "due": "ගෙවිය යුතු",
+      "paid": "ගෙවූ",
+      "balance": "ශේෂය",
+      "status": "තත්ත්වය"
+    },
+    "classValue": "{subject} · {grade} ශ්‍රේණිය",
+    "status": {
+      "paid": "ගෙවලා",
+      "partial": "අර්ධ වශයෙන්",
+      "unpaid": "නොගෙවූ"
+    },
+    "filters": {
+      "class": "පන්තිය",
+      "allClasses": "සියලු පන්ති",
+      "status": "තත්ත්වය",
+      "allStatuses": "සියල්ල"
+    },
+    "searchPlaceholder": "නමෙන් හෝ ඇතුළත් වීමේ අංකයෙන් සොයන්න",
+    "empty": {
+      "title": "මේ මාසයට තවම ගාස්තු නැහැ",
+      "description": "සක්‍රිය හැම ලියාපදිංචියකටම ගාස්තුවක් එකතු කරන්න “ගාස්තු සාදන්න” පාවිච්චි කරන්න."
+    },
+    "generate": {
+      "action": "ගාස්තු සාදන්න",
+      "title": "{month} ගාස්තු සාදන්නද?",
+      "description": "{month} සඳහා සක්‍රිය හැම ලියාපදිංචියකටම, පන්ති ගාස්තුව සහ වට්ටම අනුව ගාස්තුවක් එකතු කරයි. දැනටමත් තියෙන ගාස්තු වෙනස් වෙන්නේ නැහැ.",
+      "pending": "සාදමින්…",
+      "created": "{month} සඳහා {count, plural, one {ගාස්තු # ක් සෑදුවා} other {ගාස්තු # ක් සෑදුවා}}",
+      "upToDate": "{month} සඳහා හැම ගාස්තුවක්ම දැනටමත් තියෙනවා",
+      "noEnrollments": "{month} සඳහා සක්‍රිය ලියාපදිංචි නැහැ"
+    },
+    "actions": {
+      "column": "ක්‍රියා",
+      "menu": "{name} සඳහා ක්‍රියා"
+    },
+    "payments": {
+      "action": "ගෙවීම්",
+      "title": "ගෙවීම්",
+      "description": "{name} · {className}",
+      "listLabel": "මේ ගාස්තුවේ ගෙවීම්",
+      "loading": "ගෙවීම් පූරණය වෙමින්…",
+      "empty": "තවම ගෙවීම් නැහැ.",
+      "loadFailed": "ගෙවීම් පූරණය කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න.",
+      "summary": "{date} · {method}",
+      "voided": "අවලංගුයි",
+      "void": {
+        "action": "අවලංගු කරන්න",
+        "label": "{receiptNo} රිසිට්පත අවලංගු කරන්න",
+        "title": "{receiptNo} රිසිට්පත අවලංගු කරන්නද?",
+        "description": "{amount} ගෙවීම තවදුරටත් ගාස්තුවට ගණන් වෙන්නේ නැහැ. රිසිට් අංකය ඉතිරි වෙයි, කවදාවත් නැවත පාවිච්චි වෙන්නේ නැහැ.",
+        "pending": "අවලංගු කරමින්…",
+        "done": "{receiptNo} රිසිට්පත අවලංගු කළා",
+        "failed": "ගෙවීම අවලංගු කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+      }
+    },
+    "payment": {
+      "record": "ගෙවීමක් සටහන් කරන්න",
+      "title": "ගෙවීමක් සටහන් කරන්න",
+      "description": "{name} · {className}. ශේෂය: {balance}.",
+      "fields": {
+        "amount": "මුදල (රු.)",
+        "paidOn": "ගෙවූ දිනය",
+        "method": "ක්‍රමය"
+      },
+      "methods": {
+        "cash": "මුදලින්",
+        "bank_transfer": "බැංකු මාරු කිරීම"
+      },
+      "submit": "ගෙවීම සටහන් කරන්න",
+      "pending": "සටහන් කරමින්…",
+      "recorded": "ගෙවීම සටහන් කළා. රිසිට් අංකය {receiptNo}",
+      "errors": {
+        "notFound": "මේ ගාස්තුව තවදුරටත් නැහැ.",
+        "amountRequired": "මුදල දෙන්න",
+        "amountInvalid": "2500 හෝ 2500.50 වගේ මුදලක් දෙන්න",
+        "amountPositive": "මුදල 0ට වඩා වැඩි විය යුතුයි",
+        "amountTooHigh": "මුදල ශේෂයට වඩා වැඩි වෙන්න බැහැ",
+        "dateInvalid": "වලංගු දිනයක් දෙන්න",
+        "dateInFuture": "දිනය අනාගතයේ වෙන්න බැහැ",
+        "methodRequired": "ගෙවූ ක්‍රමය තෝරන්න",
+        "alreadyPaid": "මේ ගාස්තුව දැනටමත් ගෙවලා.",
+        "saveFailed": "ගෙවීම සටහන් කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+      }
+    },
+    "errors": {
+      "invalidMonth": "ලැයිස්තුවෙන් මාසයක් තෝරන්න",
+      "generateFailed": "ගාස්තු සාදන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+    }
+  },
+  "timetable": {
+    "metaTitle": "කාලසටහන · Panthiya",
+    "description": "සතියේ සක්‍රිය හැම පන්තියක්ම. විවෘත කරන්න පන්තියක් තෝරන්න.",
+    "dayPicker": "දිනය",
+    "dayLabel": "{day}: {count, plural, =0 {පන්ති නැහැ} one {පන්ති #} other {පන්ති #}}",
+    "classValue": "{subject} · {grade} ශ්‍රේණිය",
+    "time": "{start}–{end}",
+    "blockLabel": "{name}, {day} {time}"
+  },
+  "reports": {
+    "metaTitle": "වාර්තා · Panthiya",
+    "description": "ආදායම, පැමිණීම සහ පන්ති ප්‍රමාණ එක බැල්මෙන්.",
+    "showTable": "වගුවක් ලෙස පෙන්වන්න",
+    "income": {
+      "title": "මාසික ආදායම",
+      "description": "පසුගිය මාස {count} තුළ ලැබුණු ගෙවීම්, ගෙවූ දිනය අනුව. අවලංගු කළ ගෙවීම් ඇතුළත් නැහැ.",
+      "series": "එකතු වුණු",
+      "month": "මාසය",
+      "summary": "මේ කාලය තුළ {total} ක් එකතු වුණා. හොඳම මාසය {month}, {amount} ක් එක්ක.",
+      "summaryEmpty": "මේ කාලය තුළ ගෙවීම් ලැබුණේ නැහැ."
+    },
+    "attendance": {
+      "title": "පන්තිය අනුව පැමිණීමේ අනුපාතය",
+      "description": "සක්‍රිය හැම පන්තියකම මේ දක්වා සලකුණු කළ වාර අතරින් පැමිණි සහ ප්‍රමාද වූ ප්‍රමාණය.",
+      "series": "පැමිණීමේ අනුපාතය",
+      "class": "පන්තිය",
+      "noData": "තවම සලකුණු කර නැහැ",
+      "summary": "අඩුම අනුපාතය {name} — {rate}.",
+      "summaryEmpty": "තවම පැමිණීම් සලකුණු කර නැහැ."
+    },
+    "students": {
+      "title": "පන්තිය අනුව සිසුන්",
+      "description": "සක්‍රිය හැම පන්තියකම දැනට ඉන්න ලියාපදිංචි සිසුන්.",
+      "series": "සිසුන්",
+      "class": "පන්තිය",
+      "summary": "{classes, plural, one {පන්ති # ක් පුරා} other {පන්ති # ක් පුරා}} {total, plural, one {ලියාපදිංචි # ක්} other {ලියාපදිංචි # ක්}}."
+    }
+  },
+  "receipt": {
+    "metaTitle": "රිසිට්පත · Panthiya",
+    "title": "ගාස්තු රිසිට්පත",
+    "back": "ආපසු",
+    "print": "මුද්‍රණය කරන්න",
+    "fields": {
+      "receiptNo": "රිසිට් අංකය",
+      "paidOn": "ගෙවූ දිනය",
+      "student": "සිසුවා",
+      "admissionNo": "ඇතුළත් වීමේ අංකය",
+      "class": "පන්තිය",
+      "month": "මාසය",
+      "method": "ක්‍රමය",
+      "amount": "ගෙවූ මුදල"
+    },
+    "voided": "අවලංගුයි",
+    "voidedNote": "මේ ගෙවීම {date} දින අවලංගු කළා. එය ගාස්තුවට ගණන් වෙන්නේ නැහැ."
+  },
+  "me": {
+    "metaTitle": "මගේ පන්ති · Panthiya",
+    "title": "මගේ පන්ති",
+    "nav": {
+      "label": "සිසු ද්වාරය",
+      "overview": "සාරාංශය",
+      "attendance": "පැමිණීම",
+      "payments": "ගෙවීම්"
+    },
+    "greeting": "ආයුබෝවන්, {name}",
+    "description": "{admissionNo} · {grade} ශ්‍රේණිය",
+    "classValue": "{subject} · {grade} ශ්‍රේණිය",
+    "next": {
+      "title": "ඊළඟ පන්තිය",
+      "none": "ඉදිරි පන්ති නැහැ",
+      "today": "අද, {start}–{end}",
+      "on": "{date}, {start}–{end}"
+    },
+    "rate": {
+      "title": "පැමිණීමේ අනුපාතය",
+      "none": "තවම සලකුණු කර නැහැ",
+      "hint": "{count, plural, one {පන්ති වාර # ක් අතරින්} other {පන්ති වාර # ක් අතරින්}}"
+    },
+    "unpaid": {
+      "title": "නොගෙවූ ගාස්තු",
+      "none": "සියල්ල ගෙවලා",
+      "hint": "{count, plural, =0 {ගෙවන්න දෙයක් නැහැ} one {නොගෙවූ ගාස්තු #} other {නොගෙවූ ගාස්තු #}}",
+      "listTitle": "ගෙවිය යුතු ගාස්තු",
+      "label": "නොගෙවූ ගාස්තු",
+      "month": "මාසය",
+      "class": "පන්තිය",
+      "balance": "ශේෂය"
+    },
+    "attendance": {
+      "metaTitle": "මගේ පැමිණීම · Panthiya",
+      "title": "මගේ පැමිණීම"
+    },
+    "payments": {
+      "metaTitle": "මගේ ගෙවීම් · Panthiya",
+      "title": "මගේ ගෙවීම්",
+      "description": "ඔබ කළ හැම ගෙවීමක්ම. රිසිට්පත විවෘත කරන්න හෝ මුද්‍රණය කරන්න රිසිට් අංකය තෝරන්න.",
+      "emptyDescription": "ඔබේ ගෙවීම් සහ රිසිට්පත් මෙතන පෙන්වයි."
+    }
+  },
+  "errors": {
+    "generic": {
+      "title": "මොකක් හරි වැරදුණා",
+      "description": "මේ පිටුව පූරණය කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න.",
+      "retry": "නැවත උත්සාහ කරන්න",
+      "errorId": "දෝෂ හැඳුනුම්පත: {digest}"
+    },
+    "notFound": {
+      "title": "හමු වුණේ නැහැ",
+      "description": "ඔබ සොයන දේ හමු වුණේ නැහැ. සමහරවිට එය ඉවත් කරලා ඇති.",
+      "backToDashboard": "උපකරණ පුවරුවට ආපසු"
+    },
+    "pageNotFound": {
+      "title": "පිටුව හමු වුණේ නැහැ",
+      "description": "ඔබ සොයන පිටුව නැහැ, නැත්නම් වෙනත් තැනකට ගිහින්.",
+      "goHome": "මුල් පිටුවට යන්න"
+    }
+  },
+  "metadata": {
+    "title": "Panthiya",
+    "description": "ටියුෂන් පන්ති කළමනාකරණය: සිසුන්, පන්ති, පැමිණීම සහ ගාස්තු."
+  },
+  "auth": {
+    "signIn": {
+      "metaTitle": "පිවිසෙන්න · Panthiya",
+      "description": "පන්ති, පැමිණීම සහ ගාස්තු කළමනාකරණය කරන්න පිවිසෙන්න.",
+      "email": "ඊමේල්",
+      "emailPlaceholder": "you@example.com",
+      "password": "මුරපදය",
+      "submit": "පිවිසෙන්න",
+      "submitting": "පිවිසෙමින්…",
+      "errors": {
+        "invalidEmail": "වලංගු ඊමේල් ලිපිනයක් දෙන්න",
+        "passwordRequired": "ඔබේ මුරපදය දෙන්න",
+        "invalidCredentials": "ඊමේල් හෝ මුරපදය වැරදියි",
+        "accountLoadFailed": "ඔබේ ගිණුම පූරණය කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+      }
+    },
+    "signOut": {
+      "signOut": "ඉවත් වෙන්න",
+      "logOut": "ඉවත් වෙන්න",
+      "signingOut": "ඉවත් වෙමින්…",
+      "errors": {
+        "failed": "ඉවත් කරන්න බැරි වුණා. නැවත උත්සාහ කරන්න."
+      }
+    }
+  },
+  "nav": {
+    "dashboard": "උපකරණ පුවරුව",
+    "students": "සිසුන්",
+    "classes": "පන්ති",
+    "attendance": "පැමිණීම",
+    "fees": "ගාස්තු",
+    "timetable": "කාලසටහන",
+    "reports": "වාර්තා",
+    "settings": "සැකසුම්",
+    "brandInitial": "P",
+    "mainLabel": "ප්‍රධාන",
+    "openMenu": "මෙනුව විවෘත කරන්න",
+    "accountMenu": "{name} ගිණුම් මෙනුව"
+  },
+  "table": {
+    "pagination": {
+      "label": "පිටු",
+      "showing": "{total} න් {from}–{to}",
+      "rowsPerPage": "පිටුවකට පේළි",
+      "pageOf": "{pageCount} න් {page} වන පිටුව",
+      "previous": "පෙර",
+      "next": "ඊළඟ"
+    },
+    "empty": {
+      "searchTitle": "\"{q}\" සඳහා ප්‍රතිඵල නැහැ",
+      "searchDescription": "අක්ෂර වින්‍යාසය බලන්න, නැත්නම් වෙනත් සෙවුමක් කරන්න.",
+      "filteredTitle": "ගැළපෙන ප්‍රතිඵල නැහැ",
+      "filteredDescription": "පෙරහන් වෙනස් කරන්න හෝ ඉවත් කරන්න.",
+      "defaultTitle": "ප්‍රතිඵල නැහැ",
+      "defaultDescription": "තවම මෙතන පෙන්වන්න දෙයක් නැහැ."
+    }
+  }
+}

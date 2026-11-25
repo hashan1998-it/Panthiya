@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control";
-import { formatWeekday } from "@/lib/schedule";
+import type { WeekdayName } from "@/lib/get-date-labels";
 import { cn } from "@/lib/utils";
 import { getTimeRange, layoutDay, toMinutes, WEEK_DAYS, type TimetableClass } from "../layout";
 
@@ -13,15 +13,15 @@ const PX_PER_MINUTE = 1;
 type TimetableProps = {
   classes: TimetableClass[];
   today: number;
+  weekdays: WeekdayName[];
 };
 
 function formatClock(minutes: number) {
   return `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
 }
 
-export function Timetable({ classes, today }: TimetableProps) {
+export function Timetable({ classes, today, weekdays }: TimetableProps) {
   const t = useTranslations("timetable");
-  const locale = useLocale();
   const [selectedDay, setSelectedDay] = useState(today);
 
   const range = getTimeRange(classes);
@@ -33,7 +33,7 @@ export function Timetable({ classes, today }: TimetableProps) {
 
   const dayColumn = (day: number) => {
     const dayClasses = layoutDay(classes.filter((klass) => klass.day_of_week === day));
-    const dayName = formatWeekday(day, locale);
+    const dayName = weekdays[day].long;
 
     return (
       <div
@@ -118,7 +118,7 @@ export function Timetable({ classes, today }: TimetableProps) {
                 day === today && "font-medium text-foreground",
               )}
             >
-              {formatWeekday(day, locale)}
+              {weekdays[day].long}
             </span>
           ))}
         </div>
@@ -141,8 +141,8 @@ export function Timetable({ classes, today }: TimetableProps) {
             onValueChange={(value) => setSelectedDay(Number(value))}
           >
             {WEEK_DAYS.map((day) => (
-              <SegmentedControlItem key={day} value={day} aria-label={formatWeekday(day, locale)}>
-                {formatWeekday(day, locale, "short")}
+              <SegmentedControlItem key={day} value={day} aria-label={weekdays[day].long}>
+                {weekdays[day].short}
               </SegmentedControlItem>
             ))}
           </SegmentedControl>

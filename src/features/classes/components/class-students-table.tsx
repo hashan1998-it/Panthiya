@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { calculateAmountDue } from "@/lib/fees";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import type { ClassEnrollment } from "../queries";
 import { EnrolledStudentActions } from "./enrolled-student-actions";
 
@@ -27,6 +27,7 @@ export async function ClassStudentsTable({
   className,
 }: ClassStudentsTableProps) {
   const t = await getTranslations("classes.students");
+  const formatFee = await getFormatFee();
 
   if (enrollments.length === 0) {
     return <EmptyState icon={Users} title={t("emptyTitle")} description={t("emptyDescription")} />;

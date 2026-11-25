@@ -2,7 +2,7 @@ import { connection } from "next/server";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getToday } from "@/lib/dates";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { getMonthlyIncome, listClassAttendanceRates, listClassEnrollmentCounts } from "../queries";
 import { BarReport } from "./bar-report";
 import { ReportFigure } from "./report-figure";
@@ -12,6 +12,7 @@ export function ReportSkeleton() {
 }
 
 export async function IncomeReport() {
+  const formatFee = await getFormatFee();
   await connection();
 
   const [t, format, income] = await Promise.all([

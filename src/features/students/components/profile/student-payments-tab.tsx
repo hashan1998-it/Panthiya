@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatFee } from "@/lib/money";
+import { getFormatFee } from "@/lib/get-format-fee";
 import { cn } from "@/lib/utils";
 import type { StudentPayment } from "../../profile-queries";
 
@@ -21,6 +21,7 @@ type StudentPaymentsTabProps = {
 };
 
 export async function StudentPaymentsTab({ payments, emptyDescription }: StudentPaymentsTabProps) {
+  const formatFee = await getFormatFee();
   const t = await getTranslations("students.profile.payments");
   const format = await getFormatter();
 

@@ -13,6 +13,13 @@
       "dark": "Dark",
       "system": "System"
     },
+    "language": {
+      "title": "Language",
+      "label": "Language: {language}",
+      "en": "English",
+      "si": "සිංහල",
+      "failed": "We couldn't change the language. Please try again."
+    },
     "month": "Month",
     "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },

@@ -12,7 +12,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { getStudentMonthAttendance } from "@/features/attendance/queries";
-import { pickMonth } from "@/features/attendance/session-dates";
+import { pickMonth } from "@/lib/months";
 import { StudentAttendanceTab } from "@/features/students/components/profile/student-attendance-tab";
 import { StudentClassesTab } from "@/features/students/components/profile/student-classes-tab";
 import { StudentMonthAttendance } from "@/features/students/components/profile/student-month-attendance";

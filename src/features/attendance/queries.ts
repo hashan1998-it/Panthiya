@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import type { Tables } from "@/types/database";
-import { isMonth } from "./session-dates";
+import { isMonth } from "@/lib/months";
 import type { AttendanceStatus } from "./summary";
 
 export type AttendanceClass = Pick<

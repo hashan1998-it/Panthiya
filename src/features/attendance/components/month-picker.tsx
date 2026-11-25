@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
 import { NativeSelect } from "@/components/ui/native-select";
-import { listRecentMonths } from "../session-dates";
+import { listRecentMonths } from "@/lib/months";
 
 type MonthPickerProps = {
   id: string;

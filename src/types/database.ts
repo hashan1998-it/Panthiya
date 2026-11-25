@@ -54,6 +54,13 @@ export type Database = {
             foreignKeyName: "attendance_class_id_fkey";
             columns: ["class_id"];
             isOneToOne: false;
+            referencedRelation: "class_attendance_rates";
+            referencedColumns: ["class_id"];
+          },
+          {
+            foreignKeyName: "attendance_class_id_fkey";
+            columns: ["class_id"];
+            isOneToOne: false;
             referencedRelation: "classes";
             referencedColumns: ["id"];
           },
@@ -169,6 +176,13 @@ export type Database = {
           student_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "enrollments_class_id_fkey";
+            columns: ["class_id"];
+            isOneToOne: false;
+            referencedRelation: "class_attendance_rates";
+            referencedColumns: ["class_id"];
+          },
           {
             foreignKeyName: "enrollments_class_id_fkey";
             columns: ["class_id"];
@@ -312,6 +326,19 @@ export type Database = {
       };
     };
     Views: {
+      class_attendance_rates: {
+        Row: {
+          attended: number | null;
+          class_id: string;
+          grade: number;
+          is_active: boolean;
+          marked: number | null;
+          rate: number | null;
+          subject: string;
+        };
+        ComputedFields: never;
+        Relationships: [];
+      };
       due_balances: {
         Row: {
           admission_no: string;
@@ -341,6 +368,13 @@ export type Database = {
             foreignKeyName: "enrollments_class_id_fkey";
             columns: ["class_id"];
             isOneToOne: false;
+            referencedRelation: "class_attendance_rates";
+            referencedColumns: ["class_id"];
+          },
+          {
+            foreignKeyName: "enrollments_class_id_fkey";
+            columns: ["class_id"];
+            isOneToOne: false;
             referencedRelation: "classes";
             referencedColumns: ["id"];
           },
@@ -352,6 +386,15 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      monthly_income: {
+        Row: {
+          collected: number | null;
+          month: string | null;
+          payment_count: number | null;
+        };
+        ComputedFields: never;
+        Relationships: [];
       };
     };
     Functions: {

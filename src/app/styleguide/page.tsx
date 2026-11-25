@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, Clock, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SegmentedControl, SegmentedControlItem } from "@/components/ui/segmented-control";
-import { ThemeSwitcher } from "./theme-switcher";
 import { ToastDemo } from "./toast-demo";
 
 export const metadata: Metadata = {
@@ -63,7 +63,7 @@ export default function StyleguidePage() {
             Design tokens from DESIGN.md. Switch the theme to check both palettes.
           </p>
         </div>
-        <ThemeSwitcher />
+        <ThemeToggle />
       </header>
 
       <Section title="Colours">

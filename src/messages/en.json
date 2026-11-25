@@ -6,6 +6,13 @@
     "close": "Close",
     "getStarted": "Get started",
     "exportCsv": "Export CSV",
+    "theme": {
+      "title": "Theme",
+      "label": "Theme: {theme}",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "month": "Month",
     "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },

@@ -406,6 +406,26 @@
       "column": "Actions",
       "menu": "Actions for {name}"
     },
+    "payments": {
+      "action": "Payments",
+      "title": "Payments",
+      "description": "{name} · {className}",
+      "listLabel": "Payments for this due",
+      "loading": "Loading payments…",
+      "empty": "No payments yet.",
+      "loadFailed": "We couldn't load the payments. Please try again.",
+      "summary": "{date} · {method}",
+      "voided": "Voided",
+      "void": {
+        "action": "Void",
+        "label": "Void receipt {receiptNo}",
+        "title": "Void receipt {receiptNo}?",
+        "description": "This payment of {amount} stops counting towards the due. The receipt number is kept and is never reused.",
+        "pending": "Voiding…",
+        "done": "Receipt {receiptNo} was voided",
+        "failed": "We couldn't void the payment. Please try again."
+      }
+    },
     "payment": {
       "record": "Record payment",
       "title": "Record payment",
@@ -432,8 +452,7 @@
         "dateInFuture": "The date can't be in the future",
         "methodRequired": "Choose how it was paid",
         "alreadyPaid": "This due is already paid.",
-        "saveFailed": "We couldn't record the payment. Please try again.",
-        "voidFailed": "We couldn't void the payment. Please try again."
+        "saveFailed": "We couldn't record the payment. Please try again."
       }
     },
     "errors": {

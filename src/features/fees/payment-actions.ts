@@ -5,6 +5,7 @@ import { z } from "zod";
 import { requireRole } from "@/lib/auth/require-role";
 import { getToday } from "@/lib/dates";
 import { createClient } from "@/lib/supabase/server";
+import type { Tables } from "@/types/database";
 import {
   paymentSchema,
   voidPaymentSchema,
@@ -26,6 +27,29 @@ export type RecordPaymentResult =
   { ok: true; receiptNo: string } | { ok: false; error: PaymentErrorKey };
 
 export type VoidPaymentResult = { ok: true; receiptNo: string } | { ok: false };
+
+export type DuePayment = Pick<
+  Tables<"payments">,
+  "id" | "receipt_no" | "amount" | "paid_on" | "method" | "voided_at"
+>;
+
+export type DuePaymentsResult = { ok: true; payments: DuePayment[] } | { ok: false };
+
+export async function listDuePayments(dueId: string): Promise<DuePaymentsResult> {
+  await requireRole("admin");
+
+  if (!z.guid().safeParse(dueId).success) return { ok: false };
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("payments")
+    .select("id, receipt_no, amount, paid_on, method, voided_at")
+    .eq("due_id", dueId)
+    .order("created_at");
+
+  if (error) return { ok: false };
+  return { ok: true, payments: data };
+}
 
 export async function recordPayment(values: PaymentFormValues): Promise<RecordPaymentResult> {
   await requireRole("admin");

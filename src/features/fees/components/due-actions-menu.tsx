@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HandCoins, MoreHorizontal } from "lucide-react";
+import { HandCoins, MoreHorizontal, ReceiptText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,11 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { DueListItem } from "../queries";
+import { DuePaymentsDialog } from "./due-payments-dialog";
 import { RecordPaymentDialog } from "./record-payment-dialog";
 
 export function DueActionsMenu({ due }: { due: DueListItem }) {
   const t = useTranslations("fees");
   const [recordOpen, setRecordOpen] = useState(false);
+  const [paymentsOpen, setPaymentsOpen] = useState(false);
 
   return (
     <>
@@ -31,9 +33,14 @@ export function DueActionsMenu({ due }: { due: DueListItem }) {
             <HandCoins aria-hidden />
             {t("payment.record")}
           </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setPaymentsOpen(true)}>
+            <ReceiptText aria-hidden />
+            {t("payments.action")}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <RecordPaymentDialog due={due} open={recordOpen} onOpenChange={setRecordOpen} />
+      <DuePaymentsDialog due={due} open={paymentsOpen} onOpenChange={setPaymentsOpen} />
     </>
   );
 }

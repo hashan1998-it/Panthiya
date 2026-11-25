@@ -360,6 +360,24 @@
     }
   },
   "fees": {
+    "metaTitle": "Fees · Panthiya",
+    "description": "Monthly dues for every active enrollment.",
+    "summary": {
+      "dues": "Dues for {month}",
+      "duesValue": "{count, plural, =0 {Not generated yet} one {# due} other {# dues}}",
+      "total": "Total due",
+      "free": "Free cards",
+      "freeValue": "{count, plural, =0 {None} one {# counted as paid} other {# counted as paid}}"
+    },
+    "generate": {
+      "action": "Generate dues",
+      "title": "Generate dues for {month}?",
+      "description": "This adds one due for every active enrollment in {month}, using each class fee and discount. Dues that already exist are left as they are.",
+      "pending": "Generating…",
+      "created": "{count, plural, one {# due was created} other {# dues were created}} for {month}",
+      "upToDate": "All dues for {month} already exist",
+      "noEnrollments": "There are no active enrollments in {month}"
+    },
     "errors": {
       "invalidMonth": "Pick one of the months from the list",
       "generateFailed": "We couldn't generate the dues. Please try again."

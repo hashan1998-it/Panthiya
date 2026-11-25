@@ -10,7 +10,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PrintButton } from "@/features/fees/components/print-button";
 import { getReceipt } from "@/features/fees/queries";
 import { getCurrentProfile } from "@/lib/auth/get-current-profile";
-import { getHomePath } from "@/lib/auth/get-home-path";
 import { TIME_ZONE } from "@/lib/dates";
 import { formatFee } from "@/lib/money";
 
@@ -40,8 +39,7 @@ async function ReceiptContent({ params }: { params: ReceiptParams }) {
   const formatDate = (date: string) =>
     format.dateTime(new Date(`${date}T00:00:00Z`), { dateStyle: "long", timeZone: "UTC" });
 
-  const backHref =
-    profile.role === "admin" ? `/fees?month=${receipt.month}` : getHomePath(profile.role);
+  const backHref = profile.role === "admin" ? `/fees?month=${receipt.month}` : "/me/payments";
 
   const details = [
     { label: t("fields.receiptNo"), value: receipt.receipt_no, mono: true },

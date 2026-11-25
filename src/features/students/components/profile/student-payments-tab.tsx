@@ -17,14 +17,21 @@ import type { StudentPayment } from "../../profile-queries";
 
 type StudentPaymentsTabProps = {
   payments: StudentPayment[];
+  emptyDescription?: string;
 };
 
-export async function StudentPaymentsTab({ payments }: StudentPaymentsTabProps) {
+export async function StudentPaymentsTab({ payments, emptyDescription }: StudentPaymentsTabProps) {
   const t = await getTranslations("students.profile.payments");
   const format = await getFormatter();
 
   if (payments.length === 0) {
-    return <EmptyState icon={Wallet} title={t("emptyTitle")} description={t("emptyDescription")} />;
+    return (
+      <EmptyState
+        icon={Wallet}
+        title={t("emptyTitle")}
+        description={emptyDescription ?? t("emptyDescription")}
+      />
+    );
   }
 
   const month = (value: string) =>

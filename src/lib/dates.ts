@@ -31,3 +31,14 @@ export function getCurrentMonth(now: Date = new Date()): string {
 export function getDayOfWeek(date: string): number {
   return new Date(`${date}T00:00:00Z`).getUTCDay();
 }
+
+const colomboTimeFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: TIME_ZONE,
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+export function getCurrentTime(now: Date = new Date()): string {
+  return colomboTimeFormatter.format(now);
+}

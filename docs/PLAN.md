@@ -355,7 +355,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 6 — Fees (days 11-12)
 
-- [ ] **T-060 Generate monthly dues** (M)
+- [x] **T-060 Generate monthly dues** (M)
   - A "Generate dues" action for a chosen month creates one `dues` row per active enrollment (`ended_on` is null) with the correct `amount_due`.
   - Running it twice for the same month creates no duplicates (`insert ... on conflict do nothing`).
   - Enrollments with a free card get a row with `amount_due = 0` that counts as paid.

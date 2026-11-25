@@ -5,6 +5,7 @@ import { connection } from "next/server";
 import { ListTodo } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { ExportLink } from "@/components/shared/export-link";
 import { MonthPicker } from "@/components/shared/month-picker";
 import { PageHeader } from "@/components/shared/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -75,10 +76,13 @@ export default function FeesPage({ searchParams }: { searchParams: SearchParams 
         title={t("nav.fees")}
         description={t("fees.description")}
         action={
-          <Link href="/fees/unpaid" className={buttonVariants({ variant: "outline" })}>
-            <ListTodo data-icon="inline-start" aria-hidden />
-            {t("fees.unpaid.link")}
-          </Link>
+          <>
+            <ExportLink href="/fees/export" />
+            <Link href="/fees/unpaid" className={buttonVariants({ variant: "outline" })}>
+              <ListTodo data-icon="inline-start" aria-hidden />
+              {t("fees.unpaid.link")}
+            </Link>
+          </>
         }
       />
       <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>

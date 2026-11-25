@@ -5,6 +5,7 @@
     "comingSoon": "Coming soon.",
     "close": "Close",
     "getStarted": "Get started",
+    "exportCsv": "Export CSV",
     "month": "Month",
     "unsavedChanges": "You have unsaved changes. Leave without saving?"
   },
@@ -353,6 +354,7 @@
     },
     "history": {
       "rate": "Rate",
+      "admissionNo": "Admission no",
       "noRate": "—",
       "present": "Present",
       "late": "Late",
@@ -384,6 +386,9 @@
       "due": "Due",
       "collected": "Collected",
       "outstanding": "Outstanding"
+    },
+    "export": {
+      "month": "Month"
     },
     "unpaid": {
       "link": "Unpaid list",

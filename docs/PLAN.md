@@ -385,7 +385,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Aggregation happens in SQL (view or RPC), not by loading all rows into the browser.
   - Charts are readable in dark mode and have a text alternative for screen readers.
 
-- [ ] **T-072 Weekly timetable** (L)
+- [x] **T-072 Weekly timetable** (L)
   - A 7-column weekly grid with time on the vertical axis. Each class is a block positioned by start time and sized by duration.
   - Overlapping classes are shown side by side, not on top of each other. _(cut if late)_
   - On mobile it switches to one day at a time with a day selector.

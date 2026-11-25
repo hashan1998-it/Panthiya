@@ -375,7 +375,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
 
 ### Phase 7 — Dashboard, reports, timetable (days 13-15)
 
-- [ ] **T-070 Dashboard** (M)
+- [x] **T-070 Dashboard** (M)
   - Cards: active students, classes today, collected this month, outstanding this month. "Today" and "this month" use `Asia/Colombo`.
   - Today's classes list links to that class's attendance page for today.
   - Each section loads independently with its own skeleton (Suspense), so one slow query does not block the page.

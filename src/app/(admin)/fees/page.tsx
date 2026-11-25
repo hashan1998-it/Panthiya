@@ -6,13 +6,14 @@ import { getTranslations } from "next-intl/server";
 import { MonthPicker } from "@/components/shared/month-picker";
 import { PageHeader } from "@/components/shared/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FeesTable } from "@/features/fees/components/fees-table";
 import { GenerateDuesButton } from "@/features/fees/components/generate-dues-button";
-import { parseDueFilters } from "@/features/fees/filters";
-import { getFeesTotals } from "@/features/fees/queries";
+import { DUE_SORTABLE_COLUMNS, parseDueFilters } from "@/features/fees/filters";
+import { getFeesTotals, listDues, listFeeClasses } from "@/features/fees/queries";
 import { listDueMonths, pickDueMonth } from "@/features/fees/schema";
 import { getToday } from "@/lib/dates";
 import { formatFee } from "@/lib/money";
-import { readParam } from "@/lib/table-params";
+import { parseTableParams, readParam } from "@/lib/table-params";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -29,9 +30,12 @@ async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
   const today = getToday();
   const month = pickDueMonth(readParam(raw, "month"), today);
   const filters = parseDueFilters(raw);
-  const [t, totals] = await Promise.all([
+  const params = parseTableParams(raw, DUE_SORTABLE_COLUMNS);
+  const [t, totals, { dues, rowCount }, classes] = await Promise.all([
     getTranslations("fees.summary"),
     getFeesTotals(month, filters.classId),
+    listDues(month, params, filters),
+    listFeeClasses(),
   ]);
 
   const stats = [
@@ -54,6 +58,7 @@ async function FeesMonth({ searchParams }: { searchParams: SearchParams }) {
           </div>
         ))}
       </dl>
+      <FeesTable dues={dues} rowCount={rowCount} classes={classes} />
     </div>
   );
 }
@@ -64,7 +69,7 @@ export default function FeesPage({ searchParams }: { searchParams: SearchParams 
   return (
     <div className="flex flex-col gap-8">
       <PageHeader title={t("nav.fees")} description={t("fees.description")} />
-      <Suspense fallback={<Skeleton className="h-48 w-full rounded-xl" />}>
+      <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl" />}>
         <FeesMonth searchParams={searchParams} />
       </Suspense>
     </div>

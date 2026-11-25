@@ -359,6 +359,12 @@
       "saveFailed": "We couldn't save the attendance. Please try again."
     }
   },
+  "fees": {
+    "errors": {
+      "invalidMonth": "Pick one of the months from the list",
+      "generateFailed": "We couldn't generate the dues. Please try again."
+    }
+  },
   "me": {
     "metaTitle": "My classes · Panthiya",
     "title": "My classes"

@@ -413,7 +413,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Dates and currency follow the selected locale.
   - Layouts do not break with longer Sinhala text. _(full polish of every page: cut if late)_
 
-- [ ] **T-083 Settings page** (S)
+- [x] **T-083 Settings page** (S)
   - Change password, language and theme.
 
 ### Phase 9 — Quality and launch (days 18-20)

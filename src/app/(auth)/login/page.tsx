@@ -22,7 +22,9 @@ export default async function SignInPage() {
       </div>
       <Card className="w-full max-w-sm gap-6 py-8">
         <CardHeader className="gap-2 px-6 text-center">
-          <CardTitle className="text-display-sm">{t("metadata.title")}</CardTitle>
+          <CardTitle className="text-display-sm">
+            <h1>{t("metadata.title")}</h1>
+          </CardTitle>
           <CardDescription className="text-body-sm">{t("auth.signIn.description")}</CardDescription>
         </CardHeader>
         <CardContent className="px-6">

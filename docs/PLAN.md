@@ -427,7 +427,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - All dialogs trap focus and close on Escape. Focus returns to the trigger.
   - The whole add-student flow can be completed with the keyboard only.
 
-- [ ] **T-092 Performance pass** (M)
+- [x] **T-092 Performance pass** (M)
   - Lighthouse on the deployed login and dashboard pages: Performance 90+, Accessibility 95+, Best Practices 95+.
   - Client components are used only where interactivity needs them. Charts are loaded lazily.
 

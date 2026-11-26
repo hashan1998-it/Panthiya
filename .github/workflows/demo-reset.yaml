@@ -1,0 +1,32 @@
+name: Reset live demo
+
+on:
+  schedule:
+    - cron: "30 20 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: demo-reset
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Reset data and load the seed
+        env:
+          DEMO_DATABASE_URL: ${{ secrets.DEMO_DATABASE_URL }}
+        run: |
+          if [ -z "$DEMO_DATABASE_URL" ]; then
+            echo "::error::Add the DEMO_DATABASE_URL repository secret."
+            exit 1
+          fi
+          psql "$DEMO_DATABASE_URL" \
+            --set ON_ERROR_STOP=1 \
+            --single-transaction \
+            --quiet \
+            --file supabase/demo/reset.sql \
+            --file supabase/seed.sql

@@ -17,11 +17,12 @@ export default async function SignInPage() {
 
   return (
     <main className="relative flex flex-1 items-center justify-center px-4 py-12">
+      <div aria-hidden className="pointer-events-none absolute inset-0 dot-grid" />
       <div className="absolute top-4 right-4 flex items-center gap-1">
         <LanguageSwitch />
         <ThemeToggle />
       </div>
-      <Card className="w-full max-w-sm gap-6 py-8">
+      <Card className="relative w-full max-w-sm gap-6 py-8 shadow-sm">
         <CardHeader className="gap-2 px-6 text-center">
           <CardTitle className="flex justify-center">
             <h1>

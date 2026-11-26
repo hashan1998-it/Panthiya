@@ -205,6 +205,15 @@
   }
 }
 
+@utility dot-grid {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--muted-foreground) 45%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 100%);
+}
+
 @page {
   size: A5;
   margin: 12mm;

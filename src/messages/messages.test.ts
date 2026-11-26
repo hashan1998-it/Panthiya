@@ -28,6 +28,10 @@ function placeholders(message: string): string[] {
   ].sort();
 }
 
+function tags(message: string): string[] {
+  return [...new Set([...message.matchAll(/<([A-Za-z_]\w*)>/g)].map((match) => match[1]))].sort();
+}
+
 const english = flatten(en);
 const sinhala = flatten(si);
 
@@ -47,8 +51,8 @@ describe("messages", () => {
       const translated = sinhala.get(key);
       if (translated === undefined) return [];
 
-      const expected = placeholders(message);
-      const actual = placeholders(translated);
+      const expected = [...placeholders(message), ...tags(message).map((tag) => `<${tag}>`)];
+      const actual = [...placeholders(translated), ...tags(translated).map((tag) => `<${tag}>`)];
       return expected.join() === actual.join() ? [] : [`${key}: ${expected} ≠ ${actual}`];
     });
 
@@ -64,8 +68,11 @@ describe("messages", () => {
     });
 
     for (const [key, message] of sinhala) {
-      const values = Object.fromEntries(placeholders(message).map((name) => [name, 1]));
-      (t as (key: string, values: Record<string, number>) => string)(key, values);
+      const values = Object.fromEntries([
+        ...placeholders(message).map((name) => [name, 1]),
+        ...tags(message).map((tag) => [tag, (chunks: string[]) => chunks.join("")]),
+      ]);
+      (t as (key: string, values: Record<string, unknown>) => string)(key, values);
     }
 
     expect(errors).toEqual([]);

@@ -18,7 +18,7 @@ function matchesAnyPage(pathname: string, pages: string[]) {
 }
 
 function isPublicPage(pathname: string) {
-  return pathname === LANDING_PAGE || matchesAnyPage(pathname, PUBLIC_PAGES);
+  return matchesAnyPage(pathname, PUBLIC_PAGES);
 }
 
 function isLoginPage(pathname: string) {
@@ -47,6 +47,10 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const role = user ? await getUserRole(supabase, user.id) : null;
+
+  if (pathname === LANDING_PAGE) {
+    return redirectTo(role ? getHomePath(role) : LOGIN_PAGE, request, response);
+  }
 
   if (!role) {
     return isPublicPage(pathname) ? response : redirectTo(LOGIN_PAGE, request, response);

@@ -1,6 +1,25 @@
 import { expect, test } from "@playwright/test";
 import { ADMIN, signIn, signInAsAdmin, signInAsStudent, STUDENT } from "./helpers";
 
+test.describe("root path", () => {
+  test("sends a signed-out visitor to the login page", async ({ page }) => {
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/login$/);
+  });
+
+  test("sends an admin to the dashboard", async ({ page }) => {
+    await signInAsAdmin(page);
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/dashboard$/);
+  });
+
+  test("sends a student to their portal", async ({ page }) => {
+    await signInAsStudent(page);
+    await page.goto("/");
+    await expect(page).toHaveURL(/\/me$/);
+  });
+});
+
 test.describe("admin", () => {
   test("signs in and lands on the dashboard", async ({ page }) => {
     await signInAsAdmin(page);

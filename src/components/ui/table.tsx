@@ -1,11 +1,20 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-function Table({ className, ...props }: ComponentProps<"table">) {
+function Table({
+  className,
+  scrollable = false,
+  ...props
+}: ComponentProps<"table"> & { scrollable?: boolean }) {
   return (
     <div
       data-slot="table-container"
-      className="relative w-full overflow-x-auto rounded-xl border border-border"
+      className="relative w-full overflow-x-auto rounded-xl border border-border outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+      {...(scrollable && {
+        role: "region",
+        tabIndex: 0,
+        "aria-label": props["aria-label"],
+      })}
     >
       <table
         data-slot="table"

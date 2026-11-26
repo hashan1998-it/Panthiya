@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import SignOutButton from "@/app/(auth)/components/sign-out-button";
+import { LogoWordmark } from "@/components/brand/logo";
 import { LanguageSwitch } from "@/components/language-switch";
 import { RoleGate } from "@/components/role-gate";
 import { PageSkeleton } from "@/components/shared/page-skeleton";
@@ -14,7 +15,10 @@ export default function StudentLayout({ children }: LayoutProps<"/">) {
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex w-full max-w-300 flex-col gap-3 px-4 py-3 md:px-6">
           <div className="flex items-center justify-between gap-4">
-            <span className="text-title-md">{t("title")}</span>
+            <span>
+              <LogoWordmark className="h-7 w-auto" />
+              <span className="sr-only">{t("title")}</span>
+            </span>
             <div className="flex items-center gap-1">
               <LanguageSwitch />
               <ThemeToggle />

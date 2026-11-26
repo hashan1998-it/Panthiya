@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { LogoWordmark } from "@/components/brand/logo";
 import { LanguageSwitch } from "@/components/language-switch";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,8 +23,11 @@ export default async function SignInPage() {
       </div>
       <Card className="w-full max-w-sm gap-6 py-8">
         <CardHeader className="gap-2 px-6 text-center">
-          <CardTitle className="text-display-sm">
-            <h1>{t("metadata.title")}</h1>
+          <CardTitle className="flex justify-center">
+            <h1>
+              <LogoWordmark className="h-10 w-auto" />
+              <span className="sr-only">{t("metadata.title")}</span>
+            </h1>
           </CardTitle>
           <CardDescription className="text-body-sm">{t("auth.signIn.description")}</CardDescription>
         </CardHeader>

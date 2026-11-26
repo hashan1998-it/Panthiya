@@ -12,6 +12,7 @@ import { getReceipt } from "@/features/fees/queries";
 import { getCurrentProfile } from "@/lib/auth/get-current-profile";
 import { TIME_ZONE } from "@/lib/dates";
 import { getFormatFee } from "@/lib/get-format-fee";
+import { LogoWordmark } from "@/components/brand/logo";
 
 type ReceiptParams = Promise<{ paymentId: string }>;
 
@@ -74,7 +75,10 @@ async function ReceiptContent({ params }: { params: ReceiptParams }) {
       <article className="flex flex-col gap-6 rounded-xl border border-border p-6 print:rounded-none print:border-0 print:p-0">
         <header className="flex items-start justify-between gap-4 border-b border-border pb-4">
           <div className="flex flex-col gap-1">
-            <p className="text-title-md">{tApp("title")}</p>
+            <p>
+              <LogoWordmark className="h-7 w-auto" />
+              <span className="sr-only">{tApp("title")}</span>
+            </p>
             <h1 className="text-body-sm text-muted-foreground">{t("title")}</h1>
           </div>
           {receipt.voided_at && <Badge variant="destructive">{t("voided")}</Badge>}

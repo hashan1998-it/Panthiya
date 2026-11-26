@@ -39,7 +39,7 @@
       "label": "Classes on {date}",
       "students": "{count, plural, one {# student} other {# students}}",
       "time": "{start}–{end}",
-      "markAttendance": "Mark attendance for {name}",
+      "markAttendance": "Mark attendance",
       "emptyTitle": "No classes today",
       "emptyDescription": "Nothing is scheduled for {date}."
     }
@@ -523,8 +523,7 @@
     "dayPicker": "Day",
     "dayLabel": "{day}: {count, plural, =0 {no classes} one {# class} other {# classes}}",
     "classValue": "{subject} · Grade {grade}",
-    "time": "{start}–{end}",
-    "blockLabel": "{name}, {day} {time}"
+    "time": "{start}–{end}"
   },
   "reports": {
     "metaTitle": "Reports · Panthiya",
@@ -709,7 +708,7 @@
     "brandInitial": "P",
     "mainLabel": "Main",
     "openMenu": "Open menu",
-    "accountMenu": "Account menu for {name}"
+    "accountMenu": "<hidden>Account menu for </hidden>{name}"
   },
   "table": {
     "pagination": {

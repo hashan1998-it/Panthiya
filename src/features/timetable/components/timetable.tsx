@@ -62,12 +62,12 @@ export function Timetable({ classes, today, weekdays }: TimetableProps) {
             >
               <Link
                 href={`/classes/${klass.id}`}
-                aria-label={t("blockLabel", { name, day: dayName, time })}
                 className="flex h-full flex-col gap-0.5 overflow-hidden rounded-md border border-l-4 border-border border-l-chart-1 bg-card px-2 py-1 text-left hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
               >
                 <span className="line-clamp-2 text-caption font-medium text-foreground">
                   {name}
                 </span>
+                <span className="sr-only">{dayName}</span>
                 <span className="truncate text-caption text-muted-foreground tabular-nums">
                   {time}
                 </span>

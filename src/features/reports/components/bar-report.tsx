@@ -77,7 +77,12 @@ export function BarReport({ data, seriesLabel, format, layout }: BarReportProps)
         className="aspect-auto w-full"
         style={{ height: data.length * ROW_HEIGHT + 32 }}
       >
-        <BarChart data={data} layout="vertical" margin={{ left: 8, right: 16 }}>
+        <BarChart
+          accessibilityLayer={false}
+          data={data}
+          layout="vertical"
+          margin={{ left: 8, right: 16 }}
+        >
           <CartesianGrid horizontal={false} />
           <YAxis type="category" dataKey="label" width={140} tickLine={false} axisLine={false} />
           <XAxis
@@ -97,7 +102,7 @@ export function BarReport({ data, seriesLabel, format, layout }: BarReportProps)
 
   return (
     <ChartContainer config={config} className="aspect-auto h-72 w-full">
-      <BarChart data={data} margin={{ top: 8, left: 8, right: 8 }}>
+      <BarChart accessibilityLayer={false} data={data} margin={{ top: 8, left: 8, right: 8 }}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} />
         <YAxis tickLine={false} axisLine={false} width={48} tickFormatter={formatTick} />

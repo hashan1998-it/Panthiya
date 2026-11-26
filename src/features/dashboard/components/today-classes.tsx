@@ -44,7 +44,6 @@ export async function TodayClasses() {
           <li key={klass.id}>
             <Link
               href={`/attendance?class=${klass.id}&date=${today}`}
-              aria-label={t("markAttendance", { name })}
               className="flex items-center gap-4 px-4 py-3 hover:bg-muted"
             >
               <span className="w-28 shrink-0 text-body-sm text-muted-foreground tabular-nums">
@@ -57,6 +56,7 @@ export async function TodayClasses() {
               <span className="text-body-sm text-muted-foreground tabular-nums">
                 {t("students", { count: klass.enrolled_count })}
               </span>
+              <span className="sr-only">{t("markAttendance")}</span>
               <ChevronRight className="size-4 text-muted-foreground" aria-hidden />
             </Link>
           </li>

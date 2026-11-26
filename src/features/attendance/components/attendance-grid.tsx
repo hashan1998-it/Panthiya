@@ -51,7 +51,7 @@ export function AttendanceGrid({ label, rowHeader, dates, rows }: AttendanceGrid
   };
 
   return (
-    <Table aria-label={label}>
+    <Table aria-label={label} scrollable>
       <TableHeader>
         <TableRow>
           <TableHead className={cn(STICKY, "bg-muted")}>{rowHeader}</TableHead>

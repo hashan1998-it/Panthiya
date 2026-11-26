@@ -33,15 +33,15 @@ export function UserMenu({ fullName }: UserMenuProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button variant="ghost" className="h-10 gap-2 px-2" />}
-        aria-label={t("nav.accountMenu", { name: fullName })}
-      >
-        <Avatar>
+      <DropdownMenuTrigger render={<Button variant="ghost" className="h-10 gap-2 px-2" />}>
+        <Avatar aria-hidden>
           <AvatarFallback className="text-caption">{getInitials(fullName)}</AvatarFallback>
         </Avatar>
-        <span className="hidden max-w-40 truncate text-body-sm font-medium sm:inline">
-          {fullName}
+        <span className="sr-only text-body-sm font-medium sm:not-sr-only sm:max-w-40 sm:truncate">
+          {t.rich("nav.accountMenu", {
+            name: fullName,
+            hidden: (chunks) => <span className="sr-only">{chunks}</span>,
+          })}
         </span>
         <ChevronDown className="size-4 text-muted-foreground" aria-hidden />
       </DropdownMenuTrigger>

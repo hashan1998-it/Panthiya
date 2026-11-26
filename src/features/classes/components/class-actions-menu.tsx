@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Eye, MoreHorizontal, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";

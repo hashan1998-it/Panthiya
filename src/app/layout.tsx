@@ -14,11 +14,13 @@ const inter = Inter({
 const notoSansSinhala = Noto_Sans_Sinhala({
   variable: "--font-noto-sinhala",
   subsets: ["sinhala"],
+  preload: false,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const instant = false;

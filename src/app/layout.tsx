@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Noto_Sans_Sinhala } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TitleKeeper } from "@/components/title-keeper";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -52,6 +53,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         >
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
           <Toaster />
+          <TitleKeeper />
         </ThemeProvider>
       </body>
     </html>

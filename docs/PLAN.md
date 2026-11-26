@@ -422,7 +422,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Playwright set up against a seeded local database and running in CI. CI starts local Supabase with `supabase start` (Docker), applies migrations and the seed, then runs the tests.
   - Flows covered: admin login, add a student, enroll in a class, mark attendance, record a payment, student login sees only own data, student is blocked from `/students`.
 
-- [ ] **T-091 Accessibility pass** (M)
+- [x] **T-091 Accessibility pass** (M)
   - Every page passes an axe scan with no serious or critical issues.
   - All dialogs trap focus and close on Escape. Focus returns to the trigger.
   - The whole add-student flow can be completed with the keyboard only.

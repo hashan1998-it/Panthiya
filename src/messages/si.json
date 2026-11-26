@@ -39,7 +39,7 @@
       "label": "{date} දින පන්ති",
       "students": "{count, plural, one {සිසුන් #} other {සිසුන් #}}",
       "time": "{start}–{end}",
-      "markAttendance": "{name} පැමිණීම සටහන් කරන්න",
+      "markAttendance": "පැමිණීම සටහන් කරන්න",
       "emptyTitle": "අද පන්ති නැහැ",
       "emptyDescription": "{date} දිනට කිසිම පන්තියක් නැහැ."
     }

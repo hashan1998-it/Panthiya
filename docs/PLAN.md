@@ -431,7 +431,7 @@ Size: **S** = under 2 hours, **M** = half a day, **L** = a full day.
   - Lighthouse on the deployed login and dashboard pages: Performance 90+, Accessibility 95+, Best Practices 95+.
   - Client components are used only where interactivity needs them. Charts are loaded lazily.
 
-- [ ] **T-093 README and demo** (M)
+- [x] **T-093 README and demo** (M)
   - README has: one-paragraph pitch, live link, demo admin and demo student credentials, screenshots or a short GIF, feature list, tech stack, architecture notes (RLS, Server Actions), local setup steps, and what I would do next.
   - The live demo resets its data on a schedule or the demo accounts cannot do damage.
 

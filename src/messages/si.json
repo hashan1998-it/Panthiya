@@ -523,8 +523,7 @@
     "dayPicker": "දිනය",
     "dayLabel": "{day}: {count, plural, =0 {පන්ති නැහැ} one {පන්ති #} other {පන්ති #}}",
     "classValue": "{subject} · {grade} ශ්‍රේණිය",
-    "time": "{start}–{end}",
-    "blockLabel": "{name}, {day} {time}"
+    "time": "{start}–{end}"
   },
   "reports": {
     "metaTitle": "වාර්තා · Panthiya",

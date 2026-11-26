@@ -15,7 +15,7 @@ let classId: string;
 async function openMathsGrade10(page: Page) {
   await page.goto("/timetable");
   await page
-    .getByRole("link", { name: /^Maths · Grade 10, / })
+    .getByRole("link", { name: /^Maths · Grade 10 / })
     .first()
     .click();
   await expect(page).toHaveURL(/\/classes\/[0-9a-f-]{36}$/);

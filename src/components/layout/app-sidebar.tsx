@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { LogoMark, LogoWordmark } from "@/components/brand/logo";
 import { NavList } from "./nav-list";
 
 export async function AppSidebar() {
@@ -10,12 +11,11 @@ export async function AppSidebar() {
       <div className="flex h-14 shrink-0 items-center justify-center px-3 lg:justify-start lg:px-6">
         <Link
           href="/dashboard"
-          className="rounded-md text-title-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          <span aria-hidden className="lg:hidden">
-            {t("nav.brandInitial")}
-          </span>
-          <span className="sr-only lg:not-sr-only">{t("metadata.title")}</span>
+          <LogoMark className="size-8 lg:hidden" />
+          <LogoWordmark className="hidden h-6 w-auto lg:block" />
+          <span className="sr-only">{t("metadata.title")}</span>
         </Link>
       </div>
       <nav aria-label={t("nav.mainLabel")} className="flex-1 overflow-y-auto px-2 py-4 lg:px-3">

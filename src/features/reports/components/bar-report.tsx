@@ -8,6 +8,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { useFormatFee } from "@/lib/use-format-fee";
+import { chartHeight } from "./chart-height";
 
 export type BarReportFormat = "fee" | "percent" | "count";
 
@@ -22,8 +23,6 @@ type BarReportProps = {
   format: BarReportFormat;
   layout: "columns" | "rows";
 };
-
-const ROW_HEIGHT = 40;
 
 const percentFormat = new Intl.NumberFormat("en-US", {
   style: "percent",
@@ -75,7 +74,7 @@ export function BarReport({ data, seriesLabel, format, layout }: BarReportProps)
       <ChartContainer
         config={config}
         className="aspect-auto w-full"
-        style={{ height: data.length * ROW_HEIGHT + 32 }}
+        style={{ height: chartHeight("rows", data.length) }}
       >
         <BarChart
           accessibilityLayer={false}
@@ -101,7 +100,11 @@ export function BarReport({ data, seriesLabel, format, layout }: BarReportProps)
   }
 
   return (
-    <ChartContainer config={config} className="aspect-auto h-72 w-full">
+    <ChartContainer
+      config={config}
+      className="aspect-auto w-full"
+      style={{ height: chartHeight("columns", data.length) }}
+    >
       <BarChart accessibilityLayer={false} data={data} margin={{ top: 8, left: 8, right: 8 }}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} />

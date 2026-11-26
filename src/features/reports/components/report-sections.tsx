@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getToday } from "@/lib/dates";
 import { getFormatFee } from "@/lib/get-format-fee";
 import { getMonthlyIncome, listClassAttendanceRates, listClassEnrollmentCounts } from "../queries";
-import { BarReport } from "./bar-report";
+import { LazyBarReport } from "./lazy-bar-report";
 import { ReportFigure } from "./report-figure";
 
 export function ReportSkeleton() {
@@ -52,7 +52,7 @@ export async function IncomeReport() {
         value: formatFee(row.collected),
       }))}
     >
-      <BarReport
+      <LazyBarReport
         layout="columns"
         format="fee"
         seriesLabel={t("series")}
@@ -103,7 +103,7 @@ export async function AttendanceReport() {
         value: row.rate === null ? t("noData") : percent(row.rate),
       }))}
     >
-      <BarReport
+      <LazyBarReport
         layout="rows"
         format="percent"
         seriesLabel={t("series")}
@@ -136,7 +136,7 @@ export async function StudentsReport() {
       valueHeader={t("series")}
       rows={counts.map((row) => ({ label: name(row), value: String(row.students) }))}
     >
-      <BarReport
+      <LazyBarReport
         layout="rows"
         format="count"
         seriesLabel={t("series")}

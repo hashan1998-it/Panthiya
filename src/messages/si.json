@@ -709,7 +709,7 @@
     "brandInitial": "P",
     "mainLabel": "ප්‍රධාන",
     "openMenu": "මෙනුව විවෘත කරන්න",
-    "accountMenu": "{name} ගිණුම් මෙනුව"
+    "accountMenu": "{name}<hidden> ගිණුම් මෙනුව</hidden>"
   },
   "table": {
     "pagination": {

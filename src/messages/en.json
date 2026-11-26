@@ -709,7 +709,7 @@
     "brandInitial": "P",
     "mainLabel": "Main",
     "openMenu": "Open menu",
-    "accountMenu": "Account menu for {name}"
+    "accountMenu": "<hidden>Account menu for </hidden>{name}"
   },
   "table": {
     "pagination": {
